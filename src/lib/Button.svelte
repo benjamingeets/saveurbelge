@@ -3,7 +3,7 @@
     export let outline = false
     export let href = "#"
     export let target = ""
-    let classButton = "rounded-md border-2 px-5 py-3 transition duration-300 ease-in-out"
+    let classButton = "rounded-md border-2 px-3 py-2 transition duration-300 ease-in-out"
 </script>
 
 
