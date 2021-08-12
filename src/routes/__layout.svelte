@@ -2,6 +2,6 @@
 import Navbar from "$lib/Navbar.svelte";
 import "../app.postcss";</script>
 <Navbar/>
-<main>
+<main class="px-4">
     <slot></slot>
 </main>
