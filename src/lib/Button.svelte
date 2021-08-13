@@ -23,7 +23,7 @@
             <slot/>
         </a>  
         {:else if color=="green"}
-        <a target="{target}" href="{href}" class="{classButton} border-green bg-green text-white">
+        <a target="{target}" href="{href}" class="{classButton} border-green bg-green text-white text-center">
             <slot/>
         </a>  
         {:else if color="red"}

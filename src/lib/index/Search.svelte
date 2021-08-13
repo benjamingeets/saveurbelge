@@ -1,20 +1,22 @@
 <script>
 import Button from "$lib/Button.svelte";
+import Magnifier from "$lib/svg/Magnifier.svelte";
+import Pointer from "$lib/svg/Pointer.svelte";
 
 </script>
-<div id="search" class="flex flex-col justify-center items-center rounded-md py-80">
+<section id="search" class="flex px-4 flex-col justify-center items-center rounded-md lg:py-80 py-40">
     <p class="uppercase text-white text-5xl mb-10 font-bebas">Quel type de commerce cherchez-vous ?</p>
-    <form class="flex justify-between bg-white p-2 rounded-md w-full max-w-3xl">
-        <div class="w-6/12 bg-grey-light flex justify-between p-2 rounded-md" >
+    <form class="flex lg:flex-row flex-col justify-between bg-white p-2 rounded-md w-full max-w-3xl">
+        <div class="lg:w-6/12 w-full bg-grey-light flex justify-between p-2 rounded-md" >
             <input class="bg-grey-light w-full" type="text" placeholder="7500 Tournai">
-            <span>📍</span>
+            <span><Pointer/></span>
         </div>
-        <select class="w-5/12 bg-grey-light rounded-md p-2 mx-2" name="" id="">
+        <select class="lg:w-5/12 lg:my-0 my-2 w-full bg-grey-light rounded-md p-2 lg:mx-2" name="" id="">
             <option value="">Secteur d'activité</option>
         </select>
-        <Button>🔍</Button>
+        <Button><span class="block w-full flex justify-center"><Magnifier></Magnifier></span></Button>
     </form>
-</div>
+</section>
 
 <style>
     #search{
