@@ -1,15 +1,9 @@
 <script>
-import Button from "./Button.svelte";
 import Hamburger from "./svg/Hamburger.svelte";
 import {goto} from "$app/navigation"
-import {onMount} from 'svelte'
+export let sousTitre = "Des produits de chez nous"
 let menuOpen = false;
-const links = [
-    {text:"Accueil",href:"/"},
-    {text:"A propos",href:"/a-propos"},
-    {text:"Se connecter",href:"/connexion",style:"text-green"},
-    {text:"Ajouter mon commerce", href:"/ajouter-mon-commerce",type:"button"}
-]
+export let links
 
 </script>
 <div class="h-28"></div>
@@ -17,7 +11,7 @@ const links = [
     <div class="w-5/12 uppercase">
         <a class="inline-block" href="/">
             <p class="font-bebas lg:text-4xl text-2xl">Saveur Belge</p>
-            <p class="font-bebas lg:text-lg text-xs">Des produits de chez nous</p>
+            <p class="font-bebas lg:text-lg text-xs">{sousTitre}</p>
         </a>
     </div>
     <div class="w-2/12 flex justify-center">
@@ -34,7 +28,8 @@ const links = [
                     </li>
                 {:else if link.type =="button"}
                     <li>
-                        <Button href="{link.href}">{link.text}</Button>
+                        <a class="btn btn-green" href="{link.href}">{link.text}</a>
+                        
                     </li>
                 {/if}
             {/each}
@@ -46,7 +41,7 @@ const links = [
 </header>
 
 
-<ul on:click={()=>{menuOpen = !menuOpen}} class="xl:hidden fixed mt-20 z-10 pt-10 flex bg-white w-full border-b-2 flex-col justify-evenly items-center overflow-hidden transition duration-300 ease-in-out {menuOpen?'h-auto opacity-100': 'h-0 opacity-0'}">
+<ul on:click={()=>{menuOpen = !menuOpen}} class="xl:hidden fixed z-10 pt-32 flex bg-white w-full border-b-2 flex-col justify-evenly items-center overflow-hidden transition duration-300 ease-in-out {menuOpen?'h-auto opacity-100': 'h-0 w-0 opacity-0'}">
     {#each links as link}
         {#if link.type !="button"}
             <li class="my-4">
@@ -54,7 +49,7 @@ const links = [
             </li>
         {:else if link.type =="button"}
             <li class="my-6">
-                <Button href="{link.href}">{link.text}</Button>
+                <a class="btn btn-green" href="{link.href}">{link.text}</a>
             </li>
         {/if}
     {/each}

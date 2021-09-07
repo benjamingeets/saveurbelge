@@ -1,22 +1,37 @@
+<script context="module">
+    export const load = async()=>{
+        const data = await fetch("http://localhost:3000/api/last-shops")
+        return{
+            props:{
+                lastShops : await data.json()
+            }
+        }
+    }
+</script>
+
 <script>
-import Button from "$lib/Button.svelte";
 import Head from "$lib/Head.svelte";
 import Category from "$lib/index/Category.svelte";
 import Search from "$lib/index/Search.svelte";
 import ShopCard from "$lib/ShopCard.svelte";
+
+let pc = ""
+
+
+export let lastShops
 </script>
 <Head/>
-<Search/>
+<Search pc="{pc}"/>
 <section class="max-w-5xl mx-auto mt-24">
-    <h2>Qu'est-ce que c'est?</h2>
+    <h2 class="mb-12">Qu'est-ce que c'est?</h2>
     <p class="text-xl">
         Saveur Belge est le site qui regroupe tous les commerçants locaux prêt de chez vous !  Avec seulement quelques informations, vous allez pouvoir découvrir quelles sont les commerçants locaux qui travaillent dans votre région. Cette initiative citoyenne a pour vocation de rapprocher les personnes qui veulent consommer local et des commerçants dans toute la Belgique. 
         <br/>Si vous souhaitez agir et changer votre manière de consommer, lancez une recherche et découvrez les produits de chez nous !
     </p>
     <div class="my-24 flex md:flex-row flex-col justify-center items-center">
-        <div><Button href="recherche" color="green">Lancer une recherche</Button></div>
+        <div><a class="btn btn-green" href="recherche">Lancer une recherche</a></div>
         <div class="m-4"></div><!--Un peu shlagos ça mais c rien c le dev-->
-        <div><Button href="ajouter-mon-commerce" color="green" outline="{true}">Ajouter mon commerce</Button></div>
+        <div><a class="btn btn-green-outline" href="ajouter-mon-commerce">Ajouter mon commerce</a></div>
     </div>
 </section>
 <section class="flex md:flex-row flex-col">
@@ -27,11 +42,11 @@ import ShopCard from "$lib/ShopCard.svelte";
 <section class="my-16">
     <h2 class="my-12">Les derniers inscrits</h2>
     <div class="flex lg:flex-row flex-col items-center justify-evenly max-w-5xl mx-auto">
-        <ShopCard/>
-        <ShopCard/>
-        <ShopCard/>
+        {#each lastShops as shop}
+            <ShopCard name="{shop.name}" slug="{shop.slug}" description="{shop.description}" badges="{shop.options}"/>
+        {/each}
     </div>
     <div class="flex justify-center mt-4">
-        <Button href="/recherche">Voir tous les commerces</Button>
+        <a class="btn btn-green" href="/recherche">Voir tous les commerces</a>
     </div>
 </section>

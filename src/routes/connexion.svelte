@@ -1,3 +1,94 @@
 <script>
-    localStorage.setItem("oui","non")
+import Head from "$lib/Head.svelte";
+import Eye from "$lib/svg/Eye.svelte";
+import {goto} from '$app/navigation'
+import {login} from '$lib/auth_req'
+import { onMount } from "svelte";
+import { getLostPwd } from "$lib/user_req";
+
+let mail =""
+let pwd = ""
+let displayPwd = false
+let lostPwd = false
+let message ='Quel est votre adresse email?'
+let error = ''
+const showPwd = () =>{
+        displayPwd = !displayPwd
+}
+onMount(()=>{
+    if(localStorage.getItem("accessToken")){
+        if(parseInt(localStorage.getItem('status'))>=5){
+            goto('/admin')
+        }
+        else{
+            goto('/commercant')
+        }
+    }
+})
+const handleLogin = async () =>{
+    const log = await login(mail,pwd)
+    if(log){
+        if(parseInt(localStorage.getItem('status'))>=5){
+            goto('/admin')
+        }
+        else{
+            goto('/commercant')
+        }
+    }
+    else{
+        error = 'Identifiants incorrects'
+    }
+}
+
+const lostPassword = async ()=>{
+   const req = await getLostPwd(mail)
+   message = req.message
+}
 </script>
+<Head title="Connexion - SaveurBelge"></Head>
+<main class="rounded-md py-40 mb-10 px-2">
+    <div class="bg-white max-w-md mx-auto rounded-md py-20">
+        {#if !lostPwd}
+            <h2 class="text-noir">Se connecter</h2>
+            <p class="text-center text-orange">{error}</p>
+            <form action="" class="flex flex-col mx-auto w-8/12">
+                <label for="mail flex flex-col">
+                    <p class="text-grey-dark">Mail</p>
+                    <input bind:value={mail} id="mail" class="border rounded-md px-4 py-2 w-full" type="text">
+                </label>
+                <label for="pwd">
+                    <p class="text-grey-dark">Mot de passe</p>
+                    <span class="flex border rounded-md px-4 py-2">
+                        {#if !displayPwd}<input bind:value={pwd} class="w-full" type="password" id="pwd">{/if}
+                        {#if displayPwd}<input bind:value={pwd} class="w-full" type="text" id="pwd">{/if}
+                        <span on:mousedown={()=>{showPwd()}} on:mouseup={()=>{showPwd()}} class="cursor-pointer"><Eye></Eye></span>
+                    </span>
+                </label>
+            </form>
+            <p on:click={()=>{lostPwd = true}} class="text-orange underline text-center cursor-pointer mt-8 mb-16">Mot de passe oublié</p>
+            <div class="w-full flex my-4">
+                <span on:click={()=>{handleLogin()}} class="btn btn-green mx-auto">
+                    Se connecter
+                </span>  
+            </div>
+        {:else}
+            <h2>Mot de passe oublié</h2>
+            <div class="flex flex-col items-center">
+                <p class="text-center mt-4 mb-10">{message}</p>
+                <label for="mail">
+                    <p>Mail</p>
+                    <input class="input-normal" bind:value={mail} type="text">
+                </label>
+                <div on:click={()=>lostPassword()} class="btn btn-green my-4">Envoyer</div>
+                <p class="text-orange underline cursor-pointer" on:click={()=>{lostPwd = false}}>Annuler</p>
+            </div>
+        {/if}
+    </div>
+</main>
+
+<style>
+    main{
+        background-image: url("/images/se_connecter.webp");
+        background-size: cover;
+    }
+</style>

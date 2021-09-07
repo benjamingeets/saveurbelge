@@ -4,11 +4,12 @@
     export let description = "Venez découvrir les commerçant qui ont a coeur de vendre des produits qui viennent de votre région!"
     export let lien = ""
     export let image = `https://${DOMAIN}/public/image/share.png`
-
+    export let noindex = false
 </script>
 
 <svelte:head>
     <title>{title}</title>
+    <link rel="icon" href="/favicon.ico">
     <meta name="description" content={description}/>
     <link rel="canonical" href="https://{DOMAIN}/{lien}">
     <meta property="og:type" content="website" />
@@ -21,4 +22,7 @@
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
+    {#if noindex}
+        <meta name="robots" content="noindex">
+    {/if}
 </svelte:head>

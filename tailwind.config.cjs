@@ -21,7 +21,8 @@ const config = {
 					DEFAULT:"#D8D8D8",
 					dark:"#686565"
 				},
-				red:"#FF2E00"
+				red:"#FF2E00",
+				noir:"#252323"
 			},
 			fontFamily: {
 				'bebas': ['Bebas Neue']
