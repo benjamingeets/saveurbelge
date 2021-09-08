@@ -15,20 +15,20 @@ let ready = false
     })
 </script>
 
-<section class="ml-72 flex flex-wrap">
+<section class="lg:ml-72 flex flex-wrap px-2">
     
-    {#if ready}
+    {#if ready && user.status >= 1}
         {#each shops as shop}
-            <div class="w-80 rounded-md shadow-lg m-2">
-                <div class="h-40 rounded-t-md" style={shop.header ? `background-image:url(http://localhost:8000/public/${shop._id}_header.png); background-size: cover;)` : shop.sector == 'restaurant' ? 'background-image:url(/images/headers/restaurant.png);background-size:30%;' : 'background-image:url(/images/headers/commerce.png);background-size:30%;'}>
+            <div class="w-80 rounded-md shadow-lg sm:m-2 mx-auto">
+                <div class="h-48 rounded-t-md" style={shop.header ? `background-image:url(http://localhost:8000/public/${shop._id}_header.webp); background-size: cover;)` : shop.sector == 'restaurant' ? 'background-image:url(/images/headers/restaurant.png);background-size:30%;' : 'background-image:url(/images/headers/commerce.png);background-size:30%;'}>
                 </div>
                 <div class="flex flex-col items-center h-32 pb-8 px-4 w-full">
                     <h3 class="my-2 w-full font-bold text-center">{shop.name}</h3>
-                    {#if shop.status > 0}
-                    <a class="btn btn-green" href="/commercant/shop/{shop._id}">Modifier</a>
-                    {:else}
+                    {#if shop.status == 0}
                     <small>En attente de validation</small>
                     {/if}
+                    <a class="btn btn-green" href="/commercant/shop/{shop._id}">Modifier</a>
+                    
                 </div>
             </div>
 
@@ -40,6 +40,8 @@ let ready = false
             </div>
         </a>
         {/if}
+    {:else}
+        <p>Veuillez valider votre compte via le lien reçu par mail</p>
     {/if}
         
 </section>

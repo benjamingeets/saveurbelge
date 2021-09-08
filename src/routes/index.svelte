@@ -24,7 +24,7 @@ export let lastShops
 <Search pc="{pc}"/>
 <section class="max-w-5xl mx-auto mt-24">
     <h2 class="mb-12">Qu'est-ce que c'est?</h2>
-    <p class="text-xl">
+    <p class="md:text-xl">
         Saveur Belge est le site qui regroupe tous les commerçants locaux prêt de chez vous !  Avec seulement quelques informations, vous allez pouvoir découvrir quelles sont les commerçants locaux qui travaillent dans votre région. Cette initiative citoyenne a pour vocation de rapprocher les personnes qui veulent consommer local et des commerçants dans toute la Belgique. 
         <br/>Si vous souhaitez agir et changer votre manière de consommer, lancez une recherche et découvrez les produits de chez nous !
     </p>
@@ -43,7 +43,7 @@ export let lastShops
     <h2 class="my-12">Les derniers inscrits</h2>
     <div class="flex lg:flex-row flex-col items-center justify-evenly max-w-5xl mx-auto">
         {#each lastShops as shop}
-            <ShopCard name="{shop.name}" slug="{shop.slug}" description="{shop.description}" badges="{shop.options}"/>
+            <ShopCard name={shop.name} slug={shop.slug} id={shop._id} banner={shop.header} description={shop.description} badges={shop.options}/>
         {/each}
     </div>
     <div class="flex justify-center mt-4">

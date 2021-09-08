@@ -27,8 +27,8 @@ let sidebarLinks = [
 </script>
 <Head title="Gestion - SaveurBelge" noindex={true}/>
 <Navbar links={links} sousTitre="Espace commerçant"/>
-<main class="mt-10">
-    <aside class="w-60 ml-4 absolute">
+<main class="md:mt-10 mt-4">
+    <aside class="w-60 ml-4 lg:absolute static">
         <ul>
             {#each sidebarLinks as l}
                 {#if l.href==`/commercant/${currentPage}`}

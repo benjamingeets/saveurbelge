@@ -7,7 +7,7 @@ const categories = [
     {name:"Bars",link:"bar"}
 ]
 </script>
-<footer class="bg-green text-white py-16">
+<footer class="bg-green text-white py-16 mt-10">
     <div class="max-w-5xl flex md:flex-row flex-col mx-auto p-4">
         <div class="flex md:flex-row flex-col md:w-6/12 w-12/12">
             <div class="md:w-6/12 w-12/12">

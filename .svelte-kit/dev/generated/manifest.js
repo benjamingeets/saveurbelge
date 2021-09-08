@@ -12,6 +12,9 @@ const c = [
 	() => import("../../../src/routes/commercant/contact.svelte"),
 	() => import("../../../src/routes/commercant/shop/new.svelte"),
 	() => import("../../../src/routes/commercant/shop/[id].svelte"),
+	() => import("../../../src/routes/validation/mot-de-passe.svelte"),
+	() => import("../../../src/routes/validation/compte.svelte"),
+	() => import("../../../src/routes/validation/mail.svelte"),
 	() => import("../../../src/routes/connexion.svelte"),
 	() => import("../../../src/routes/recherche.svelte"),
 	() => import("../../../src/routes/a-propos.svelte"),
@@ -55,20 +58,29 @@ export const routes = [
 	// src/routes/commercant/shop/[id].svelte
 	[/^\/commercant\/shop\/([^/]+?)\/?$/, [c[6], c[12]], [], (m) => ({ id: d(m[1])})],
 
+	// src/routes/validation/mot-de-passe.svelte
+	[/^\/validation\/mot-de-passe\/?$/, [c[0], c[13]], [c[1]]],
+
+	// src/routes/validation/compte.svelte
+	[/^\/validation\/compte\/?$/, [c[0], c[14]], [c[1]]],
+
+	// src/routes/validation/mail.svelte
+	[/^\/validation\/mail\/?$/, [c[0], c[15]], [c[1]]],
+
 	// src/routes/connexion.svelte
-	[/^\/connexion\/?$/, [c[0], c[13]], [c[1]]],
+	[/^\/connexion\/?$/, [c[0], c[16]], [c[1]]],
 
 	// src/routes/recherche.svelte
-	[/^\/recherche\/?$/, [c[0], c[14]], [c[1]]],
+	[/^\/recherche\/?$/, [c[0], c[17]], [c[1]]],
 
 	// src/routes/a-propos.svelte
-	[/^\/a-propos\/?$/, [c[0], c[15]], [c[1]]],
+	[/^\/a-propos\/?$/, [c[0], c[18]], [c[1]]],
 
 	// src/routes/commerce/[slug].svelte
-	[/^\/commerce\/([^/]+?)\/?$/, [c[0], c[16]], [c[1]], (m) => ({ slug: d(m[1])})],
+	[/^\/commerce\/([^/]+?)\/?$/, [c[0], c[19]], [c[1]], (m) => ({ slug: d(m[1])})],
 
 	// src/routes/admin/index.svelte
-	[/^\/admin\/?$/, [c[0], c[17]], [c[1]]],
+	[/^\/admin\/?$/, [c[0], c[20]], [c[1]]],
 
 	// src/routes/api/get-categories.js
 	[/^\/api\/get-categories\/?$/],

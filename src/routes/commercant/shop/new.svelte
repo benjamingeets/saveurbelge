@@ -81,7 +81,11 @@ const handleCreateShop = async ()=>{
             shop.categories.push(e.name)
         }
     })
-    console.log(shop.categories)
+    if(shop.categories.length<= 0){
+        alert("Sélectionnez au moins 1 catégorie")
+        return
+    }
+
     const end = await createShop(shop,images)
     if(end.status){
         goto("/commercant")
@@ -93,9 +97,9 @@ const handleCreateShop = async ()=>{
 }
 </script>
 
-<section class="max-w-3xl w-full mx-auto">
+<section class="max-w-3xl w-full mx-auto p-2">
     <h2>Ajouter votre commerce</h2>
-    <ProgressBar progress={progress}/>
+    <div class="hidden md:block"><ProgressBar progress={progress}/></div>
     <div class="px-4">
         {#if progress == 0}
         <p>Afin de répondre au mieux aux attendes de nos visiteurs, nous effectuons un tri sur les inscriptions. C'est pourquoi nous vous demandons quelle est la motivation de votre commerce/restaurant/...</p>
@@ -103,7 +107,7 @@ const handleCreateShop = async ()=>{
         {:else if progress ==1}
         <h3 class="text-2xl">Informations relatives à votre commerce</h3>
         <div class="w-full flex mt-4">
-            <div class="w-6/12">
+            <div class="md:w-6/12 w-12/12">
                 <label for="name">
                     <p>Nom</p>
                     <input class="input-normal" type="text" id="name" bind:value={shop.name}>
@@ -134,14 +138,14 @@ const handleCreateShop = async ()=>{
                     <input class="input-normal" type="text" id="phone" bind:value={shop.phone}>
                 </label>
             </div>
-            <div class="w-6/12">
+            <div class="hidden md:block w-6/12">
                 <h3 class="text-center">Prévisualisation</h3>
                 <ShopCard sector={shop.sector} disabled={true} name={shop.name} banner={headerImage == '' ? '' : headerImage} badges={shop.options}/>
             </div>
         </div>
         {:else if progress ==2}
         <div class="flex">
-            <div class="w-6/12">
+            <div class="md:w-6/12 w-12/12">
                 <p>Catégories:</p>
                 {#each categories as category}
                     {#if category.sector == shop.sector}
@@ -154,28 +158,28 @@ const handleCreateShop = async ()=>{
                     <span class="flex items-center my-2"><Slider on:updateValue={(event)=>{shop.options.bio = event.detail}} value={shop.options.bio}/>Vos produits sont essentiellement bio</span>
                 </div>
             </div>
-            <div class="w-6/12">
+            <div class="hidden md:block  w-6/12">
                 <h3 class="text-center">Prévisualisation</h3>
                 <ShopCard banner={headerImage == '' ? '' : headerImage} sector={shop.sector} disabled={true} name={shop.name} badges={shop.options}/>
             </div>
         </div>
         {:else if progress ==3}
         <div class="flex">
-            <div class="w-6/12">
+            <div class="md:w-6/12 w-12/12">
                 <p>Description</p>
                 <textarea class="input-normal w-full h-40" name="" id="" bind:value={shop.description}></textarea>
                 <small>Cette description sera affichée en entier sur la page dédiée à votre commerce.</small>
             </div>
-            <div class="w-6/12">
+            <div class=" hidden md:block w-6/12">
                 <ShopCard sector={shop.sector} disabled={true} name={shop.name} banner={headerImage == '' ? '' : headerImage} badges={shop.options} description={shop.description}/>
             </div>
         </div>
         {:else if progress ==4}
         <div class="flex">
-            <div class="w-6/12">
+            <div class="md:w-6/12 w-12/12">
                 <div for="pdp">
                     <p>Logo de votre commerce</p>
-                    <input bind:this={pdpUpload} style='display:none'  on:change={(e)=>{setPdp(e)}} type="file" name="" id="pdp">
+                    <input bind:this={pdpUpload} style='display:none' accept="image/png, image/jpeg, image/jpg, image/webp"  on:change={(e)=>{setPdp(e)}} type="file" name="" id="pdp">
                     <div class="h-32 w-32 bg-grey rounded-md flex justify-center items-center cursor-pointer" on:click={()=>{pdpUpload.click()}}>
                         {#if pdpImage == ''}
                         <Plus/>
@@ -186,8 +190,8 @@ const handleCreateShop = async ()=>{
                 </div>
                 <div for="header">
                     <p>Image de couverture</p>
-                    <input bind:this={headerUpload} accept="image/png" on:change={(e)=>{setHeader(e)}} style='display:none' type="file" id="header">
-                    <div class="h-48 w-80 bg-grey rounded-md flex justify-center items-center cursor-pointer" on:click={()=>{headerUpload.click()}}>
+                    <input bind:this={headerUpload} accept="image/png, image/jpeg, image/jpg, image/webp" on:change={(e)=>{setHeader(e)}} style='display:none' type="file" id="header">
+                    <div class="h-48 md-60 md:w-80 bg-grey rounded-md flex justify-center items-center cursor-pointer" on:click={()=>{headerUpload.click()}}>
                         {#if headerImage == ''}
                         <Plus/>
                         {:else}
@@ -208,7 +212,7 @@ const handleCreateShop = async ()=>{
                     <input bind:value={shop.social.website} class="input-normal" type="text" id="website">
                 </label>
             </div>
-            <div class="w-6/12">
+            <div class="hidden md:block w-6/12">
                 <ShopCard sector={shop.sector} disabled={true} name={shop.name} banner={headerImage == '' ? '' : headerImage} badges={shop.options} description={shop.description}/>
             </div>    
         </div>
@@ -219,7 +223,7 @@ const handleCreateShop = async ()=>{
         {#if progress < 4}
         <div class="btn btn-green" on:click={()=>{if(progress <4){progress++}}}>Suivant</div>
         {:else}
-        <div on:click={()=>{handleCreateShop()}} class="btn btn-green">Terminer</div>
+            <div on:click={()=>{handleCreateShop()}} class="btn btn-green {shop.ca} ">Terminer</div>
         {/if}
     </div>
 </section>

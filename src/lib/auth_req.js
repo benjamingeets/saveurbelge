@@ -34,6 +34,7 @@ export const logout = async()=>{
         })
         localStorage.removeItem('refreshToken')
         localStorage.removeItem('accessToken')
+        localStorage.removeItem('status')
         return true
     }
     catch(error){

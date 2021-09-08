@@ -6,7 +6,8 @@ import IconProducteur from "./svg/IconProducteur.svelte";
 export let name = "Sample Name"
 export let slug = "sample-slug"
 export let sector = 'restaurant'
-export let banner = ""
+export let id
+export let banner = false
 export let disabled = false
 export let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pellentesque turpis vitae mattis. Cras rutrum tu"
 export let badges = {
@@ -19,7 +20,7 @@ export let badges = {
 </script>
 
 <div class="md:w-80 w-60 m-4 shadow-lg rounded-md overflow-hidden">
-    <div class="h-48 flex flex-col justify-end rounded-t-md" style={banner == '' ? `background-image:url(/images/headers/${sector}.png);background-repeat:repeat;background-size:30%` : `background-image:url(${banner});background-size:cover`}>
+    <div class="h-48 flex flex-col justify-end rounded-t-md" style={!banner? `background-image:url(/images/headers/${sector}.png);background-repeat:repeat;background-size:30%` : `background-image:url(http://localhost:8000/public/${id}_header.webp);background-size:cover`}>
         <div class="flex justify-center {badges.bio || badges.monnaie || badges.local ? 'py-2' : ''}" style="background:rgba(255,255,255,0.4)">
             {#if badges.bio}
                 <Badge texte="Vend des produits bio"><IconBio/></Badge>

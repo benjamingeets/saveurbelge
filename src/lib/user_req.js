@@ -19,7 +19,6 @@ export const getUserShops = async()=>{
             return res
         }
     }catch(error){
-        console.log("erorr")
     }
 }
 
@@ -41,7 +40,6 @@ export const getUserInformations = async()=>{
             return res
         }
     }catch(error){
-        console.log("erorr")
     }
 }
 
@@ -84,7 +82,6 @@ export const updatePwd = async (pwd,newPwd)=>{
         })
         
         const rep = await res.json()
-        console.log(rep)
         if(rep.message == 'jwt expired'){
             await refreshAccessToken()
             return await updatePwd(pwd,newPwd)
@@ -140,6 +137,26 @@ export const getLostPwd = async (email)=>{
     }
 }
 
+export const setLostPwd = async (email,code,pwd)=>{
+    try{
+        const res = await fetch(`http://localhost:8000/user/set-lost-password`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                email:email,
+                code:code,
+                pwd:pwd
+            })
+        })
+        const rep = await res.json()
+        return rep
+    }catch{
+
+    }
+}
+
 export const createShop = async (shop,images)=>{
     try{
         const reqShop = await fetch("http://localhost:8000/user/shop",{
@@ -169,6 +186,60 @@ export const createShop = async (shop,images)=>{
     catch(e){
         return e
     }
-    /*
-    */
+}
+
+export const updateShop = async (shop,images) =>{
+    try{
+        const reqShop = await fetch(`http://localhost:8000/user/shop/${shop._id}`,{
+        method:'PUT',
+        headers:{
+            'Authorization':`Bearer ${localStorage.getItem('accessToken')}`,
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({...shop})
+        })
+        
+        let res = await reqShop.json()
+        if(res.message =="jwt expired"){
+            await refreshAccessToken()
+            return await updateShop(shop,images)
+        }
+        if(images){
+            const reqImages = await fetch('http://localhost:8000/upload',{
+                method:'POST',
+                headers:{
+                    'Authorization':`Bearer ${localStorage.getItem('accessToken')}`,
+                    'shopid':res.id
+                },
+                body:images
+            })
+        }
+                
+        
+        return res
+    }
+    catch(e){
+        return e
+    }
+}
+
+export const createAccount = async (email,pwd,first_name,last_name)=>{
+    try{
+        const res = await fetch(`http://localhost:8000/user`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                email:email,
+                pwd:pwd,
+                first_name:first_name,
+                last_name:last_name
+            })
+        })
+        const rep = await res.json()
+        return rep
+    }catch{
+
+    }
 }

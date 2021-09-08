@@ -5,7 +5,13 @@ import {goto} from '$app/navigation'
 import {login} from '$lib/auth_req'
 import { onMount } from "svelte";
 import { getLostPwd } from "$lib/user_req";
-
+import {page} from '$app/stores'
+let code = $page.query.get('code')
+let next = $page.query.get('next')
+let title = 'Se connecter'
+if(code && next){
+    title = "valider votre compte"
+}
 let mail =""
 let pwd = ""
 let displayPwd = false
@@ -28,11 +34,16 @@ onMount(()=>{
 const handleLogin = async () =>{
     const log = await login(mail,pwd)
     if(log){
-        if(parseInt(localStorage.getItem('status'))>=5){
-            goto('/admin')
+        if(next && code){
+            goto(`/${next}?code=${code}`)
         }
         else{
-            goto('/commercant')
+            if(parseInt(localStorage.getItem('status'))>=5){
+                goto('/admin')
+            }
+            else{
+                goto('/commercant')
+            }
         }
     }
     else{
@@ -46,12 +57,12 @@ const lostPassword = async ()=>{
 }
 </script>
 <Head title="Connexion - SaveurBelge"></Head>
-<main class="rounded-md py-40 mb-10 px-2">
-    <div class="bg-white max-w-md mx-auto rounded-md py-20">
+<main class="rounded-md md:py-40 py-16 mb-10 px-2">
+    <div class="bg-white max-w-md mx-auto rounded-md md:py-20 py-8">
         {#if !lostPwd}
-            <h2 class="text-noir">Se connecter</h2>
+            <h2 class="text-noir">{title}</h2>
             <p class="text-center text-orange">{error}</p>
-            <form action="" class="flex flex-col mx-auto w-8/12">
+            <form action="" class="flex flex-col mx-auto md:w-8/12 px-2">
                 <label for="mail flex flex-col">
                     <p class="text-grey-dark">Mail</p>
                     <input bind:value={mail} id="mail" class="border rounded-md px-4 py-2 w-full" type="text">
@@ -72,7 +83,7 @@ const lostPassword = async ()=>{
                 </span>  
             </div>
         {:else}
-            <h2>Mot de passe oublié</h2>
+            <h2 class="text-noir">Mot de passe oublié</h2>
             <div class="flex flex-col items-center">
                 <p class="text-center mt-4 mb-10">{message}</p>
                 <label for="mail">

@@ -33,8 +33,8 @@
     <section class="mx-auto max-w-xl w-full flex flex-col items-center">
         <h2>Mes informations</h2>
         <p class="my-2 px-4 text-center">{@html message}</p>
-        <div class="flex">
-            <div class="w-6/12">
+        <div class="flex flex-wrap">
+            <div class="lg:w-6/12 w-12/12 lg:px-0 px-2">
                 <label for="lastname">
                     <p>Nom</p>
                     <input class="border rounded-md py-2 px-4 w-full"  type="text" bind:value={user.last_name} id="lastname">
@@ -44,7 +44,7 @@
                     <input class="border rounded-md py-2 px-4 w-full"  type="text" bind:value={user.first_name} id="firstname">
                 </label>
             </div>
-            <div class="w-6/12 ml-4">
+            <div class="lg:w-6/12 w-12/12 lg:pl-4 px-2">
                 <label class="w-full" for="email">
                     <p>Email</p>
                     <input  class="border rounded-md py-2 px-4 w-full" type="text" bind:value={user.email} id="email">
