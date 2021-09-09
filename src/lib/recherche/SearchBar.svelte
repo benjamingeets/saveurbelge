@@ -10,7 +10,6 @@
     if(cp.length == 4){
         const cityNameQuery = await fetch(`http://localhost:8000/get-city-from-cp/${cp}`)
         const cityName = await cityNameQuery.json()
-        console.log(cityName)
         city = cityName.name
     }
     else if(cp.length === 0){
@@ -26,13 +25,21 @@
 
 const clearCategories = () =>{
     categories.forEach(elt=>{
-        elt.selected = false
+        elt.value = false
     })
+}
+const dispatchSearch =async (query)=>{
+    categories.filter(cat => cat.value === true).forEach(e=>{
+        if(e.value){
+            query.categories.push(e.name)
+        }
+    })
+    dispatch('query',query)
 }
 let distance = 25
 </script>
 
-<aside class="w-72 mb-12">
+<aside class="md:w-72 mb-12 md:mx-0 mx-auto">
     <label for="pc">
         <p class="font-bold my-4">Code postal</p>
         <div class="border rounded-md py-2 px-4 flex"><input class="w-3/12" id="pc" type="text" bind:value={pc} on:input="{handleInput}"><p class="mr-auto">{city}</p> <Pointer/> </div>
@@ -51,15 +58,15 @@ let distance = 25
     {/if}
     {#each categories as cat}
         {#if cat.sector == sector}
-        <label class="block" for="{cat.name}"><input class="mr-2" type="checkbox" name="" id="{cat.name}">{cat.name}</label>
+        <label class="block" for="{cat.name}"><input bind:checked={cat.value} class="mr-2" type="checkbox" name="" id="{cat.name}">{cat.name}</label>
         {/if}
     {/each}
     <hr class="my-4">
     <p class="font-bold">Distance</p>
     <small>0km - {distance}km</small>
     <input bind:value={distance} class="w-full my-6 bg-red-500" type="range" min=5 max=50 name="" id="">
-    <div>
-        <span class="btn btn-green">
+    <div class="flex justify-center">
+        <span on:click={()=>(dispatchSearch({pc,sector,distance,categories:[]}))} class="btn btn-green">
             Appliquer le filtre
         </span>  
     </div>

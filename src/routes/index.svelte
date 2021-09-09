@@ -43,7 +43,7 @@ export let lastShops
     <h2 class="my-12">Les derniers inscrits</h2>
     <div class="flex lg:flex-row flex-col items-center justify-evenly max-w-5xl mx-auto">
         {#each lastShops as shop}
-            <ShopCard name={shop.name} slug={shop.slug} id={shop._id} banner={shop.header} description={shop.description} badges={shop.options}/>
+            <ShopCard shop={shop}/>
         {/each}
     </div>
     <div class="flex justify-center mt-4">

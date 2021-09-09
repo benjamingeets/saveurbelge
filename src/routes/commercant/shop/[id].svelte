@@ -221,5 +221,5 @@ const handleUpdate =async ()=>{
 
 {#if display}
 <section class="fixed right-0 top-36 2xl:block hidden">
-    <ShopCard name={shop.name} banner={headerImage} badges={shop.options} disabled={true} description={shop.description}/>
+    <ShopCard shop={shop} disabled={true}/>
 </section>{/if}

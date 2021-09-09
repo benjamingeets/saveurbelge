@@ -3,8 +3,7 @@ import Facebook from "./svg/Facebook.svelte";
 import Instagram from "./svg/Instagram.svelte";
 const categories = [
     {name:"Commerces",link:"commerce"},
-    {name:"Restaurants",link:"restaurant"},
-    {name:"Bars",link:"bar"}
+    {name:"Restaurants/bars",link:"restaurant"},
 ]
 </script>
 <footer class="bg-green text-white py-16 mt-10">
@@ -14,7 +13,7 @@ const categories = [
                 <h4>Catégories</h4>
                 <ul>
                     {#each categories as category}
-                        <li class="my-4"><a class="text-white" href="/recherche?categorie={category.link}">{category.name}</a></li>
+                        <li class="my-4"><a class="text-white" href="/recherche?sector={category.link}">{category.name}</a></li>
                     {/each}
                 </ul>
             </div>

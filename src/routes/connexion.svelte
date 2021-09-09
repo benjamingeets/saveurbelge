@@ -16,7 +16,7 @@ let mail =""
 let pwd = ""
 let displayPwd = false
 let lostPwd = false
-let message ='Quel est votre adresse email?'
+let message ='Quelle est votre adresse email?'
 let error = ''
 const showPwd = () =>{
         displayPwd = !displayPwd

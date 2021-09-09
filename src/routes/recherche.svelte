@@ -12,7 +12,9 @@ export const load = async()=>{
 <script>
     import {page} from '$app/stores'
     import Head from '$lib/Head.svelte';
+    import { publicShopQuery } from '$lib/public_req';
     import SearchBar from '$lib/recherche/SearchBar.svelte';
+import ShopModal from "$lib/ShopModal.svelte";
     import ShopCard from '$lib/ShopCard.svelte';
     let pc = $page.query.get('pc')
     let sector = $page.query.get('sector')
@@ -21,18 +23,29 @@ export const load = async()=>{
         pc = "7500"
         city = "Tournai"
     }
+    let displayModal = false
     let shops = []
     let displayQuery = false
     export let categories
+    
+    const queryShops = async (data)=>{
+        shops = await publicShopQuery(data)
+        displayQuery = true
+        console.log(shops)
+    }
+let shopModal
+    queryShops({sector,pc,distance:25})
 </script>
 
 <Head title={`Recherche de commerces aux alentours de ${city} - SaveurBelge`}/>
-<main class="flex mt-10">
-    <SearchBar on:query={(event)=>{console.log(event.detail)}} categories={categories} pc={pc} city={city} sector={sector}/>
-    <div class="flex flex-wrap w-full px-10">
+
+{#if displayModal}<ShopModal shop={shopModal} on:close={()=>{displayModal=false}} on:click={()=>{displayModal=false}}/>{/if} 
+<main class="flex md:mt-10 mt-0 flex-wrap md:flex-nowrap">
+    <SearchBar on:query={(event)=>{queryShops(event.detail)}} categories={categories} pc={pc} city={city} sector={sector}/>
+    <div class="flex flex-wrap w-full md:justify-start justify-center">
         {#if displayQuery}
             {#each shops as shop}
-            <div class=""><ShopCard name="{shop.shop.name}" slug="{shop.shop.slug}" description="{shop.shop.description}" badges="{shop.shop.options}"/></div>
+            <div class=""><ShopCard shop={shop.shop} distance={shop.distanceFrom} dispatchMode={true} on:click={()=>{displayModal=true;shopModal = shop.shop;}}/></div>
             {/each}
         {/if}
     </div>

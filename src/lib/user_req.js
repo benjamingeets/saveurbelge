@@ -1,9 +1,9 @@
 import { goto } from "$app/navigation"
 import { refreshAccessToken } from "./auth_req"
-
+import { API } from "./env"
 export const getUserShops = async()=>{
     try{
-        const req = await fetch('http://localhost:8000/user/shops',{
+        const req = await fetch(`${API}/user/shops`,{
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
@@ -24,7 +24,7 @@ export const getUserShops = async()=>{
 
 export const getUserInformations = async()=>{
     try{
-        const req = await fetch('http://localhost:8000/user',{
+        const req = await fetch(`${API}/user`,{
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
@@ -40,12 +40,13 @@ export const getUserInformations = async()=>{
             return res
         }
     }catch(error){
+        console.log(error)
     }
 }
 
 export const updateUserInformations = async (body)=>{
     try{
-        const res = await fetch('http://localhost:8000/user',{
+        const res = await fetch(`${API}/user`,{
             method:'PUT',
             headers:{
                 'Content-Type':'application/json',
@@ -70,7 +71,7 @@ export const updateUserInformations = async (body)=>{
 
 export const updatePwd = async (pwd,newPwd)=>{
     try{
-        const res = await fetch('http://localhost:8000/user/update-pwd',{
+        const res = await fetch(`${API}/user/update-pwd`,{
             method:'PUT',
             headers:{
                 'Content-Type':'application/json',
@@ -96,7 +97,7 @@ export const updatePwd = async (pwd,newPwd)=>{
 
 export const getShop = async (id)=>{
     try{
-        const res = await fetch(`http://localhost:8000/shop/${id}`)
+        const res = await fetch(`${API}/shop/${id}`)
         const rep = await res.json()
         return rep
     }
@@ -107,7 +108,7 @@ export const getShop = async (id)=>{
 
 export const deleteShop = async (id)=>{
     try{
-        const res = await fetch(`http://localhost:8000/user/shop/${id}`,{
+        const res = await fetch(`${API}/user/shop/${id}`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json',
@@ -123,7 +124,7 @@ export const deleteShop = async (id)=>{
 
 export const getLostPwd = async (email)=>{
     try{
-        const res = await fetch(`http://localhost:8000/user/get-lost-password`,{
+        const res = await fetch(`${API}/user/get-lost-password`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -139,7 +140,7 @@ export const getLostPwd = async (email)=>{
 
 export const setLostPwd = async (email,code,pwd)=>{
     try{
-        const res = await fetch(`http://localhost:8000/user/set-lost-password`,{
+        const res = await fetch(`${API}/user/set-lost-password`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -159,7 +160,7 @@ export const setLostPwd = async (email,code,pwd)=>{
 
 export const createShop = async (shop,images)=>{
     try{
-        const reqShop = await fetch("http://localhost:8000/user/shop",{
+        const reqShop = await fetch(`${API}/user/shop`,{
         method:'POST',
         headers:{
             'Authorization':`Bearer ${localStorage.getItem('accessToken')}`,
@@ -173,7 +174,7 @@ export const createShop = async (shop,images)=>{
             await refreshAccessToken()
             return await createShop(shop,images)
         }
-        const reqImages = await fetch('http://localhost:8000/upload',{
+        const reqImages = await fetch(`${API}/upload`,{
             method:'POST',
             headers:{
                 'Authorization':`Bearer ${localStorage.getItem('accessToken')}`,
@@ -190,7 +191,7 @@ export const createShop = async (shop,images)=>{
 
 export const updateShop = async (shop,images) =>{
     try{
-        const reqShop = await fetch(`http://localhost:8000/user/shop/${shop._id}`,{
+        const reqShop = await fetch(`${API}/user/shop/${shop._id}`,{
         method:'PUT',
         headers:{
             'Authorization':`Bearer ${localStorage.getItem('accessToken')}`,
@@ -205,7 +206,7 @@ export const updateShop = async (shop,images) =>{
             return await updateShop(shop,images)
         }
         if(images){
-            const reqImages = await fetch('http://localhost:8000/upload',{
+            const reqImages = await fetch(`${API}/upload`,{
                 method:'POST',
                 headers:{
                     'Authorization':`Bearer ${localStorage.getItem('accessToken')}`,
@@ -225,7 +226,7 @@ export const updateShop = async (shop,images) =>{
 
 export const createAccount = async (email,pwd,first_name,last_name)=>{
     try{
-        const res = await fetch(`http://localhost:8000/user`,{
+        const res = await fetch(`${API}/user`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

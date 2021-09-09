@@ -15,14 +15,14 @@ import Head from "$lib/Head.svelte";
                 <p class="py-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis vitae molestiae veniam quibusdam ipsum corporis laboriosam aspernatur. Labore minus pariatur quia, id provident sunt placeat, soluta, voluptate dolores eligendi quam.</p>
             </div>
             <div class="w-12/12 md:w-6/12">
-                <img class="rounded-md" src="https://via.placeholder.com/630x400" alt="">
+                <img class="rounded-md" src="https://picsum.photos/630/400" alt="">
             </div>
         </div>
         <div class="mt-10">
             <h2 class="text-noir">Notre équipe</h2>
             <p class="py-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptas deserunt esse enim laboriosam possimus non repudiandae, vitae id doloribus, minus ratione quo beatae asperiores fugit corrupti dolorum. Voluptatem, ipsa.</p>
             <div>
-                <img class="rounded-md" src="https://via.placeholder.com/1280x560" alt="">
+                <img class="rounded-md" src="https://picsum.photos/1280/560" alt="">
             </div>
         </div>
     </article>

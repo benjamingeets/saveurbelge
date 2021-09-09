@@ -47,7 +47,7 @@ searchCityName(pc)
         </div>
         <select bind:value="{sector}" class="lg:w-5/12 lg:my-0 my-2 w-full bg-grey-light rounded-md p-2 lg:mx-2" name="" id="">
             <option value="" selected disabled>Secteur d'activité</option>
-            <option value="restaurant-bar">Restaurant/Bar</option>
+            <option value="restaurant">Restaurant/Bar</option>
             <option value="commerce">Commerce</option>
         </select>
 

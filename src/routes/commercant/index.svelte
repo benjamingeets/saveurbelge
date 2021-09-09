@@ -11,15 +11,15 @@ let ready = false
         currentAdminPage.update(n => "")
         shops = await getUserShops()
         user = await getUserInformations()
+        console.log(user)
         ready = true
     })
 </script>
 
 <section class="lg:ml-72 flex flex-wrap px-2">
-    
-    {#if ready && user.status >= 1}
+    {#if ready && user && user.status >= 1}
         {#each shops as shop}
-            <div class="w-80 rounded-md shadow-lg sm:m-2 mx-auto">
+            <div class="w-80 h-80 rounded-md shadow-lg sm:m-2 mb-2 mx-auto">
                 <div class="h-48 rounded-t-md" style={shop.header ? `background-image:url(http://localhost:8000/public/${shop._id}_header.webp); background-size: cover;)` : shop.sector == 'restaurant' ? 'background-image:url(/images/headers/restaurant.png);background-size:30%;' : 'background-image:url(/images/headers/commerce.png);background-size:30%;'}>
                 </div>
                 <div class="flex flex-col items-center h-32 pb-8 px-4 w-full">
@@ -34,7 +34,7 @@ let ready = false
 
         {/each}
         {#if user.shopsLimit > shops.length}
-        <a href="/commercant/shop/new" class="h-72 w-80 border m-2 shadow-lg rounded-md" >
+        <a href="/commercant/shop/new" class="h-80 w-80 border md:m-2 shadow-lg rounded-md mx-auto my-2" >
             <div class="cursor-pointer w-full h-full flex justify-center items-center">
                 <Plus></Plus>
             </div>

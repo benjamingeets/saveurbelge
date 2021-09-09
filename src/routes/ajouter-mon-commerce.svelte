@@ -1,8 +1,14 @@
 <script>
+import { goto } from "$app/navigation";
+
 import Head from "$lib/Head.svelte";
 import { createAccount } from "$lib/user_req";
-
-
+import { onMount } from "svelte";
+onMount(()=>{
+    if(localStorage.getItem('accessToken')){
+        goto("/commercant")
+    }
+})
     let first_name=''
     let last_name=''
     let email=''

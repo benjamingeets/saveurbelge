@@ -7,6 +7,7 @@ import { goto } from "$app/navigation";
         const loggedOut = await logout()
         if(loggedOut){
             goto("/connexion")
+            document.location.reload()
         }
     })
 </script>
