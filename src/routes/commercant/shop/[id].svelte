@@ -16,15 +16,18 @@ import { currentAdminPage } from "$lib/store";
 import { getShop,deleteShop, updateShop } from "$lib/user_req";
 import Slider from "$lib/Slider.svelte";
 import ShopCard from "$lib/ShopCard.svelte";
-import Category from "$lib/index/Category.svelte";
 import Plus from "$lib/svg/Plus.svelte";
 import { goto } from "$app/navigation";
+import {getShopFromSlug} from '$lib/public_req'
 export let id
+import slugify from "slugify";
+import {API} from "$lib/env"
 let pdpUpload,headerUpload,images
 let pdpImage =""
 let headerImage = ''
 let shop 
 let categories
+let nameFree = true
 let displayDelete = false
 let display = false
     onMount(async ()=>{
@@ -33,11 +36,10 @@ let display = false
         const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
         categories = await categoriesRes.json()
         if(shop.logo){
-            pdpImage = "http://localhost:8000/public/" + shop._id + "_logo.webp"
+            pdpImage = `${API}/public/${shop._id}_logo.webp`
         }
-        console.log(shop.header)
         if(shop.header){
-            headerImage = "http://localhost:8000/public/" + shop._id + "_header.webp"
+            headerImage = `${API}/public/${shop._id}_header.webp`
         }
         categories.forEach(e=>{
             shop.categories.forEach(f=>{
@@ -99,6 +101,15 @@ const handleUpdate =async ()=>{
         goto("/commercant")
     }
 }
+const checkIfNameIsFree = async () =>{
+    const res = await getShopFromSlug(slugify(shop.name,{lower:true}))
+    if(res.success && res.shop.slug!= shop.slug){
+        nameFree = false
+    }else{
+        nameFree = true
+    }
+}
+
 </script>
 {#if displayDelete}
 <div>
@@ -115,15 +126,16 @@ const handleUpdate =async ()=>{
     </div>
 </div>
 {/if}
-<section class="max-w-3xl xl:mx-auto ml-auto border w-full px-2">
+<section class="max-w-3xl xl:mx-auto ml-auto w-full px-2">
     <h2>Votre commerce</h2>
     {#if display}
     <div class="flex flex-wrap"><!--Form-->
-        <div class="md:w-6/12 w-12/12">
+        <div class="md:w-6/12 w-12/12 px-2">
             <label for="nom">
                 <p>Nom*</p>
-                <input class="input-normal" bind:value={shop.name} type="text" id="nom">
+                <input class="input-normal w-full" bind:value={shop.name} on:change={()=>{checkIfNameIsFree()}} type="text" id="nom">
             </label>
+            {#if !nameFree} <small class="block">Ce nom est déjà utilisé</small> {/if}
             <p>Secteur d'activité</p>
             <select bind:value={shop.sector} on:change={()=>clearCategories()} class="input-normal" name="" id="">
                 <option value="restaurant">Restaurant/Bar</option>
@@ -169,49 +181,55 @@ const handleUpdate =async ()=>{
                 <div>
                     <label for="facebook">
                         <p>Lien Facebook</p>
-                        <input bind:value={shop.social.facebook} type="text" id="facebook" class="input-normal">
+                        <input bind:value={shop.social.facebook} type="text" id="facebook" class="input-normal w-full">
                     </label>
                     <label for="instagram">
                         <p>Lien Instagram</p>
-                        <input bind:value={shop.social.instagram} type="text" id="instagram" class="input-normal">
+                        <input bind:value={shop.social.instagram} type="text" id="instagram" class="input-normal w-full">
                     </label>
                     <label for="web">
                         <p>Lien site web</p>
-                        <input bind:value={shop.social.website} type="text" id="web" class="input-normal">
+                        <input bind:value={shop.social.website} type="text" id="web" class="input-normal w-full">
                     </label>
                 </div>
             </div>
         </div>
-        <div class="md:w-6/12 w-12/12">
+        <div class="md:w-6/12 w-12/12 px-2">
             <label for="rue">
                 <p>Rue</p>
-                <input class="input-normal" type="text" id="rue" bind:value={shop.address.street}>
+                <input class="input-normal w-full" type="text" id="rue" bind:value={shop.address.street}>
             </label>
             <label for="num">
                 <p>Numéro</p>
-                <input class="input-normal" type="text" id="num" bind:value={shop.address.num}>
+                <input class="input-normal w-full" type="text" id="num" bind:value={shop.address.num}>
             </label>
             <label for="cp">
                 <p>Code postal</p>
-                <input class="input-normal" type="text" id="pc" bind:value={shop.address.pc}>
+                <input class="input-normal w-full" type="text" id="pc" bind:value={shop.address.pc}>
             </label>
             <label for="city">
                 <p>Ville</p>
-                <input class="input-normal" type="text" id="city" bind:value={shop.address.city}>
+                <input class="input-normal w-full" type="text" id="city" bind:value={shop.address.city}>
             </label>
             <label for="phone">
                 <p>Numéro de téléphone</p>
-                <input class="input-normal" type="text" id="phone" bind:value={shop.phone}>
+                <input class="input-normal w-full" type="text" id="phone" bind:value={shop.phone}>
             </label>
             <label for="description">
                 <p>Description</p>
-                <textarea bind:value={shop.description} id="description" class="input-normal"></textarea>
+                <textarea bind:value={shop.description} id="description" class="input-normal w-full"></textarea>
             </label>
         </div>
     </div>
+    {#if !nameFree}
+    <div class="btn border-grey text-center cursor-not-allowed w-36 mx-auto mt-10">
+        Sauvegarder
+    </div>
+    {:else}
     <div on:click={()=>{handleUpdate()}} class="btn btn-green w-36 mx-auto mt-10">
         Sauvegarder
     </div>
+    {/if}
     <div class="text-orange text-center mx-auto cursor-pointer mt-10" on:click={()=>{displayDelete = true}}>
         Supprimer 
     </div>

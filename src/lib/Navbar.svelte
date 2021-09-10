@@ -7,7 +7,7 @@ export let links
 
 </script>
 <div class="h-28"></div>
-<header class="z-20 fixed top-0 bg-white w-full flex justify-between text-brown py-4 select-none border-b mb-4 px-4">
+<header class="z-20 fixed top-0 bg-white w-full flex justify-between text-brown py-4 select-none mb-4 px-4">
     <div class="w-5/12 uppercase">
         <a class="inline-block" href="/">
             <p class="font-bebas lg:text-4xl text-2xl">Saveur Belge</p>
@@ -15,7 +15,7 @@ export let links
         </a>
     </div>
     <div class="w-2/12 flex justify-center">
-            <p class="md:w-24 w-20 p-2 -bottom-4 md:p-3 bg-white rounded-full absolute md:-bottom-6 border z-10">
+            <p id="bord" class="md:w-32 w-20 p-2 -bottom-4 md:p-3 bg-white rounded-full absolute md:-bottom-6">
                 <img on:click={()=>{goto(`/`) }} class="cursor-pointer z-30" src="/images/logo_saveur_belge.svg" alt="Saveur Belge">
             </p>
     </div>
@@ -60,3 +60,9 @@ export let links
 
 </div>
 {/if}
+
+<style>
+    header{
+        filter: drop-shadow(0 0 1px #9CA3AF);
+    }
+</style>

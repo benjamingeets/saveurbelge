@@ -17,3 +17,15 @@ export const publicShopQuery = async(query)=>{
         
     }
 }
+
+export const getShopFromSlug = async (slug) =>{
+    try{
+        const req = await fetch(`${API}/shop-from-slug/${slug}`,{
+            method:'GET'
+        })
+        const res = await req.json()
+        return res
+    }catch(error){
+        
+    } 
+}

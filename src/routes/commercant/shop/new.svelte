@@ -9,6 +9,8 @@ import ShopCard from "$lib/ShopCard.svelte";
 import Plus from "$lib/svg/Plus.svelte";
 import {createShop} from "$lib/user_req"
 import { goto } from "$app/navigation";
+import slugify from 'slugify'
+import {getShopFromSlug} from '$lib/public_req'
 let categories,pdpUpload,headerUpload
 let images 
 let pdpImage =""
@@ -40,11 +42,32 @@ let shop = {
     }
 }
 
+let nameFree = true
+let atLeastOneCategory = false
+
 onMount(async()=>{
         currentAdminPage.update(n => "")
         const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
         categories = await categoriesRes.json()
 })
+
+const checkIfNameIsFree = async () =>{
+    const res = await getShopFromSlug(slugify(shop.name,{lower:true}))
+    if(res.success){
+        nameFree = false
+    }else{
+        nameFree = true
+    }
+}
+
+const checkIfCategories = async () =>{
+    categories.forEach(e=>{
+        if(e.value){
+            atLeastOneCategory = true
+        }
+        atLeastOneCategory  = false
+    })
+}
 
 const setPdp = async(e)=>{
     shop.logo = true
@@ -83,6 +106,7 @@ const handleCreateShop = async ()=>{
     })
     if(shop.categories.length<= 0){
         alert("Sélectionnez au moins 1 catégorie")
+        progress = 2
         return
     }
 
@@ -110,8 +134,12 @@ const handleCreateShop = async ()=>{
             <div class="md:w-6/12 w-12/12">
                 <label for="name">
                     <p>Nom</p>
-                    <input class="input-normal" type="text" id="name" bind:value={shop.name}>
+                    <input class="input-normal" type="text" id="name" bind:value={shop.name} on:change={()=>{checkIfNameIsFree()}}>
+                    
                 </label>
+                {#if !nameFree}
+                        <small class="block">Ce nom est déjà utilisé 🚫</small>
+                    {/if}
                 <p>Secteur d'activité</p>
                 <select class="input-normal" name="" id="" bind:value={shop.sector} on:change={()=>{categories.forEach(e=>{e.value = false})}}>
                     <option value="restaurant" default>Restaurant/Bar</option>
@@ -146,7 +174,7 @@ const handleCreateShop = async ()=>{
         {:else if progress ==2}
         <div class="flex">
             <div class="md:w-6/12 w-12/12">
-                <p>Catégories:</p>
+                <p>Catégories: (min. 1)</p>
                 {#each categories as category}
                     {#if category.sector == shop.sector}
                         <label class="block" for={category.name}><input bind:checked={category.value} type="checkbox" class="mr-2" name="" id={category.name}>{category.name}</label>
@@ -219,11 +247,17 @@ const handleCreateShop = async ()=>{
         {/if}
     </div>
     <div class="flex justify-between mt-10">
+        {#if nameFree}
         <div class="btn btn-green-outline" on:click={()=>{if(progress >0){progress--}}}>Précédent</div>
-        {#if progress < 4}
-        <div class="btn btn-green" on:click={()=>{if(progress <4){progress++}}}>Suivant</div>
         {:else}
+        <div class="btn border-grey text-grey-light cursor-not-allowed">Précédent</div>
+        {/if}
+        {#if progress < 4 && nameFree}
+        <div class="btn btn-green" on:click={()=>{if(progress <4){progress++}}}>Suivant</div>
+        {:else if progress === 4}
             <div on:click={()=>{handleCreateShop()}} class="btn btn-green {shop.ca} ">Terminer</div>
+        {:else}
+            <div class="btn btn-green border-grey bg-grey cursor-not-allowed">Suivant</div>
         {/if}
     </div>
 </section>

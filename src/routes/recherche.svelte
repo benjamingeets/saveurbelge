@@ -31,7 +31,6 @@ import ShopModal from "$lib/ShopModal.svelte";
     const queryShops = async (data)=>{
         shops = await publicShopQuery(data)
         displayQuery = true
-        console.log(shops)
     }
 let shopModal
     queryShops({sector,pc,distance:25})
@@ -39,7 +38,7 @@ let shopModal
 
 <Head title={`Recherche de commerces aux alentours de ${city} - SaveurBelge`}/>
 
-{#if displayModal}<ShopModal shop={shopModal} on:close={()=>{displayModal=false}} on:click={()=>{displayModal=false}}/>{/if} 
+{#if displayModal}<ShopModal shop={shopModal} on:close={()=>{displayModal=false}} />{/if} 
 <main class="flex md:mt-10 mt-0 flex-wrap md:flex-nowrap">
     <SearchBar on:query={(event)=>{queryShops(event.detail)}} categories={categories} pc={pc} city={city} sector={sector}/>
     <div class="flex flex-wrap w-full md:justify-start justify-center">

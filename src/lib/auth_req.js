@@ -1,6 +1,7 @@
+import { API } from "./env"
 export const login = async (email,pwd)=>{
     try{
-        const req = await fetch('http://localhost:8000/login',{
+        const req = await fetch(`${API}/login`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -23,7 +24,7 @@ export const login = async (email,pwd)=>{
 export const logout = async()=>{
     try{
         const refreshToken = localStorage.getItem('refreshToken')
-        const req = await fetch('http://localhost:8000/logout',{
+        const req = await fetch(`${API}/logout`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'
@@ -46,7 +47,7 @@ export const logout = async()=>{
 export const refreshAccessToken = async()=>{
     try{
         const refreshToken = localStorage.getItem('refreshToken')
-        const req = await fetch('http://localhost:8000/refresh-token',{
+        const req = await fetch(`${API}/refresh-token`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

@@ -5,6 +5,9 @@
     export let lien = ""
     export let image = `https://${DOMAIN}/public/image/share.png`
     export let noindex = false
+    if(description.length > 100){
+        description = `${description.substring(0,140)}...`
+    }
 </script>
 
 <svelte:head>
