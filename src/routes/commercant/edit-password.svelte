@@ -1,6 +1,6 @@
 <script>
 import { onMount } from "svelte";
-import { currentAdminPage } from "$lib/store";
+import { currentUserPage } from "$lib/store";
 import { updatePwd } from "$lib/user_req";
 
 let currentPwd =''
@@ -8,7 +8,7 @@ let newPwd =''
 let confirmPwd =''
 let message = ''
 onMount(async()=>{
-        currentAdminPage.update(n => "informations")
+        currentUserPage.update(n => "informations")
 })
 const handleClick = async()=>{
     const res = await updatePwd(currentPwd,newPwd)

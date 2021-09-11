@@ -115,6 +115,9 @@ export const deleteShop = async (id)=>{
                 'Authorization':'Bearer ' +localStorage.getItem('accessToken')
             }
         })
+        if(parseInt(localStorage.getItem('status'))==5){
+            goto("/admin/shop")
+        } 
         goto('/commercant')
     }
     catch(e){

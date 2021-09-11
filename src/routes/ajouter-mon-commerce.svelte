@@ -26,6 +26,7 @@ onMount(()=>{
             return (false)
         }
     }
+    let done = false
     let checkForm = () =>{
         
         isPwdLongEnough = pwd.length >= 8
@@ -34,7 +35,13 @@ onMount(()=>{
     }
     const handleClick = async ()=>{
         const res = await createAccount(email,pwd,first_name,last_name)
-        alert(res.message)
+        
+        if(res.success){
+            done = true
+        }
+        else{
+            alert(res.message)
+        }
     }
 </script>
 <Head title="Ajouter mon commerce - SaveurBelge"/>
@@ -44,6 +51,7 @@ onMount(()=>{
         <h2>Ajouter votre commerce</h2>
     </div>
     <section class="max-w-xl mx-auto">
+        {#if !done}
         <p>blablab la gentil</p>
         <p>Vos informations</p>
         <div class="flex flex-wrap">
@@ -77,5 +85,8 @@ onMount(()=>{
         <div on:click={()=>{handleClick()}} class={`btn btn-green w-60 my-10 mx-auto ${fullFiled && isPwdLongEnough && arePwdSame && checkMail(email) ? '' : 'bg-grey border-grey cursor-not-allowed'}`}>
             Créer mon compte
         </div>
+        {:else}
+            <p>Votre compte a bien été créé. Un mail avec un lien de confirmation va vous êtes envoyé sous peu!</p>
+        {/if}
     </section>
 </main>

@@ -19,7 +19,13 @@ const c = [
 	() => import("../../../src/routes/a-propos.svelte"),
 	() => import("../../../src/routes/commerce/[slug].svelte"),
 	() => import("../../../src/routes/contact.svelte"),
-	() => import("../../../src/routes/admin/index.svelte")
+	() => import("../../../src/routes/admin/__layout.reset.svelte"),
+	() => import("../../../src/routes/admin/index.svelte"),
+	() => import("../../../src/routes/admin/utilisateur/[id].svelte"),
+	() => import("../../../src/routes/admin/categories.svelte"),
+	() => import("../../../src/routes/admin/commerces.svelte"),
+	() => import("../../../src/routes/admin/shop/index.svelte"),
+	() => import("../../../src/routes/admin/shop/[id].svelte")
 ];
 
 const d = decodeURIComponent;
@@ -80,7 +86,22 @@ export const routes = [
 	[/^\/contact\/?$/, [c[0], c[19]], [c[1]]],
 
 	// src/routes/admin/index.svelte
-	[/^\/admin\/?$/, [c[0], c[20]], [c[1]]],
+	[/^\/admin\/?$/, [c[20], c[21]], []],
+
+	// src/routes/admin/utilisateur/[id].svelte
+	[/^\/admin\/utilisateur\/([^/]+?)\/?$/, [c[20], c[22]], [], (m) => ({ id: d(m[1])})],
+
+	// src/routes/admin/categories.svelte
+	[/^\/admin\/categories\/?$/, [c[20], c[23]], []],
+
+	// src/routes/admin/commerces.svelte
+	[/^\/admin\/commerces\/?$/, [c[20], c[24]], []],
+
+	// src/routes/admin/shop/index.svelte
+	[/^\/admin\/shop\/?$/, [c[20], c[25]], []],
+
+	// src/routes/admin/shop/[id].svelte
+	[/^\/admin\/shop\/([^/]+?)\/?$/, [c[20], c[26]], [], (m) => ({ id: d(m[1])})],
 
 	// src/routes/api/get-categories.js
 	[/^\/api\/get-categories\/?$/],

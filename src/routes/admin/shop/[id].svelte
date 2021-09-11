@@ -12,8 +12,9 @@
 <script>
     // @ts-nocheck
 import { onMount } from "svelte";
-import { currentUserPage } from "$lib/store";
-import { getShop,deleteShop, updateShop } from "$lib/user_req";
+import { currentAdminPage } from "$lib/store";
+import { deleteShop, updateShop } from "$lib/user_req";
+import {getShopAdmin} from "$lib/admin_req.js"
 import Slider from "$lib/Slider.svelte";
 import ShopCard from "$lib/ShopCard.svelte";
 import Plus from "$lib/svg/Plus.svelte";
@@ -31,8 +32,8 @@ let nameFree = true
 let displayDelete = false
 let display = false
     onMount(async ()=>{
-        currentUserPage.update(n => "")
-        shop = await getShop(id)
+        currentAdminPage.update(n => "shop")
+        shop = await getShopAdmin(id)
         const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
         categories = await categoriesRes.json()
         if(shop.logo){
@@ -98,12 +99,13 @@ const handleUpdate =async ()=>{
     const res = await updateShop(shop,images)
     alert(res.message)
     if(res.success){
-        goto("/commercant")
+        goto("/admin/shop")
     }
 }
 const checkIfNameIsFree = async () =>{
     if(shop.name.length > 0){
-        const res = await getShopFromSlug(slugify(shop.name,{lower:true}))
+        shop.slug = slugify(shop.name,{lower:true})
+        const res = await getShopFromSlug(shop.slug)
         if(res.success && res.shop.slug!= shop.slug){
             nameFree = false
         }else{
@@ -132,7 +134,7 @@ const checkIfNameIsFree = async () =>{
     </div>
 </div>
 {/if}
-<section class="max-w-3xl xl:mx-auto ml-auto w-full px-2"> 
+<section class="max-w-3xl w-full px-2"> 
     <h2>Votre commerce</h2>
     {#if display}
     <div class="flex flex-wrap"><!--Form-->
@@ -224,6 +226,29 @@ const checkIfNameIsFree = async () =>{
             <label for="description">
                 <p>Description</p>
                 <textarea bind:value={shop.description} id="description" class="input-normal w-full"></textarea>
+            </label>
+            <label for="ownerId">
+                <p>ID propriétaire</p>
+                <input class="input-normal w-full" type="text" bind:value={shop.ownerId}>
+            </label>
+            <label for="status">
+                <p>Status</p>
+                <select bind:value={shop.status} name="" id="" class="input-normal w-full">
+                    <option value={0}>En attente</option>
+                    <option value={1}>Validé</option>
+                </select>
+            </label>
+            <label for="slug">
+                <p>Slug</p>
+                <input bind:value={shop.slug} class="input-normal w-full" type="text">
+            </label>
+            <label for="slug">
+                <p>latitude</p>
+                <input bind:value={shop.coordinates.lat} class="input-normal w-full" type="text">
+            </label>
+            <label for="slug">
+                <p>longitude</p>
+                <input bind:value={shop.coordinates.lon} class="input-normal w-full" type="text">
             </label>
         </div>
     </div>

@@ -35,8 +35,10 @@ const dispatch = createEventDispatcher();
             </div>
             <div class="bg-grey-light w-52 h-52 rounded-full mx-auto -mt-32 p-4">
                 <!--<img class="rounded-full w-full h-full p-4" src={`${API}/public/${shop._id}_logo.webp`} alt="">-->
-                <div class="w-full h-full rounded-full p-4" style={`background-image:url(${shop.logo ? `${API}/public/${shop._id}_logo.webp` : `https://picsum.photos/400/400`});background-size:cover`}>
-    
+                <div class="w-full h-full rounded-full p-4 flex justify-center items-center" style={`${shop.logo ? `background-image:url(${API}/public/${shop._id}_logo.webp);background-size:cover` : `background-color:#C7CB85;`}`}>
+                    {#if !shop.logo}
+                        <p class="select-none text-white text-9xl capitalize">{shop.name.charAt(0)}</p>
+                    {/if}
                 </div>
             </div>
         </div>

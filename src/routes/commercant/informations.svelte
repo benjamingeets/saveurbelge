@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { currentAdminPage } from "$lib/store";
+    import { currentUserPage } from "$lib/store";
     import { getUserInformations,updateUserInformations } from "$lib/user_req";
     import Edit from "$lib/svg/Edit.svelte";
     let user
@@ -8,7 +8,7 @@
     let message = ""
     let initialValue = {}
     onMount(async()=>{
-        currentAdminPage.update(n => "informations")
+        currentUserPage.update(n => "informations")
         user = await getUserInformations()
         initialValue = {
             ...user

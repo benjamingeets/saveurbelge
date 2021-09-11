@@ -3,27 +3,33 @@ import Navbar from "$lib/Navbar.svelte";
 import { onMount } from "svelte";
 import {goto} from '$app/navigation'
 import Head from "$lib/Head.svelte";
-import { currentAdminPage } from "$lib/store";
+import { currentUserPage } from "$lib/store";
 import Id from "$lib/svg/Id.svelte";
 import Shop from "$lib/svg/Shop.svelte";
 import Mail from "$lib/svg/Mail.svelte";
 let currentPage
 
-currentAdminPage.subscribe(v=>{
+currentUserPage.subscribe(v=>{
     currentPage = v
 })
 const links = [
     {text:"Se déconnecter", href:"/deconnexion",type:"button"}
 ]
-onMount(()=>{
-    if(!localStorage.getItem('accessToken')){
-        goto('/connexion')
-    }
-})
 let sidebarLinks = [
     {text:'Mes commerces',href:'/commercant/'},
     {text:'Mes infos',href:'/commercant/informations'},
 ]
+let admin = false
+onMount(()=>{
+    if(!localStorage.getItem('accessToken')){
+        goto('/connexion')
+    }else{
+        if(parseInt(localStorage.getItem("status")) >= 5){
+            admin = true
+        }
+    }
+})
+
 </script>
 <Head title="Gestion - SaveurBelge" noindex={true}/>
 <Navbar links={links} sousTitre="Espace commerçant"/>
@@ -55,6 +61,7 @@ let sidebarLinks = [
                         {l.text}</a></li>
                 {/if}
             {/each}
+            {#if admin} <li class="p-2 px-3"><a class="flex items-center" href="/admin">Admin 🔒</a></li>{/if}
         </ul>
     </aside>
     <slot></slot>

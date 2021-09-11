@@ -1,6 +1,6 @@
 <script>
 import { onMount } from "svelte";
-import { currentAdminPage } from "$lib/store";
+import { currentUserPage } from "$lib/store";
 import { getUserInformations, getUserShops } from "$lib/user_req";
 import Plus from "$lib/svg/Plus.svelte";
 import Shop from "$lib/svg/Shop.svelte";
@@ -8,10 +8,13 @@ let shops
 let user
 let ready = false
     onMount(async()=>{
-        currentAdminPage.update(n => "")
+        currentUserPage.update(n => "")
         shops = await getUserShops()
         user = await getUserInformations()
-        console.log(user)
+
+        shops.sort((a,b)=>{
+            return b.status - a.status
+        })
         ready = true
     })
 </script>

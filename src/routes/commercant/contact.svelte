@@ -1,7 +1,7 @@
 <script>
 import { onMount } from "svelte";
-import { currentAdminPage } from "$lib/store";
-onMount(()=>{currentAdminPage.update(n => "contact")})
+import { currentUserPage } from "$lib/store";
+onMount(()=>{currentUserPage.update(n => "contact")})
 </script>
 
 <section class="w-full flex flex-col items-center justify-center">

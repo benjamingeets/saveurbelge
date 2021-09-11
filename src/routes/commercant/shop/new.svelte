@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { onMount } from "svelte";
-import {currentAdminPage} from '$lib/store'
+import {currentUserPage} from '$lib/store'
 import Slider from '$lib/Slider.svelte'
 import ProgressBar from "$lib/addShop/ProgressBar.svelte";
 import ShopCard from "$lib/ShopCard.svelte";
@@ -13,7 +13,7 @@ import slugify from 'slugify'
 import {getShopFromSlug} from '$lib/public_req'
 let categories,pdpUpload,headerUpload
 let images 
-let pdpImage =""
+let logo =""
 let headerImage = ''
 let progress = 0
 
@@ -46,7 +46,7 @@ let nameFree = true
 let atLeastOneCategory = false
 
 onMount(async()=>{
-        currentAdminPage.update(n => "")
+        currentUserPage.update(n => "")
         const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
         categories = await categoriesRes.json()
 })
@@ -79,7 +79,7 @@ const setPdp = async(e)=>{
     images.append('logo',image)
     reader.readAsDataURL(image);
     reader.onload = e => {
-        pdpImage = e.target.result
+        logo = e.target.result
     };
 }
 
@@ -209,10 +209,10 @@ const handleCreateShop = async ()=>{
                     <p>Logo de votre commerce</p>
                     <input bind:this={pdpUpload} style='display:none' accept="image/png, image/jpeg, image/jpg, image/webp"  on:change={(e)=>{setPdp(e)}} type="file" name="" id="pdp">
                     <div class="h-32 w-32 bg-grey rounded-md flex justify-center items-center cursor-pointer" on:click={()=>{pdpUpload.click()}}>
-                        {#if pdpImage == ''}
+                        {#if logo == ''}
                         <Plus/>
                         {:else}
-                        <img class="h-full w-full rounded-md" src={pdpImage} alt="">
+                        <img class="h-full w-full rounded-md" src={logo} alt="">
                         {/if}
                     </div>
                 </div>
@@ -241,7 +241,7 @@ const handleCreateShop = async ()=>{
                 </label>
             </div>
             <div class="hidden md:block w-6/12">
-                <ShopCard shop={shop} disabled={true}/>
+                <ShopCard headerImage={headerImage} shop={shop} disabled={true}/>
             </div>    
         </div>
         {/if}
