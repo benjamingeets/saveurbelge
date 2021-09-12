@@ -1,4 +1,5 @@
 <script context="module">
+    import {DOMAIN} from "$lib/env.js"
     export const load = async()=>{
         const data = await fetch("http://localhost:3000/api/last-shops")
         return{
