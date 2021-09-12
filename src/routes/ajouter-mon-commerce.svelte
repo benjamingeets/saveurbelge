@@ -5,6 +5,7 @@ import Head from "$lib/Head.svelte";
 import Checked from "$lib/svg/Checked.svelte";
 import { createAccount } from "$lib/user_req";
 import { onMount } from "svelte";
+import {DOMAIN} from "$lib/env"
 onMount(()=>{
     if(localStorage.getItem('accessToken')){
         goto("/commercant")
@@ -48,7 +49,7 @@ onMount(()=>{
 <Head title="Ajouter mon commerce - SaveurBelge" lien="ajouter-mon-commerce"/>
 
 <main>
-    <div class="w-full rounded-md h-40 bg-grey flex justify-center items-center">
+    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center" style={`background-image:url(${DOMAIN}/images/ajouter_votre_commerce.webp);background-size:cover;`}>
         <h2>Ajouter votre commerce</h2>
     </div>
     <section class="max-w-xl mx-auto">

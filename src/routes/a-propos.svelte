@@ -1,28 +1,29 @@
 <script>
 import Head from "$lib/Head.svelte";
+import {DOMAIN} from "$lib/env"
 
 </script>
 <Head title="A propos - SaveurBelge" lien="a-propos"/>
 
 <main>
-    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20">
+    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20" style={`background-image:url(${DOMAIN}/images/a_propos.webp);background-size:cover;`}>
         <h2>A propos</h2>
     </div>
     <article class="max-w-5xl mx-auto">
         <div class="flex flex-wrap">
             <div class="w-12/12 md:w-6/12 md:pr-4">
                 <h2 class="text-noir">Notre mission</h2>
-                <p class="py-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis vitae molestiae veniam quibusdam ipsum corporis laboriosam aspernatur. Labore minus pariatur quia, id provident sunt placeat, soluta, voluptate dolores eligendi quam.</p>
+                <p class="py-6">Nous avons à coeur d'offrir aux belges un moyen simple et efficace d'acheter aux producteurs près de chez eux. Il peut être compliqué de trouver des petits commerçants locaux, c'est pourquoi nous avons créé SaveurBelge.</p>
             </div>
             <div class="w-12/12 md:w-6/12">
-                <img class="rounded-md" src="https://picsum.photos/630/400" alt="">
+                <img class="rounded-md" src={`${DOMAIN}/images/notre_mission.webp`} alt="Notre mission">
             </div>
         </div>
         <div class="mt-10">
             <h2 class="text-noir">Notre équipe</h2>
-            <p class="py-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptas deserunt esse enim laboriosam possimus non repudiandae, vitae id doloribus, minus ratione quo beatae asperiores fugit corrupti dolorum. Voluptatem, ipsa.</p>
+            <p class="py-6">Nous sommes 2 étudiants de la région de Tournai. Afin de parfaire nos connaissances, nous avons conçu, designé, prototypé, développé et mis en ligne SaveurBelge. Benjamin Geets s'est chargé de la partie technique (développement/mise en ligne/...) alors que Galand Tristan s'est occupé de la partie artistique (UX/UI, design, logo,...)</p>
             <div>
-                <img class="rounded-md" src="https://picsum.photos/1280/560" alt="">
+                <img class="rounded-md w-full" src={`${DOMAIN}/images/notre_equipe.webp`} alt="Notre équipe">
             </div>
         </div>
     </article>
