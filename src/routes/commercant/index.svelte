@@ -4,6 +4,7 @@ import { currentUserPage } from "$lib/store";
 import { getUserInformations, getUserShops } from "$lib/user_req";
 import Plus from "$lib/svg/Plus.svelte";
 import Shop from "$lib/svg/Shop.svelte";
+import {API} from '$lib/env.js'
 let shops
 let user
 let ready = false
@@ -23,7 +24,7 @@ let ready = false
     {#if ready && user && user.status >= 1}
         {#each shops as shop}
             <div class="w-80 h-80 rounded-md shadow-lg sm:m-2 mb-2 mx-auto">
-                <div class="h-48 rounded-t-md" style={shop.header ? `background-image:url(http://localhost:8000/public/${shop._id}_header.webp); background-size: cover;)` : shop.sector == 'restaurant' ? 'background-image:url(/images/headers/restaurant.png);background-size:30%;' : 'background-image:url(/images/headers/commerce.png);background-size:30%;'}>
+                <div class="h-48 rounded-t-md" style={shop.header ? `background-image:url(${API}/public/${shop._id}_header.webp); background-size: cover;)` : shop.sector == 'restaurant' ? 'background-image:url(/images/headers/restaurant.png);background-size:30%;' : 'background-image:url(/images/headers/commerce.png);background-size:30%;'}>
                 </div>
                 <div class="flex flex-col items-center h-32 pb-8 px-4 w-full">
                     <h3 class="my-2 w-full font-bold text-center">{shop.name}</h3>
