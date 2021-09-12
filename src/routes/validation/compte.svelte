@@ -3,6 +3,7 @@
     import {page} from '$app/stores'
     import { refreshAccessToken } from '$lib/auth_req';
     import { onMount } from 'svelte';
+    import {API} from '$lib/env.js'
     let code = $page.query.get('code')
     let message=""
     onMount(async()=>{
@@ -10,7 +11,7 @@
             console.log("he")
             
             try{
-                const req = await fetch('http://localhost:8000/user/set-account-validation',{
+                const req = await fetch(`${API}/user/set-account-validation`,{
                     method:'POST',
                     headers:{
                         'Authorization':`Bearer: ${localStorage.getItem('accessToken')}`,
@@ -27,7 +28,7 @@
                 alert("Votre compte a été validé")
                 if(res.message == 'jwt expired'){
                     await refreshAccessToken()
-                    const req2 = await fetch('http://localhost:8000/user/set-account-validation',{
+                    const req2 = await fetch(`${API}/user/set-account-validation`,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer: ${localStorage.getItem('accessToken')}`,

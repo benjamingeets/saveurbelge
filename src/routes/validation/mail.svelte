@@ -3,12 +3,13 @@
     import {page} from '$app/stores'
     import { refreshAccessToken } from '$lib/auth_req';
     import { onMount } from 'svelte';
+    import {API} from '$lib/env.js'
     let code = $page.query.get('code')
     let message=""
     onMount(async()=>{
         if(localStorage.getItem('accessToken')){
             try{
-                const req = await fetch('http://localhost:8000/user/confirm-new-email',{
+                const req = await fetch(`${API}/user/confirm-new-email`,{
                     method:'POST',
                     headers:{
                         'Authorization':`Bearer: ${localStorage.getItem('accessToken')}`,
@@ -25,7 +26,7 @@
                 alert(res.message)
                 if(res.message == 'jwt expired'){
                     await refreshAccessToken()
-                    const req2 = await fetch('http://localhost:8000/user/confirm-new-email',{
+                    const req2 = await fetch(`${API}/user/confirm-new-email`,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer: ${localStorage.getItem('accessToken')}`,
