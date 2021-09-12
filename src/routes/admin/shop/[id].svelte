@@ -22,7 +22,7 @@ import { goto } from "$app/navigation";
 import {getShopFromSlug} from '$lib/public_req'
 export let id
 import slugify from "slugify";
-import {API} from "$lib/env"
+import {API,DOMAIN} from "$lib/env.js"
 let pdpUpload,headerUpload,images
 let logo =""
 let headerImage = ''
@@ -34,7 +34,7 @@ let display = false
     onMount(async ()=>{
         currentAdminPage.update(n => "shop")
         shop = await getShopAdmin(id)
-        const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
+        const categoriesRes = await fetch(`${DOMAIN}/api/get-categories`)
         categories = await categoriesRes.json()
         if(shop.logo){
             logo = `${API}/public/${shop._id}_logo.webp`
