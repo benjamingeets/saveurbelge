@@ -33,7 +33,7 @@ let display = false
     onMount(async ()=>{
         currentUserPage.update(n => "")
         shop = await getShop(id)
-        const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
+        const categoriesRes = await fetch(`${DOMAIN}/api/get-categories`)
         categories = await categoriesRes.json()
         if(shop.logo){
             logo = `${API}/public/${shop._id}_logo.webp`
