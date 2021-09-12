@@ -3,6 +3,7 @@
     import { currentUserPage } from "$lib/store";
     import { getUserInformations,updateUserInformations } from "$lib/user_req";
     import Edit from "$lib/svg/Edit.svelte";
+    import {API} from "$lib/env.js"
     let user
     let display = false
     let message = ""
@@ -28,6 +29,29 @@
         }
         const oui = await updateUserInformations(query)
     }
+    let isMailFree = true
+    const checkIfMailIsFree = async ()=>{
+        if(initialValue.email != user.email){
+            const req = await fetch(`${API}/is-this-email-free`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                email:user.email
+            })
+        })
+        const res = await req.json()
+
+        console.log(initialValue.email)
+            console.log(user.email)
+        if(res.free){
+            isMailFree = true
+        }else{
+            isMailFree = false
+        }
+        }
+    }
 </script>
 {#if display}
     <section class="mx-auto max-w-xl w-full flex flex-col items-center">
@@ -46,8 +70,9 @@
             </div>
             <div class="lg:w-6/12 w-full lg:pl-4 px-2">
                 <label class="w-full" for="email">
-                    <p>Email</p>
-                    <input  class="border rounded-md py-2 px-4 w-full" type="text" bind:value={user.email} id="email">
+                    <p>Email </p>
+                    <input  class="border rounded-md py-2 px-4 w-full" type="text" bind:value={user.email} on:change={()=>{checkIfMailIsFree()}} id="email">
+                    {#if !isMailFree} <small class="block">Cette adresse email est déjà utilisée</small> {/if}
                 </label>
                 <label for="pwd">
                     <p>Mot de passe</p>
@@ -55,7 +80,11 @@
                 </label>
             </div>
         </div>
+            {#if isMailFree && user.email.length > 0}
             <div on:click={()=>{handleUpdate()}} class="btn btn-green mt-4">Sauvegarder</div>
+            {:else}
+            <div class="btn btn-green bg-grey border-grey cursor-not-allowed mt-4">Sauvegarder</div>
+            {/if}
 
     </section>
     

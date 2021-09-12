@@ -2,7 +2,7 @@
 import Head from "$lib/Head.svelte";
 
 </script>
-<Head title="A propos - SaveurBelge"/>
+<Head title="A propos - SaveurBelge" lien="a-propos"/>
 
 <main>
     <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20">

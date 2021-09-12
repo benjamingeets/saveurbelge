@@ -11,6 +11,7 @@ import {createShop} from "$lib/user_req"
 import { goto } from "$app/navigation";
 import slugify from 'slugify'
 import {getShopFromSlug} from '$lib/public_req'
+import {DOMAIN} from "$lib/env.js"
 let categories,pdpUpload,headerUpload
 let images 
 let logo =""
@@ -18,23 +19,23 @@ let headerImage = ''
 let progress = 0
 
 let shop = {
-    name:'Benjamin',
+    name:'',
     sector:"restaurant",
-    description:'La description',
+    description:'',
     categories:[],
     address:{
-        num:'30',
-        street:'Rue du moulin à eau',
-        pc:'7506',
-        city:'Willemeau'
+        num:'',
+        street:'',
+        pc:'',
+        city:''
     },
     options:{
         monnaie:false,
         local:true,
         bio:false
     },
-    phone:'0472638970',
-    motivation:'envie',
+    phone:'',
+    motivation:'',
     social:{
         instagram:'',
         facebook:'',
@@ -47,7 +48,7 @@ let atLeastOneCategory = false
 
 onMount(async()=>{
         currentUserPage.update(n => "")
-        const categoriesRes = await fetch("http://localhost:3000/api/get-categories")
+        const categoriesRes = await fetch(`${DOMAIN}/api/get-categories`)
         categories = await categoriesRes.json()
 })
 
@@ -230,13 +231,14 @@ const handleCreateShop = async ()=>{
                 <label for="facebook">
                     <p>Lien de votre page Facebook</p>
                     <input bind:value={shop.social.facebook} class="input-normal" type="text" id="facebook">
+               
                 </label>
                 <label for="instagram">
-                    <p>Lien de votre compte Instagram</p>
+                    <p>Votre compte Instagram (nom d'utilisateur)</p>
                     <input bind:value={shop.social.instagram} class="input-normal" type="text" id="instagram">
                 </label>
                 <label for="website">
-                    <p>Lien de votre site internet</p>
+                    <p>Lien de votre site internet (commençant par https:// ou http://)</p>
                     <input bind:value={shop.social.website} class="input-normal" type="text" id="website">
                 </label>
             </div>

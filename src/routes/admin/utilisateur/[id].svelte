@@ -75,7 +75,7 @@ let inscription,maj
 
 {#if display}
     <div class="flex flex-wrap">
-        <div class="w-3/12">
+        <div class="md:w-3/12 w-full">
             <h2 class="text-left text-noir">Utilisateur</h2>
             <label for="last_name">
                 <p>Nom</p>
@@ -102,14 +102,14 @@ let inscription,maj
                 <input type="number" bind:value={user.shopsLimit} class="input-normal">
             </label>
         </div>
-        <div class="w-3/12">
-            <h2>.</h2>
+        <div class="md:w-3/12 w-full">
+            <h2 class="text-white">.</h2>
             <label for="motivation">
                 <p>Notes</p>
                 <textarea bind:value={user.notes} name="" id="" class="input-normal"></textarea>
             </label>
         </div>
-        <div class="w-6/12">
+        <div class="md:w-6/12 w-full">
             <h2 class="text-left text-noir">Informations</h2>
             <p class="text-grey-dark">Date d'inscription</p>
             <p class="ml-2">{inscription}</p>

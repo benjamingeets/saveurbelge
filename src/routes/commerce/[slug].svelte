@@ -18,7 +18,7 @@
 import Badges from '$lib/Badges.svelte'
     import Pointer from '$lib/svg/Pointer.svelte'
     import Phone from '$lib/svg/Phone.svelte'
-    import {API} from '$lib/env.js'
+    import {API, DOMAIN} from '$lib/env.js'
     import Head from '$lib/Head.svelte'
     import { getShopFromSlug } from "$lib/public_req";
     import { onMount } from 'svelte';
@@ -46,9 +46,9 @@ import Badges from '$lib/Badges.svelte'
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 crossorigin=""/>
-<Head title={`${shop.name} - SaveurBelge`} description={shop.description}/>
+<Head title={`${shop.name} à ${shop.address.city} - SaveurBelge`} description={shop.description} lien={`commerce/${shop.slug}`} image={shop.header ? `https://${API}/public/${shop._id}_header.webp` : `${DOMAIN}/public/image/share.png`}/>
 <main class="flex flex-col items-center w-full">
-    <div class="w-full rounded-md h-60" style={shop.header ? `background-image:url(${API}/public/${shop._id}_header.webp);background-size:cover;background-position:center` :`background-image:url(http://localhost:3000/images/headers/${shop.sector}.png)`} >
+    <div class="w-full rounded-md h-60" style={shop.header ? `background-image:url(${API}/public/${shop._id}_header.webp);background-size:cover;background-position:center` :`background-image:url(${DOMAIN}/images/headers/${shop.sector}.png)`} >
 
     </div>
     <div class="md:-mt-40 -mt-20 w-full flex justify-center">
@@ -81,9 +81,9 @@ crossorigin=""/>
                         </div>
                         {#if shop.social.facebook || shop.social.instagram || shop.social.website}
                         <div class="flex gap-3 mt-4">
-                            {#if shop.social.facebook}<a target="_blank" href={`https://facebook.com/${shop.social.facebook}`}><Facebook size="30" color="#7EA172"/></a>{/if}
+                            {#if shop.social.facebook}<a target="_blank" href={`${shop.social.facebook}`}><Facebook size="30" color="#7EA172"/></a>{/if}
                             {#if shop.social.instagram}<a target="_blank" href={`https://instagram.com/${shop.social.instagram}`}><Instagram size="30" color="#7EA172"/></a>{/if}
-                            {#if shop.social.website}<a target="_blank" href={`https://${shop.social.website}`}><Website size="30" color="#7EA172"/></a>{/if}
+                            {#if shop.social.website}<a target="_blank" href={`${shop.social.website}`}><Website size="30" color="#7EA172"/></a>{/if}
                         </div>
                         {/if}
                         <div class="mt-4">

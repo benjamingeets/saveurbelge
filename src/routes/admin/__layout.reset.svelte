@@ -40,7 +40,7 @@ let sidebarLinks = [
             <li class="p-2 px-3" ><a class="flex items-center" href="/commercant">Interface commerçant 🔗</a></li>
         </ul>
     </aside>
-    <div class="md:ml-72 px-2">
+    <div class="lg:ml-72 px-2">
         <slot></slot>
     </div>
 </main>

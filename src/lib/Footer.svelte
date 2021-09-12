@@ -28,7 +28,7 @@ const categories = [
         </div>
         <div class="md:w-6/12 w-12/12">
             <h4>Saveur Belge</h4>
-            <p class="my-4 text-lg">Chez Saveur Belge on aime manger des trucs tsé miam nourriture et tout laaa lezgo g pas raison?</p>
+            <p class="my-4 text-lg">Saveur Belge est une initiavte bénévole et gratuit de 2 étudiants tournaisiens ayant à coeur de participer à une transition écologique. <a class="text-green-light" href="/a-props">En savoir plus.</a></p>
             <div class="flex">
                 <a class="mr-2" href="https://facebook.com"><Facebook/></a>
                 <a href="https://instagram.com"><Instagram/></a>

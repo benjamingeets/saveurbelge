@@ -41,7 +41,7 @@ import Head from "$lib/Head.svelte"
     }
 </script>
 
-<Head title="Contact - SaveurBelge"/>
+<Head title="Contact - SaveurBelge" lien="contact"/>
 <main>
     <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20">
         <h2>Nous contacter</h2>

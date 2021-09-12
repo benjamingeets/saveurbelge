@@ -6,6 +6,7 @@ import {login} from '$lib/auth_req'
 import { onMount } from "svelte";
 import { getLostPwd } from "$lib/user_req";
 import {page} from '$app/stores'
+import Checked from "$lib/svg/Checked.svelte";
 let code = $page.query.get('code')
 let next = $page.query.get('next')
 let title = 'Se connecter'
@@ -51,12 +52,17 @@ const handleLogin = async () =>{
     }
 }
 
+let requestSend = false
 const lostPassword = async ()=>{
    const req = await getLostPwd(mail)
    message = req.message
+   console.log(req)
+   if(req.success){
+    requestSend = true
+   }
 }
 </script>
-<Head title="Connexion - SaveurBelge"></Head>
+<Head title="Connexion - SaveurBelge" lien="connexion"></Head>
 <main class="rounded-md md:py-40 py-16 mb-10 px-2">
     <div class="bg-white max-w-md mx-auto rounded-md md:py-20 py-8">
         {#if !lostPwd}
@@ -85,6 +91,7 @@ const lostPassword = async ()=>{
         {:else}
             <h2 class="text-noir">Mot de passe oublié</h2>
             <div class="flex flex-col items-center">
+                {#if requestSend}<div><Checked size={80} color="#7EA172"/></div>{/if}
                 <p class="text-center mt-4 mb-10">{message}</p>
                 <label for="mail">
                     <p>Mail</p>

@@ -26,6 +26,8 @@ let display = false
                 <span class="rounded-full bg-grey px-2 text-white">Non validé</span>
                {:else if shop.status == 1}
                <span class="rounded-full text-white bg-green px-2">Validé</span>
+               {:else if shop.status == -1}
+               <span class="rounded-full text-white bg-orange px-2">Refusé</span>
                {:else}
                 Erreur
                {/if}</span>

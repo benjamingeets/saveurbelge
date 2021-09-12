@@ -234,8 +234,9 @@ const checkIfNameIsFree = async () =>{
             <label for="status">
                 <p>Status</p>
                 <select bind:value={shop.status} name="" id="" class="input-normal w-full">
-                    <option value={0}>En attente</option>
-                    <option value={1}>Validé</option>
+                    <option value={0}>⏳ En attente</option>
+                    <option value={1}>☑️ Validé</option>
+                    <option value={-1}>🚫 Refusé</option>
                 </select>
             </label>
             <label for="slug">

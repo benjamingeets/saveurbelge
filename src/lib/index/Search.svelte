@@ -1,23 +1,13 @@
 <script>
 import Magnifier from "$lib/svg/Magnifier.svelte";
 import Pointer from "$lib/svg/Pointer.svelte";
+import {API} from '$lib/env.js'
+import {searchCityName} from '$lib/public_req'
 
-export let city =""
+export let city ="Tournai"
 export let pc = "7500"
 let sector
-const searchCityName = async (cp) =>{
-    if(cp.length == 4){
-        const cityNameQuery = await fetch(`http://localhost:8000/get-city-from-cp/${cp}`)
-        const cityName = await cityNameQuery.json()
-        city = cityName.name
-    }
-    else if(cp.length === 0){
-        city = "Tournai"
-    }
-    else{
-        city = "..."
-    }
-}
+
 if(typeof navigator !== 'undefined'){
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(async function(position) {
@@ -25,15 +15,15 @@ if(typeof navigator !== 'undefined'){
         const ville = await fetch(query)
         const res = await ville.json()
         pc = res.address.postcode
-        searchCityName(pc)
+        city = await searchCityName(pc)
     });
     } 
 }
 
 const handleInput = async ()=>{
-    searchCityName(pc)
+    city = await searchCityName(pc)
 }
-searchCityName(pc)
+
 
 </script>
 <section id="search" class="flex px-4 flex-col justify-center items-center rounded-md lg:py-80 py-40">
@@ -51,7 +41,7 @@ searchCityName(pc)
             <option value="commerce">Commerce</option>
         </select>
 
-        <a class="btn btn-green" href="/recherche?pc={pc.length > 3 ? pc : '7500'}&city={city != '...' ? city : 'Tournai'}{sector? `&sector=${sector}` : ''}"><span class="block w-full flex justify-center"><Magnifier></Magnifier></span></a>
+        <a class="btn btn-green" href="/recherche?pc={pc.length > 3 ? pc : '7500'}{sector? `&sector=${sector}` : ''}"><span class="block w-full flex justify-center"><Magnifier></Magnifier></span></a>
 
     </form>
 </section>

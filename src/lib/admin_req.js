@@ -160,3 +160,52 @@ export const getShopAdmin = async (id)=>{
 
     }
 }
+export const addCategory = async (name,sector)=>{
+    try{
+        const res = await fetch(`${API}/admin/categories`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' +localStorage.getItem('accessToken')
+            },
+            body:JSON.stringify({
+                name,sector
+            })
+        })
+        const rep = await res.json()
+        if(rep.message == 'jwt expired'){
+            await refreshAccessToken()
+            return await addCategory(name,sector)
+        }
+        else{
+            return rep
+        }
+    }catch(e){
+        
+    }
+}
+
+export const deleteCategory = async (name) =>{
+    try{
+        const res = await fetch(`${API}/admin/category`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' +localStorage.getItem('accessToken')
+            },
+            body:JSON.stringify({
+                name
+            })
+        })
+        const rep = await res.json()
+        if(rep.message == 'jwt expired'){
+            await refreshAccessToken()
+            return await deleteCategory(name)
+        }
+        else{
+            return rep
+        }
+    }catch(e){
+        console.log(e)
+    }
+}

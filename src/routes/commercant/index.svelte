@@ -29,6 +29,8 @@ let ready = false
                     <h3 class="my-2 w-full font-bold text-center">{shop.name}</h3>
                     {#if shop.status == 0}
                     <small>En attente de validation</small>
+                    {:else if shop.status == -1}
+                    <small class="text-center">Votre établissement a été refusé. Vous pouvez le modifier pour qu'il soit à nouveau vérifié.</small>
                     {/if}
                     <a class="btn btn-green" href="/commercant/shop/{shop._id}">Modifier</a>
                     

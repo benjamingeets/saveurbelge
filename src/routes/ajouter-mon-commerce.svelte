@@ -2,6 +2,7 @@
 import { goto } from "$app/navigation";
 
 import Head from "$lib/Head.svelte";
+import Checked from "$lib/svg/Checked.svelte";
 import { createAccount } from "$lib/user_req";
 import { onMount } from "svelte";
 onMount(()=>{
@@ -44,7 +45,7 @@ onMount(()=>{
         }
     }
 </script>
-<Head title="Ajouter mon commerce - SaveurBelge"/>
+<Head title="Ajouter mon commerce - SaveurBelge" lien="ajouter-mon-commerce"/>
 
 <main>
     <div class="w-full rounded-md h-40 bg-grey flex justify-center items-center">
@@ -52,8 +53,8 @@ onMount(()=>{
     </div>
     <section class="max-w-xl mx-auto">
         {#if !done}
-        <p>blablab la gentil</p>
-        <p>Vos informations</p>
+        <p class="my-4">L'ajout d'un commerce sur SaveurBelge.be requiert la création d'un compte. Par l'intéremédiaire de ce dernier, vous pourrez gérer vos commerces et ceux ci seront disponibles après une vérification manuelle. </p>
+        <p class="font-bold my-2">Vos informations</p>
         <div class="flex flex-wrap">
             <div class="md:w-6/12 w-12/12">
                 <label for="lastname">
@@ -86,7 +87,12 @@ onMount(()=>{
             Créer mon compte
         </div>
         {:else}
+            <div class="flex flex-col items-center my-6 text-center">
+                <Checked size={100} color={"#7EA172"}/>
+                <h2 class="text-noir">Félicitations! </h2>
             <p>Votre compte a bien été créé. Un mail avec un lien de confirmation va vous êtes envoyé sous peu!</p>
+            <small>Vous ne l'avez pas reçu? 😅 <a class="text-green-light" href="#">Cliquez ici pour en demander un nouveau</a></small>
+            </div>
         {/if}
     </section>
 </main>

@@ -22,7 +22,7 @@
                 console.log(res.message)
                 message = res.message
                 goto("/commercant")
-                alert("Votre adresse email a bien été mise à jour")
+                alert(res.message)
                 if(res.message == 'jwt expired'){
                     await refreshAccessToken()
                     const req2 = await fetch('http://localhost:8000/user/confirm-new-email',{
@@ -38,7 +38,7 @@
                     const res2 = await req.json()
                     message = res2.message
                     goto("/commercant")
-                    alert("Votre adresse email a bien été mise à jour")
+                    alert(res2.messageai)
                 }
             }
             catch(e){

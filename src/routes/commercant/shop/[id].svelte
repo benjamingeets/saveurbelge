@@ -186,15 +186,15 @@ const checkIfNameIsFree = async () =>{
                 </div>
                 <div>
                     <label for="facebook">
-                        <p>Lien Facebook</p>
+                        <p>Lien de votre page Facebook</p>
                         <input bind:value={shop.social.facebook} type="text" id="facebook" class="input-normal w-full">
                     </label>
                     <label for="instagram">
-                        <p>Lien Instagram</p>
+                        <p>Votre compte Instagram (nom d'utilisateur)</p>
                         <input bind:value={shop.social.instagram} type="text" id="instagram" class="input-normal w-full">
                     </label>
                     <label for="web">
-                        <p>Lien site web</p>
+                        <p>Lien de votre site internet (commençant par https:// ou http://)</p>
                         <input bind:value={shop.social.website} type="text" id="web" class="input-normal w-full">
                     </label>
                 </div>

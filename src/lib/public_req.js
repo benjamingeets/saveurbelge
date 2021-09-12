@@ -29,3 +29,17 @@ export const getShopFromSlug = async (slug) =>{
         
     } 
 }
+
+export const searchCityName = async (cp) =>{
+    if(cp.length == 4){
+        const cityNameQuery = await fetch(`${API}/get-city-from-cp/${cp}`)
+        const cityName = await cityNameQuery.json()
+        return cityName.name
+    }
+    else if(cp.length === 0){
+        return "Tournai"
+    }
+    else{
+        return "..."
+    }
+}
