@@ -1,5 +1,4 @@
-const DOMAIN = `https://${import.meta.env.VITE_DOMAIN}`;
-import { API } from "$lib/env";
+import { API,DOMAIN } from "$lib/env";
 const getSlugs = async ()=>{
 	const slugs = await fetch(`${API}/slugs`)
 	const res = slugs.json()
