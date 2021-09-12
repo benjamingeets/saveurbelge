@@ -22,7 +22,7 @@ import { goto } from "$app/navigation";
 import {getShopFromSlug} from '$lib/public_req'
 export let id
 import slugify from "slugify";
-import {API,DOMAIN} from "$lib/env.js"
+import {API, DOMAIN} from "$lib/env.js"
 let pdpUpload,headerUpload,images
 let logo =""
 let headerImage = ''

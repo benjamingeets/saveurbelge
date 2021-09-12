@@ -31,7 +31,6 @@ let inscription,maj
         shops.sort((a,b)=>{
             return a.status - b.status
         })
-        console.log(shops)
         display = true
         inscription = new Date(user.createdAt).toLocaleDateString('fr')
         maj = new Date(user.updatedAt).toLocaleDateString('fr')
