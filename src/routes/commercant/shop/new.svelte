@@ -254,7 +254,7 @@ const handleCreateShop = async ()=>{
         {:else}
         <div class="btn border-grey text-grey-light cursor-not-allowed">Précédent</div>
         {/if}
-        {#if progress < 4 && nameFree}
+        {#if progress < 4 && nameFree && shop.motivation.length>0}
         <div class="btn btn-green" on:click={()=>{if(progress <4){progress++}}}>Suivant</div>
         {:else if progress === 4}
             <div on:click={()=>{handleCreateShop()}} class="btn btn-green {shop.ca} ">Terminer</div>
