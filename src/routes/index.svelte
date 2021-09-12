@@ -1,7 +1,7 @@
 <script context="module">
     import {DOMAIN} from "$lib/env.js"
     export const load = async()=>{
-        const data = await fetch("http://localhost:3000/api/last-shops")
+        const data = await fetch(`${DOMAIN}/api/last-shops`)
         return{
             props:{
                 lastShops : await data.json()
