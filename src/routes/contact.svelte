@@ -1,5 +1,6 @@
 <script>
 import { goto } from "$app/navigation";
+import {API} from "$lib/env"
 
 import Head from "$lib/Head.svelte"
 
@@ -15,7 +16,7 @@ import Head from "$lib/Head.svelte"
     }
     const handleClick = async ()=>{
         try{
-        const req = await fetch('http://localhost:8000/contact-form',{
+        const req = await fetch(`${API}/contact-form`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
