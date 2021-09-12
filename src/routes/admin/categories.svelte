@@ -1,13 +1,13 @@
 <script>
 import { addCategory, deleteCategory } from '$lib/admin_req';
-
+import {DOMAIN} from '$lib/env.js'
     import {currentAdminPage} from '$lib/store.js'
     import { onMount } from "svelte";
     let categories
     let display = false
     onMount(async()=>{
             currentAdminPage.update(n => "categories")
-            const req = await fetch("http://localhost:3000/api/get-categories")
+            const req = await fetch(`${DOMAIN}/api/get-categories`)
             categories = await req.json()
             triage()
             display = true
