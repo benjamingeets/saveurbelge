@@ -1,7 +1,7 @@
 const DOMAIN = `https://${import.meta.env.VITE_DOMAIN}`;
-
+import { API } from "$lib/env";
 const getSlugs = async ()=>{
-	const slugs = await fetch("http://localhost:8000/slugs")
+	const slugs = await fetch(`${API}/slugs`)
 	const res = slugs.json()
 	return res
 }
@@ -14,7 +14,9 @@ export async function get() {
 	sitemap = sitemap + `<url><loc>${DOMAIN}/connexion</loc></url>`
 	sitemap = sitemap + `<url><loc>${DOMAIN}/ajouter-mon-commerce</loc></url>`
 	slugs.forEach(slug=>{
-		sitemap = sitemap + `<url><loc>${DOMAIN}/commerce/${slug.slug}</loc></url>`
+		if(slug.status ==1){
+			sitemap = sitemap + `<url><loc>${DOMAIN}/commerce/${slug.slug}</loc></url>`
+		}
 	})
 	sitemap = sitemap + "</urlset>"
 	return {
