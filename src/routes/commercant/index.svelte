@@ -29,12 +29,13 @@ let ready = false
         })
         const res = await req.json()
         if(res.message == 'jwt expired'){
-            await refreshAccessToken()
-            return await getAnotherLink()
+            refreshAccessToken()
+            await getAnotherLink()
         }
         else{
-            return res
+            alert("Un mail vous a été envoyé.")
         }
+
     }
 </script>
 
@@ -65,7 +66,7 @@ let ready = false
         </a>
         {/if}
     {:else}
-        <p>Veuillez valider votre compte via le lien reçu par mail. Si vous ne l'avez pas reçu, <span on:click={()=>{getAnotherLink()}} class="text-green-light cursor-pointer">vous pouvez en redemander un en cliquant ici.</span></p>
+        <p>Veuillez valider votre compte via le lien reçu par mail. Si vous ne l'avez pas reçu, <span on:click={()=>{getAnotherLink()}} class="text-green-light cursor-pointer">vous pouvez en redemander un en cliquant ici.</span> Si vous ne recevez toujours pas le mail, <a class="text-green-light" href="/contact">contactez nous via ce formulaire</a>.</p>
     {/if}
         
 </section>
