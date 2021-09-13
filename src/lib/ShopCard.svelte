@@ -28,7 +28,7 @@ import {API} from '$lib/env.js'
 </script>
 
 <div class="md:w-80 w-72 md:m-4 m-2 shadow-lg rounded-md overflow-hidden">
-    <div class="h-48 flex flex-col justify-end rounded-t-md" style={!shop.header ? `background-image:url(/images/headers/${shop.sector}.png);background-repeat:repeat;background-size:30%` : `background-image:url(${headerImage ? headerImage : `${API}/public/${shop._id}_header.webp`});background-size:cover`}>
+    <div class="h-48 flex flex-col justify-end rounded-t-md" style={!shop.header ? `background-image:url(/images/headers/${shop.sector}.png);background-repeat:repeat;background-size:30%` : `background-image:url(${headerImage ? headerImage : `${API}/public/${shop._id}_header.webp`});background-size:cover;background-position:center;`}>
         <div class="flex justify-center {shop.options.bio || shop.options.monnaie || shop.options.local ? 'py-2' : ''}" style="background:rgba(255,255,255,0.4)">
             <Badges options={shop.options}/>
         </div>
