@@ -6,9 +6,10 @@
          url("/font/bebas_neue/BebasNeue-Regular.otf") format("otf"),
          url("/font/bebas_neue/BebasNeue-Regular.ttf") format("ttf"),
          url("/font/bebas_neue/BebasNeue-Regular.woff") format("woff"),
-         url("/font/bebas_neue/BebasNeue-Regular.woff2") format("woff2");
+         url("/font/bebas_neue/BebasNeue-Regular.woff2") format("woff2"),
+         local('Arial');
+         font-display: swap;
 }
-
 @layer base {
     h2{
         @apply text-brown font-bebas text-4xl text-center my-4;
