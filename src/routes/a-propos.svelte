@@ -6,7 +6,7 @@ import {DOMAIN} from "$lib/env"
 <Head title="A propos - SaveurBelge" lien="a-propos"/>
 
 <main>
-    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20" style={`background-image:url(${DOMAIN}/images/a_propos.webp);background-size:cover;`}>
+    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20" style={`background-image:url(${DOMAIN}/images/a_propos.webp);background-size:cover;background-position:center;`}>
         <h2>A propos</h2>
     </div>
     <article class="max-w-5xl mx-auto">

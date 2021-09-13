@@ -92,7 +92,7 @@ onMount(()=>{
                 <Checked size={100} color={"#7EA172"}/>
                 <h2 class="text-noir">Félicitations! </h2>
             <p>Votre compte a bien été créé. Un mail avec un lien de confirmation va vous êtes envoyé sous peu!</p>
-            <small>Vous ne l'avez pas reçu? 😅 <a class="text-green-light" href="/contact">Cliquez ici pour en demander un nouveau</a></small>
+            <small>Vous ne l'avez pas reçu? 😅 <a class="text-green-light" href="/connexion">Connectez vous à votre compte</a> afin d'en demander un autre.</small>
             </div>
         {/if}
     </section>
