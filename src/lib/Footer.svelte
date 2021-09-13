@@ -30,7 +30,7 @@ const categories = [
             <h4>Saveur Belge</h4>
             <p class="my-4 text-lg">Saveur Belge est une initiavte bénévole et gratuit de 2 étudiants tournaisiens ayant à coeur de participer à une transition écologique. <a class="text-green-light" href="/a-propos">En savoir plus.</a></p>
             <div class="flex">
-                <a class="mr-2" href="https://facebook.com"><Facebook/></a>
+                <a class="mr-2" href="https://www.facebook.com/saveurbelgium"><Facebook/></a>
                 <a href="https://instagram.com/saveurbelge"><Instagram/></a>
             </div>
         </div>

@@ -3,7 +3,7 @@
     export let title = "Saveur Belge 🌽 Des produits de chez nous 😁"
     export let description = "Venez découvrir les commerçant qui ont a coeur de vendre des produits qui viennent de votre région!"
     export let lien = ""
-    export let image = `${DOMAIN}/public/image/share.png`
+    export let image = `${DOMAIN}/share.webp`
     export let noindex = false
     if(description.length > 100){
         description = `${description.substring(0,140)}...`

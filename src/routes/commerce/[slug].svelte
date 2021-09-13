@@ -74,9 +74,9 @@ crossorigin=""/>
                         <div class="">
                             <Badges options={shop.options}/>
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 flex flex-wrap">
                             {#each shop.categories as category}
-                                <span class="text-white bg-grey rounded-full px-3 mr-1">{category}</span>
+                                <span class="text-white bg-grey rounded-full px-2 m-1">{category}</span>
                             {/each}
                         </div>
                         {#if shop.social.facebook || shop.social.instagram || shop.social.website}
