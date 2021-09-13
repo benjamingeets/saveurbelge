@@ -28,7 +28,7 @@ export let lastShops
 <section class="max-w-5xl mx-auto mt-24">
     <h2 class="mb-12">Qu'est-ce que c'est?</h2>
     <p class="md:text-xl">
-        Saveur Belge est le site qui regroupe les commerçants locaux et de circuit court près de chez vous !  Avec seulement quelques informations, vous allez pouvoir découvrir quels sont les commerçants de votre région qui proposent des produits bons à la fois pour vous et pour l'environement. Cette initiative citoyenne a pour vocation de rapprocher les personnes qui veulent consommer local et des commerçants dans toute la Belgique. 
+        Saveur Belge est le site qui regroupe les commerçants locaux et de circuit court près de chez vous !  Avec seulement quelques informations, vous allez pouvoir découvrir quels sont les commerçants de votre région qui proposent des produits bons à la fois pour vous et pour l'environnement. Cette initiative citoyenne a pour vocation de rapprocher les personnes qui veulent consommer local et des commerçants dans toute la Belgique. 
         <br/>Si vous souhaitez agir et changer votre manière de consommer, lancez une recherche et découvrez les produits de chez nous !
     </p>
     <div class="my-24 flex md:flex-row flex-col justify-center items-center">
