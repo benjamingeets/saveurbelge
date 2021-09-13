@@ -16,7 +16,7 @@ export let links
     </div>
     <div class="w-2/12 flex justify-center">
             <p id="bord" class="md:w-32 w-20 p-2 -bottom-4 md:p-3 bg-white rounded-full absolute md:-bottom-6">
-                <img on:click={()=>{goto(`/`) }} class="cursor-pointer z-30 w-full" src="/images/logo_saveur_belge.svg" alt="Saveur Belge">
+                <img on:click={()=>{goto(`/`) }} class="cursor-pointer z-30 h-full w-full" src="/images/logo_saveur_belge.svg" alt="Saveur Belge">
             </p>
     </div>
     <nav class="xl:block hidden w-5/12">
