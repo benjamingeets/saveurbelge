@@ -98,7 +98,7 @@ crossorigin=""/>
             </div>
         </section>
     </div>
-    <div class="mt-10 h-80 w-full max-w-5xl rounded-md" id="map">
+    <div class="mt-10 h-80 w-full max-w-5xl rounded-md z-0" id="map">
 
     </div>
 </main>
