@@ -19,7 +19,7 @@ let ready = false
         shops.sort((a,b)=>{
             return b.status - a.status
         })
-        ready = true
+        ready = false
     })
 
     const getAnotherLink = async () =>{
@@ -68,10 +68,13 @@ let ready = false
         </a>
         {/if}
     {:else}
-        <p>Veuillez valider votre compte via le lien reçu par mail. Si vous ne l'avez pas reçu, <span on:click={()=>{getAnotherLink()}} class="text-green-light cursor-pointer">vous pouvez en redemander un en cliquant ici.</span> Si vous ne recevez toujours pas le mail, <a class="text-green-light" href="/contact">contactez nous via ce formulaire</a>.</p>
-        <div>
+        
+        <div class="flex flex-col gap-2">
+            <p>Veuillez valider votre compte via le lien reçu par mail. Si vous ne l'avez pas reçu, <span on:click={()=>{getAnotherLink()}} class="text-green-light cursor-pointer">vous pouvez en redemander un en cliquant ici.</span> Si vous ne recevez toujours pas le mail, <a class="text-green-light" href="/contact">contactez nous via ce formulaire</a>.</p>
             <p>Si vous avez reçu un code par mail, entrez le ici:</p>
-            <input type="text" bind:value={codeValidation} on:click={()=>{goto(`/validation/compte?code=${codeValidation}`)}}>
+            <div class="flex">
+                <input class="input-normal" type="text" bind:value={codeValidation}><div class="btn btn-green ml-2" on:click={()=>{goto(`/validation/compte?code=${codeValidation}`)}}>Valider</div>
+            </div>
         </div>
     {/if}
         
