@@ -6,8 +6,10 @@ import Plus from "$lib/svg/Plus.svelte";
 import Shop from "$lib/svg/Shop.svelte";
 import {API} from '$lib/env.js'
 import {refreshAccessToken} from '$lib/auth_req.js'
+import { goto } from "$app/navigation";
 let shops
 let user
+let codeValidation
 let ready = false
     onMount(async()=>{
         currentUserPage.update(n => "")
@@ -67,6 +69,10 @@ let ready = false
         {/if}
     {:else}
         <p>Veuillez valider votre compte via le lien reçu par mail. Si vous ne l'avez pas reçu, <span on:click={()=>{getAnotherLink()}} class="text-green-light cursor-pointer">vous pouvez en redemander un en cliquant ici.</span> Si vous ne recevez toujours pas le mail, <a class="text-green-light" href="/contact">contactez nous via ce formulaire</a>.</p>
+        <div>
+            <p>Si vous avez reçu un code par mail, entrez le ici:</p>
+            <input type="text" bind:value={codeValidation} on:click={()=>{goto(`/validation/compte?code=${codeValidation}`)}}>
+        </div>
     {/if}
         
 </section>
