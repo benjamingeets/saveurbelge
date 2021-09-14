@@ -19,7 +19,7 @@ let ready = false
         shops.sort((a,b)=>{
             return b.status - a.status
         })
-        ready = false
+        ready = true
     })
 
     const getAnotherLink = async () =>{
