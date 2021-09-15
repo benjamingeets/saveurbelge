@@ -251,6 +251,10 @@ const checkIfNameIsFree = async () =>{
                 <p>longitude</p>
                 <input bind:value={shop.coordinates.lon} class="input-normal w-full" type="text">
             </label>
+            <label for="motivation">
+                <p>Motivations:</p>
+                <p>{shop.motivation}</p>
+            </label>
         </div>
     </div>
     {#if !nameFree}
