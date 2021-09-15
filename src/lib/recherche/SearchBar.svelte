@@ -42,7 +42,7 @@ const dispatchSearch =async (query)=>{
 }
 let distance = 25
 let screenWidth
-let seeFilters = true
+let seeFilters = false
 </script>
 
 <svelte:window bind:innerWidth={screenWidth}/>

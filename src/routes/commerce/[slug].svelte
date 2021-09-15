@@ -51,7 +51,7 @@ crossorigin=""/>
     <div class="w-full rounded-md h-60" style={shop.header ? `background-image:url(${API}/public/${shop._id}_header.webp);background-size:cover;background-position:center` :`background-image:url(${DOMAIN}/images/headers/${shop.sector}.png)`} >
 
     </div>
-    <div class="md:-mt-40 -mt-20 w-full flex justify-center">
+    <div class="md:-mt-40 -mt-28 w-full flex justify-center">
         <section class={`bg-grey-light max-w-5xl w-full mt-32 rounded-md p-4 relative w-full pb-10`}>
             <div>
                 <div class="bg-grey-light w-52 h-52 rounded-full mx-auto -mt-32 p-4">

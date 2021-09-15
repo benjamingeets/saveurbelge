@@ -28,10 +28,10 @@ const categories = [
         </div>
         <div class="md:w-6/12 w-12/12">
             <h4>Saveur Belge</h4>
-            <p class="my-4 text-lg">Saveur Belge est une initiavte bénévole et gratuite de 2 étudiants tournaisiens ayant à coeur de participer à une transition écologique. <a class="text-green-light" href="/a-propos">En savoir plus.</a></p>
+            <p class="my-4 text-lg">Saveur Belge est une initiative bénévole et gratuite de 2 étudiants tournaisiens ayant à coeur de participer à une transition écologique. <a class="text-green-light" href="/a-propos">En savoir plus.</a></p>
             <div class="flex">
-                <a class="mr-2" href="https://www.facebook.com/saveurbelgium"><Facebook/></a>
-                <a href="https://instagram.com/saveurbelge"><Instagram/></a>
+                <a class="mr-2" href="https://www.facebook.com/saveurbelgium"><Facebook size="30" /></a>
+                <a href="https://instagram.com/saveurbelge"><Instagram size="30"  /></a>
             </div>
         </div>
     </div>

@@ -54,7 +54,7 @@ onMount(()=>{
     </div>
     <section class="max-w-xl mx-auto">
         {#if !done}
-        <p class="my-4">L'ajout d'un commerce sur SaveurBelge.be requiert la création d'un compte. Par l'intéremédiaire de ce dernier, vous pourrez gérer vos commerces et ceux ci seront disponibles après une vérification manuelle. </p>
+        <p class="my-4">L'ajout d'un commerce sur SaveurBelge.be requiert la création d'un compte. Par l'intérmédiaire de ce dernier, vous pourrez gérer vos commerces et ceux ci seront disponibles après une vérification manuelle. </p>
         <p class="font-bold my-2">Vos informations</p>
         <div class="flex flex-wrap">
             <div class="md:w-6/12 w-12/12">

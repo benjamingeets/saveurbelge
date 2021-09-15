@@ -64,7 +64,7 @@ const lostPassword = async ()=>{
 </script>
 <Head title="Connexion - SaveurBelge" lien="connexion"></Head>
 <main class="rounded-md md:py-40 py-16 mb-10 px-2">
-    <div class="bg-white max-w-md mx-auto rounded-md md:py-20 py-8">
+    <div class="bg-white max-w-md mx-auto rounded-md md:py-20 py-8 px-4">
         {#if !lostPwd}
             <h2 class="text-noir">{title}</h2>
             <p class="text-center text-orange">{error}</p>
@@ -82,7 +82,7 @@ const lostPassword = async ()=>{
                     </span>
                 </label>
             </form>
-            <p on:click={()=>{lostPwd = true}} class="text-orange underline text-center cursor-pointer mt-8 mb-16">Mot de passe oublié</p>
+            <p on:click={()=>{lostPwd = true}} class="text-orange underline text-center cursor-pointer mt-8 mb-8">Mot de passe oublié</p>
             <div class="w-full flex my-4">
                 <span on:click={()=>{handleLogin()}} class="btn btn-green mx-auto">
                     Se connecter

@@ -224,7 +224,7 @@ const checkIfNameIsFree = async () =>{
             </label>
             <label for="description">
                 <p>Description</p>
-                <textarea bind:value={shop.description} id="description" class="input-normal w-full"></textarea>
+                <textarea bind:value={shop.description} id="description" class="input-normal w-full h-80"></textarea>
             </label>
         </div>
     </div>

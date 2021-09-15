@@ -27,7 +27,7 @@ const dispatch = createEventDispatcher();
 
 </script>
 
-<div class="h-screen w-screen bg-grey-light bg-opacity-50 fixed z-20 top-0 left-0 flex justify-center md:pt-10 md:pb-10" on:click={()=>{dispatch('close')}}>
+<div class="px-2 pb-2 h-screen w-screen bg-black bg-opacity-50 fixed z-20 top-0 left-0 flex justify-center md:pt-10 md:pb-10" on:click={()=>{dispatch('close')}}>
     <section on:click|stopPropagation class={`bg-grey-light max-w-3xl w-full mt-32 rounded-md p-4 relative w-full pb-32`}>
         <div>
             <div on:click={()=>{dispatch('close')}} class={`absolute left-4 top-4 cursor-pointer`}>

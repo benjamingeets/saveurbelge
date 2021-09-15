@@ -31,7 +31,7 @@ let shop = {
     },
     options:{
         monnaie:false,
-        local:true,
+        local:false,
         bio:false
     },
     phone:'',

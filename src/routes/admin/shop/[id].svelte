@@ -225,7 +225,7 @@ const checkIfNameIsFree = async () =>{
             </label>
             <label for="description">
                 <p>Description</p>
-                <textarea bind:value={shop.description} id="description" class="input-normal w-full"></textarea>
+                <textarea bind:value={shop.description} id="description" class="input-normal w-full h-80"></textarea>
             </label>
             <label for="ownerId">
                 <p>ID propriétaire</p>
@@ -251,11 +251,14 @@ const checkIfNameIsFree = async () =>{
                 <p>longitude</p>
                 <input bind:value={shop.coordinates.lon} class="input-normal w-full" type="text">
             </label>
-            <label for="motivation">
+            <div>
                 <p>Motivations:</p>
-                <p>{shop.motivation}</p>
-            </label>
+                <p class="border rounded-md p-4">{shop.motivation}</p>
+            </div>
         </div>
+    </div>
+    <div class="flex justify-center">
+        <a target="_blank" class="btn btn-green-outline mt-4" href={`/commerce/${shop.slug}`}>Accéder à la page</a>
     </div>
     {#if !nameFree}
     <div class="btn border-grey text-center cursor-not-allowed w-36 mx-auto mt-10">
