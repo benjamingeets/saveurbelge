@@ -46,6 +46,8 @@ import Badges from '$lib/Badges.svelte'
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 crossorigin=""/>
+
+{#if shop.status == 1}
 <Head title={`${shop.name} à ${shop.address.city} - SaveurBelge`} description={shop.description} lien={`commerce/${shop.slug}`} image={shop.header ? `${API}/public/${shop._id}_header.webp` : `${DOMAIN}/public/image/share.png`}/>
 <main class="flex flex-col items-center w-full">
     <div class="w-full rounded-md h-60" style={shop.header ? `background-image:url(${API}/public/${shop._id}_header.webp);background-size:cover;background-position:center` :`background-image:url(${DOMAIN}/images/headers/${shop.sector}.png)`} >
@@ -102,3 +104,7 @@ crossorigin=""/>
 
     </div>
 </main>
+{:else}
+<Head title={`${shop.name} à ${shop.address.city} - SaveurBelge`} noindex={true} lien={`commerce/${shop.slug}`}/>
+<h2 class="mt-10">Cet établissement n'a pas encore été validé</h2>
+{/if}
