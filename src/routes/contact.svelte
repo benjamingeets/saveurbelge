@@ -44,7 +44,7 @@ import Head from "$lib/Head.svelte"
 
 <Head title="Contact - SaveurBelge" lien="contact"/>
 <main>
-    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20">
+    <div class="w-full rounded-md h-60 bg-grey flex justify-center items-center mb-20" style={`background-image:url(/images/contact.webp);background-size:cover;`}>
         <h2>Nous contacter</h2>
     </div>
 
