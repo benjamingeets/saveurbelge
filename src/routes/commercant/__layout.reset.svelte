@@ -34,8 +34,8 @@ onMount(()=>{
 <Head title="Gestion - SaveurBelge" noindex={true}/>
 <Navbar links={links} sousTitre="Espace commerçant"/>
 <main class="md:mt-10 mt-4 mb-10">
-    <aside class="w-60 ml-4 lg:absolute static">
-        <ul>
+    <aside class="md:w-60 w-full md:ml-4 lg:absolute static">
+        <ul class="md:block flex justify-center flex-wrap">
             {#each sidebarLinks as l}
                 {#if l.href==`/commercant/${currentPage}`}
                     <li class="border border-green-light border-2 p-2 rounded-md">
