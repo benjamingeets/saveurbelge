@@ -34,7 +34,7 @@ import {API} from '$lib/env.js'
         </div>
     </div>
     <div class="p-4">
-        <h5 class="text-center text-xl bold">
+        <h5 class="text-center text-xl bold truncate">
             {#if shop.name != ''}
                 {shop.name} 
                 {#if shop.status == -1}
