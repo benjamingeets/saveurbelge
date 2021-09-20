@@ -29,7 +29,7 @@ const categories = [
         <div class="md:w-6/12 w-12/12">
             <h4>Saveur Belge</h4>
             <p class="my-4 text-lg">Saveur Belge est une initiative bénévole et gratuite de 2 étudiants tournaisiens ayant à coeur de participer à une transition écologique. <a class="text-green-light" href="/a-propos">En savoir plus.</a></p>
-            <p class="mb-4"><a href="/politique-de-confidentialite">Politique de confidentialité</a></p>
+            <p class="mb-4"><a class="text-green-light" href="/politique-de-confidentialite">Politique de confidentialité</a></p>
             <div class="flex">
                 <a class="mr-2" href="https://www.facebook.com/saveurbelgium"><Facebook size="30" /></a>
                 <a href="https://instagram.com/saveurbelge"><Instagram size="30"  /></a>
