@@ -27,13 +27,13 @@ const dispatch = createEventDispatcher();
 
 </script>
 
-<div class="px-2 pb-2 h-screen w-screen bg-black bg-opacity-50 fixed z-20 top-0 left-0 flex justify-center md:pt-10 md:pb-10" on:click={()=>{dispatch('close')}}>
-    <section on:click|stopPropagation class={`bg-grey-light max-w-3xl w-full mt-32 rounded-md p-4 relative w-full pb-32`}>
+<div class="px-2 pb-2 h-screen w-screen bg-black bg-opacity-50 fixed z-20 top-0 left-0 flex justify-center md:py-10" on:click={()=>{dispatch('close')}}>
+    <section on:click|stopPropagation class={`bg-grey-light max-w-3xl w-full md:mt-32 mt-20 rounded-md p-4 relative w-full md:pb-32 pb-20`}>
         <div>
             <div on:click={()=>{dispatch('close')}} class={`absolute left-4 top-4 cursor-pointer`}>
                 <Close color="black"/>
             </div>
-            <div class="bg-grey-light w-52 h-52 rounded-full mx-auto -mt-32 p-4">
+            <div class="bg-grey-light md:w-52 md:h-52 w-32 h-32 rounded-full mx-auto md:-mt-32 -mt-20 md:p-4 p-2">
                 <!--<img class="rounded-full w-full h-full p-4" src={`${API}/public/${shop._id}_logo.webp`} alt="">-->
                 <div class="w-full h-full rounded-full p-4 flex justify-center items-center" style={`${shop.logo ? `background-image:url(${API}/public/${shop._id}_logo.webp);background-size:cover;background-position:center;` : `background-color:#C7CB85;`}`}>
                     {#if !shop.logo}
