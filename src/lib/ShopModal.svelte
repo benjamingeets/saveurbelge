@@ -37,7 +37,7 @@ const dispatch = createEventDispatcher();
                 <!--<img class="rounded-full w-full h-full p-4" src={`${API}/public/${shop._id}_logo.webp`} alt="">-->
                 <div class="w-full h-full rounded-full p-4 flex justify-center items-center" style={`${shop.logo ? `background-image:url(${API}/public/${shop._id}_logo.webp);background-size:cover;background-position:center;` : `background-color:#C7CB85;`}`}>
                     {#if !shop.logo}
-                        <p class="select-none text-white text-9xl capitalize">{shop.name.charAt(0)}</p>
+                        <p class="select-none text-white md:text-9xl text-5xl capitalize">{shop.name.charAt(0)}</p>
                     {/if}
                 </div>
             </div>
