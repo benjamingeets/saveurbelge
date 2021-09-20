@@ -93,7 +93,6 @@ export const updateUserById = async(user)=>{
 }
 
 export const getAllShops = async () =>{
-    console.log("shop")
     try{
         const res = await fetch(`${API}/admin/shops`,{
             method:'GET',
