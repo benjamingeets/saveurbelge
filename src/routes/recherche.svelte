@@ -60,11 +60,11 @@ import { onMount } from 'svelte';
     let shopModal
 </script>
 
-<Head title={`Recherche de commerces aux alentours de ${city} - SaveurBelge`} lien="recherche"/>
+<Head title={`Recherche de commerces aux alentours de ${city ? city : 'chez vous'} - SaveurBelge`} lien="recherche"/>
 
 {#if displayModal}<ShopModal shop={shopModal} on:close={()=>{displayModal=false;window.history.pushState(``, ``, `/recherche`);}} />{/if} 
 <main class="flex md:mt-10 mt-0 flex-wrap md:flex-nowrap">
-    <SearchBar on:query={(event)=>{queryShops(event.detail)}} categories={categories} pc={pc} city={city} sector={sector}/>
+    <SearchBar on:query={(event)=>{queryShops(event.detail)}} categories={categories} pc={pc ? pc : ''} city={city ? city : ''} sector={sector}/>
     <div class="flex flex-wrap w-full md:justify-start justify-center">
         {#if displayQuery}
             {#each shops as shop}
