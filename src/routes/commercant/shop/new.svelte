@@ -12,6 +12,7 @@ import { goto } from "$app/navigation";
 import slugify from 'slugify'
 import {getShopFromSlug} from '$lib/public_req'
 import {DOMAIN} from "$lib/env.js"
+import Loader from "$lib/Loader.svelte";
 let categories,pdpUpload,headerUpload
 let images 
 let logo =""
@@ -99,7 +100,10 @@ const setHeader = async (e)=>{
     };
 }
 
+let loading = false
+
 const handleCreateShop = async ()=>{
+    loading = true
     categories.forEach(e=>{
         if(e.value === true){
             shop.categories.push(e.name)
@@ -112,6 +116,8 @@ const handleCreateShop = async ()=>{
     }
 
     const end = await createShop(shop,images)
+
+    loading = false
     if(end.status){
         goto("/commercant")
     }
@@ -205,6 +211,8 @@ const handleCreateShop = async ()=>{
         </div>
         {:else if progress ==4}
         <div class="flex">
+
+            {#if !loading}
             <div class="md:w-6/12 w-12/12">
                 <div for="pdp">
                     <p>Logo de votre commerce</p>
@@ -241,10 +249,14 @@ const handleCreateShop = async ()=>{
                     <p>Lien de votre site internet (commençant par https:// ou http://)</p>
                     <input bind:value={shop.social.website} class="input-normal" type="text" id="website">
                 </label>
+                
             </div>
             <div class="hidden md:block w-6/12">
                 <ShopCard headerImage={headerImage} shop={shop} disabled={true}/>
             </div>    
+            {:else}
+                <Loader/>
+            {/if}
         </div>
         {/if}
     </div>
