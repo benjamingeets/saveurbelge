@@ -1,4 +1,5 @@
 <script>
+    import Head from '$lib/Head.svelte'
     const questions = [
         {
             question:'Quelles données récolte SaveurBelge lors d\'une visite?',
@@ -23,6 +24,8 @@
     ]
 </script>
 
+
+<Head title={`Politique de confidentialité - SaveurBelge`}/>
 <section class="mt-10 max-w-5xl mx-auto px-2">
     <h2>Politique de confidentalité</h2>
     {#each questions as elt}
