@@ -169,7 +169,7 @@ const handleCreateShop = async ()=>{
             </div>
             <div class="hidden md:block w-6/12">
                 <h3 class="text-center">Prévisualisation</h3>
-                <ShopCard shop={shop} disabled={true}/>
+                <ShopCard headerImage={headerImage} shop={shop} disabled={true}/>
             </div>
         </div>
         {:else if progress ==2}
@@ -189,7 +189,7 @@ const handleCreateShop = async ()=>{
             </div>
             <div class="hidden md:block  w-6/12">
                 <h3 class="text-center">Prévisualisation</h3>
-                <ShopCard shop={shop} disabled={true}/>
+                <ShopCard headerImage={headerImage} shop={shop} disabled={true}/>
             </div>
         </div>
         {:else if progress ==3}
@@ -200,7 +200,7 @@ const handleCreateShop = async ()=>{
                 <small>Cette description sera affichée en entier sur la page dédiée à votre commerce.</small>
             </div>
             <div class=" hidden md:block w-6/12">
-                <ShopCard shop={shop} disabled={true}/>
+                <ShopCard headerImage={headerImage} shop={shop} disabled={true}/>
             </div>
         </div>
         {:else if progress ==4}
