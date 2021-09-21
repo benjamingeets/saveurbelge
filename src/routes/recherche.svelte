@@ -18,14 +18,16 @@ export const load = async()=>{
     import { publicShopQuery } from '$lib/public_req';
     import SearchBar from '$lib/recherche/SearchBar.svelte';
     import ShopModal from "$lib/ShopModal.svelte";
+    import Loader from '$lib/Loader.svelte'
     import ShopCard from '$lib/ShopCard.svelte';
     import {searchCityName} from '$lib/public_req'
-import { onMount } from 'svelte';
+    import { onMount } from 'svelte';
     let pc = $page.query.get('pc')
     let sector = $page.query.get('sector')
     let city
 
     const queryShops = async (data)=>{
+        displayQuery = false
         shops = await publicShopQuery(data)
         displayQuery = true
     }
@@ -77,6 +79,8 @@ import { onMount } from 'svelte';
             </div>
                     
             {/if}
+        {:else}
+        <Loader/>
         {/if}
     </div>
 </main>
