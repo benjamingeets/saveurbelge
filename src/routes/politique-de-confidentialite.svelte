@@ -18,7 +18,7 @@
         },
         {
             question:`D'où SaveurBelge tire son bénéfice?`,
-            reponse:`De nul part, nous ne sommes pas rentables. Pour l'heures, les frais étant limités, nous assumons ces frais.`
+            reponse:`De nul part, nous ne sommes pas rentables. Pour l'heure, les frais étant limités, nous assumons ces frais.`
         }
     ]
 </script>
