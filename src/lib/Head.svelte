@@ -12,6 +12,7 @@
 
 <svelte:head>
     <!--🌽-->
+    <meta name="theme-color" content="#ffffff" />
     <title>{title}</title>
     <link rel="icon" href="/favicon.ico">
     <meta name="description" content={description}/>
