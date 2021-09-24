@@ -1,7 +1,7 @@
 <script>
     const DOMAIN = import.meta.env.VITE_DOMAIN;
     export let title = "Saveur Belge 🌽 Des produits de chez nous 😁"
-    export let description = "Venez découvrir les commerçant qui ont a coeur de vendre des produits qui viennent de votre région!"
+    export let description = "Venez découvrir les commerçants qui ont a coeur de vendre des produits qui viennent de votre région!"
     export let lien = ""
     export let image = `${DOMAIN}/share.webp`
     export let noindex = false
