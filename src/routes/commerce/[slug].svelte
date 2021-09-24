@@ -78,7 +78,7 @@ crossorigin=""/>
                         </div>
                         <div class="mt-4 flex flex-wrap">
                             {#each shop.categories as category}
-                                <span class="text-white bg-grey rounded-full px-2 m-1">{category}</span>
+                                <span class="text-white bg-grey rounded-full px-2 m-1 text-sm">{category}</span>
                             {/each}
                         </div>
                         {#if shop.social.facebook || shop.social.instagram || shop.social.website}

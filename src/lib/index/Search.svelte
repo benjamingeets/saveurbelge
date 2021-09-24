@@ -26,7 +26,7 @@ const handleInput = async ()=>{
 
 
 </script>
-<section id="search" class="flex px-4 flex-col justify-center items-center rounded-md lg:py-80 py-40">
+<section id="search" class="flex px-4 flex-col justify-center items-center rounded-md" style="height:80vh;">
     <p class="uppercase text-white text-5xl mb-10 font-bebas">Quel type de commerce cherchez-vous ?</p>
     <form class="flex lg:flex-row flex-col justify-between bg-white p-2 rounded-md w-full max-w-3xl">
         <div class="lg:w-6/12 w-full bg-grey-light flex justify-between p-2 rounded-md" >
