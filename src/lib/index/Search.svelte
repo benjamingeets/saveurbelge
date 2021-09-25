@@ -1,7 +1,6 @@
 <script>
 import Magnifier from "$lib/svg/Magnifier.svelte";
 import Pointer from "$lib/svg/Pointer.svelte";
-import {API} from '$lib/env.js'
 import {searchCityName} from '$lib/public_req'
 
 export let city ="Tournai"

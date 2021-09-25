@@ -111,7 +111,10 @@ export const routes = [
 	[/^\/api\/get-categories\/?$/],
 
 	// src/routes/api/last-shops.js
-	[/^\/api\/last-shops\/?$/]
+	[/^\/api\/last-shops\/?$/],
+
+	// src/routes/api/map.js
+	[/^\/api\/map\/?$/]
 ];
 
 export const fallback = [c[0](), c[1]()];

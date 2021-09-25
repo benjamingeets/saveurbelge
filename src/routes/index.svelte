@@ -2,9 +2,11 @@
     import {DOMAIN} from "$lib/env.js"
     export const load = async()=>{
         const data = await fetch(`${DOMAIN}/api/last-shops`)
+        const mapData = await fetch(`${DOMAIN}/api/map`)
         return{
             props:{
-                lastShops : await data.json()
+                lastShops : await data.json(),
+                map: await mapData.json()
             }
         }
     }
@@ -14,6 +16,7 @@
 // @ts-nocheck
 
 import Head from "$lib/Head.svelte";
+import Map from "$lib/index/Map.svelte"
 import Category from "$lib/index/Category.svelte";
 import Search from "$lib/index/Search.svelte";
 import ShopCard from "$lib/ShopCard.svelte";
@@ -22,6 +25,7 @@ let pc = ""
 
 
 export let lastShops
+export let map
 </script>
 <Head/>
 <Search pc="{pc}"/>
@@ -36,6 +40,9 @@ export let lastShops
         <div class="m-4"></div><!--Un peu shlagos ça mais c rien c le dev-->
         <div><a class="btn btn-green-outline" href="ajouter-mon-commerce">Ajouter mon commerce</a></div>
     </div>
+</section>
+<section class="flex justify-center items-center my-8">
+    <Map shops={map}/>
 </section>
 <section class="flex md:flex-row flex-col max-w-5xl mx-auto">
     <Category href="recherche?sector=restaurant" title="Restaurants/Bars/..." description="Des restaurateurs qui ont à coeur de vous faire manger mieux!" image="bar.jpg"/>
