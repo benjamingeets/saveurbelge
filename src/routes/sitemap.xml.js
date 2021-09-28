@@ -11,6 +11,8 @@ export async function get() {
 	sitemap = sitemap + `<url><loc>${DOMAIN}/recherche</loc></url>`
 	sitemap = sitemap + `<url><loc>${DOMAIN}/a-propos</loc></url>`
 	sitemap = sitemap + `<url><loc>${DOMAIN}/connexion</loc></url>`
+	sitemap = sitemap + `<url><loc>${DOMAIN}/politique-de-confidentialite</loc></url>`
+	sitemap = sitemap + `<url><loc>${DOMAIN}/contact</loc></url>`
 	sitemap = sitemap + `<url><loc>${DOMAIN}/ajouter-mon-commerce</loc></url>`
 	slugs.forEach(slug=>{
 			sitemap = sitemap + `<url><loc>${DOMAIN}/commerce/${slug.slug}</loc></url>`
