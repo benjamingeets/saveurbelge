@@ -14,7 +14,6 @@
     <!--🌽-->
     <meta name="theme-color" content="#ffffff" />
     <title>{title}</title>
-    <link rel="icon" href="/favicon.ico">
     <meta name="description" content={description}/>
     <link rel="canonical" href="{DOMAIN}/{lien}">
     <meta property="og:type" content="website" />
