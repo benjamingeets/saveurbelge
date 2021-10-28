@@ -20,7 +20,7 @@ export let links
             </p>
     </div>
     <nav class="xl:block hidden w-5/12">
-        <ul class="flex justify-evenly h-full items-center ml-10">
+        <ul class={`flex ${links.length > 1 ? 'justify-evenly' : 'justify-end'} h-full items-center ml-10`}>
             {#each links as link}
                 {#if link.type !="button"}
                     <li>
