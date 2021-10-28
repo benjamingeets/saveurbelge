@@ -7,7 +7,10 @@ export let city ="Tournai"
 export let pc = "7500"
 let sector
 
-if(typeof navigator !== 'undefined'){
+
+
+const useGeo = () =>{
+    if(typeof navigator !== 'undefined'){
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(async function(position) {
         const query = `https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
@@ -17,6 +20,7 @@ if(typeof navigator !== 'undefined'){
         city = await searchCityName(pc)
     });
     } 
+}
 }
 
 const handleInput = async ()=>{
@@ -30,7 +34,7 @@ const handleInput = async ()=>{
     <form class="flex lg:flex-row flex-col justify-between bg-white p-2 rounded-md w-full max-w-3xl">
         <div class="lg:w-6/12 w-full bg-grey-light flex justify-between p-2 rounded-md" >
             <span class="bg-grey-light w-full">
-                <label class="flex cursor-text" for="oui"><input id="oui" name="oui" placeholder="7500" class="bg-grey-light" style="width:5ch;" type="text" bind:value="{pc}" autofocus on:input="{handleInput}"><p class="w-9/12">{city}</p></label>
+                <label class="flex cursor-text" for="oui"><input on:click={()=>{useGeo()}} id="oui" name="oui" placeholder="7500" class="bg-grey-light" style="width:5ch;" type="text" bind:value="{pc}" on:input="{handleInput}"><p class="w-9/12">{city}</p></label>
             </span>
             <span><Pointer/></span>
         </div>

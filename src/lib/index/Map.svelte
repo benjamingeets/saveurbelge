@@ -4,14 +4,6 @@
     let L 
     let lat = 50.850340
     let lon = 4.351710
-    if(typeof navigator !== 'undefined'){
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(async function(position) {
-            lat = position.coords.latitude
-            lon = position.coords.longitude
-        });
-        } 
-    }
     onMount(async()=>{
         L = await import('leaflet')
         const map = L.map('map',{scrollWheelZoom: false}).setView([lat, lon], 8);

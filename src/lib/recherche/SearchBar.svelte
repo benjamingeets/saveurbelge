@@ -50,7 +50,7 @@ let seeFilters = false
     {#if screenWidth > 767}
     <label for="pc">
         <p class="font-bold my-4">Code postal</p>
-        <div class="border rounded-md py-2 px-4 flex"><input  class="w-3/12" id="pc" type="text" bind:value={pc} on:input="{handleInput}" on:change={()=>{dispatchSearch({pc,sector,distance,categories:[]})}}><p class="mr-auto cursor-text select-none">{city}</p> <Pointer/> </div>
+        <div class="border rounded-md py-2 px-4 flex"><input style="width:5ch;" id="pc" type="text" bind:value={pc} on:input="{handleInput}" on:change={()=>{dispatchSearch({pc,sector,distance,categories:[]})}}><p class="mr-auto cursor-text select-none">{city}</p> <Pointer/> </div>
     </label>
     <hr class="my-4">
     <label for="sector"><p class="font-bold my-4">Secteur d'activité</p>
