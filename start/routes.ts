@@ -24,7 +24,7 @@ import Route from '@ioc:Adonis/Core/Route'
 //public
 Route.group(() => {
   Route.get("/", async ({view})=>{
-    return view.render("welcome")
+    return view.render("pages/user/welcome")
   })
   Route.get("/recherche", "")
   Route.get("/connexion", "")

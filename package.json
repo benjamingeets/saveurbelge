@@ -28,10 +28,13 @@
   },
   "dependencies": {
     "@adonisjs/core": "^5.4.2",
+    "@adonisjs/lucid": "^16.3.2",
     "@adonisjs/repl": "^3.1.7",
     "@adonisjs/session": "^6.1.2",
     "@adonisjs/shield": "^7.0.7",
     "@adonisjs/view": "^6.1.1",
+    "luxon": "^2.3.0",
+    "pg": "^8.7.1",
     "postcss": "^8.4.5",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
