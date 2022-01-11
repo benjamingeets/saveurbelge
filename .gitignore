@@ -1,5 +1,7 @@
-build
-.sveltekit
 node_modules
-.svelte-kit/
+build
+coverage
+.vscode
+.DS_STORE
 .env
+tmp

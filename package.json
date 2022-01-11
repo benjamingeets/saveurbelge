@@ -1,30 +1,36 @@
 {
-	"name": "SaveurBelge",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "svelte-kit dev",
-		"build": "svelte-kit build",
-		"preview": "svelte-kit preview",
-		"check": "svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-node": "^1.0.0-next.39",
-		"@sveltejs/kit": "next",
-		"autoprefixer": "^10.3.1",
-		"cssnano": "^5.0.6",
-		"postcss": "^8.3.5",
-		"postcss-load-config": "^3.1.0",
-		"svelte": "^3.34.0",
-		"svelte-check": "^2.0.0",
-		"svelte-preprocess": "^4.7.4",
-		"tailwindcss": "^2.2.4",
-		"tslib": "^2.0.0",
-		"typescript": "^4.0.0"
-	},
-	"type": "module",
-	"dependencies": {
-		"leaflet": "^1.7.1",
-		"slugify": "^1.6.0"
-	}
+  "name": "saveurbelge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node ace serve --watch",
+    "build": "node ace build --production",
+    "start": "node server.js",
+    "lint": "eslint . --ext=.ts",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.3.9",
+    "@symfony/webpack-encore": "^1.7.0",
+    "adonis-preset-ts": "^2.1.0",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-adonis": "^2.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "pino-pretty": "^7.3.0",
+    "prettier": "^2.5.1",
+    "typescript": "~4.5",
+    "youch": "^3.0.0",
+    "youch-terminal": "^2.0.0"
+  },
+  "dependencies": {
+    "@adonisjs/core": "^5.4.2",
+    "@adonisjs/repl": "^3.1.7",
+    "@adonisjs/session": "^6.1.2",
+    "@adonisjs/shield": "^7.0.7",
+    "@adonisjs/view": "^6.1.1",
+    "proxy-addr": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.21"
+  }
 }

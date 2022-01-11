@@ -1,1 +1,0 @@
-<h2 class="mt-10">Page inexistante</h2>
