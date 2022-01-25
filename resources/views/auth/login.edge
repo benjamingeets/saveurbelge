@@ -1,0 +1,20 @@
+@layout('layouts/main')
+@set('title', 'Connexion')
+
+@section('body')
+<form action="{{route('AuthController.login')}}" method="post">
+    {{ csrfField() }}
+    @form.group({ name: 'email' })
+        @!form.label({ title: 'Email' })
+        @!form.input({ type: 'email' })
+    @end
+    @form.group({ name: 'password' })
+        @!form.label({ title: 'Mot de passe' })
+        @!form.input({ type: 'password' })
+    @end
+    <input type="submit" value="Connexion">
+</form>
+
+<a href="{{route('AuthController.showRegisterForm')}}">S'inscrire</a>
+<a href="{{route('AuthController.showForgotPassword')}}">Mot de passe oublié</a></div>
+@end

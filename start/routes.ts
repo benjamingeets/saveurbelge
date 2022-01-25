@@ -20,45 +20,29 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-
-//public
-Route.group(() => {
-  Route.get("/", async ({view})=>{
-    return view.render("pages/user/welcome")
-  })
-  Route.get("/recherche", "")
-  Route.get("/connexion", "")
-  Route.get("/commerce/:slug", "")
+Route.get('/', async ({ view }) => {
+  return view.render('welcome')
+})
+Route.get("/commerce/:slug",({request})=>{
+  return request.params().slug
 })
 
+Route.get("/account-validation/:id","AuthController.validateUser")
+Route.get("/reinitialisation-mot-de-passe/:id","AuthController.showResetPassword")
 
-//user
-Route.group(() => {
+Route.post("/reinitialisation-mot-de-passe/:id","AuthController.resetPassword")
 
-  Route.get("/", "")
+Route.group(()=>{
+  Route.get("/connexion","AuthController.showLoginForm")
+  Route.post("/connexion","AuthController.login")
+  Route.get("/inscription","AuthController.showRegisterForm")
+  Route.post("/inscription","AuthController.register")
+  Route.get("/mot-de-passe-oublie","AuthController.showForgotPassword")
+  Route.post("/mot-de-passe-oublie","AuthController.forgotPassword")
+}).middleware("redirectIfAuth")
 
-  Route.group(() => {
-    Route.get("/", "")
-    Route.get("/modifier", "")
-    Route.get("/supprimer", "")
-  }).prefix("/mon-compte")
+Route.group(()=>{
+  Route.get("/",()=>{return "dash"})
+}).prefix("/dashboard").middleware("auth")
 
-  Route.group(() => {
-    Route.get("/ajouter", "")
-    Route.group(() => {
-      Route.get("/", "")
-      Route.get("/supprimer", "")
-      Route.group(() => {
-        Route.get("/informations", "")
-        Route.get("/liens", "")
-        Route.get("/categories", "")
-      }).prefix("/modifier")
-    }).prefix("/:slug")
-  }).prefix("/commerce")
-
-}).prefix("/utilisateur")
-
-//admin
-Route.group(() => {
-  Route.get("/", "")
-}).prefix("/admin")
+Route.post("/deconnexion",'AuthController.logout')

@@ -1,0 +1,20 @@
+@layout('layouts/main')
+@set('title', 'Home page')
+
+@section('body')
+      @if(auth.isLoggedIn)
+        <a href="/dashboard">backoffice</a>
+        {{auth.user.firstName}}
+        {{auth.user.lastName}}
+        {{auth.user.email}}
+        <form action="{{route('AuthController.logout')}}" method="post">
+          {{ csrfField() }}
+          <input type="submit" value="Déconnexion">
+        </form>
+      @endif
+      @if(!auth.isLoggedIn)
+          Pas connecté.
+
+          <a href="{{route('AuthController.showLoginForm')}}">Connexion</a>
+      @endif
+@end
