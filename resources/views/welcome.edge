@@ -7,6 +7,9 @@
         {{auth.user.firstName}}
         {{auth.user.lastName}}
         {{auth.user.email}}
+        @if(auth.user.status === 1)
+          Email validé
+        @endif
         <form action="{{route('AuthController.logout')}}" method="post">
           {{ csrfField() }}
           <input type="submit" value="Déconnexion">
