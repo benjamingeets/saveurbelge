@@ -9,16 +9,17 @@ export default class AuthController {
     public async showLoginForm({ view }) {
         return view.render("auth/login")
     }
-    public async login({ auth, request, response }) {
+    public async login({ auth, request, response, view }) {
         const { email, password } = request.only(["email", "password"])
         await auth.attempt(email, password)
-
-        response.redirect().toPath("/")
+        response.header('HX-Push','/')
+        return view.render("welcome")
     }
 
-    public async logout({ auth, response }) {
+    public async logout({ auth, response,view }) {
         await auth.logout()
-        response.redirect().toRoute("AuthController.showLoginForm")
+        response.header('HX-Push',Route.makeUrl("AuthController.showLoginForm"))
+        return view.render("auth/login")
     }
 
     public async showRegisterForm({ view }) {
@@ -77,6 +78,7 @@ export default class AuthController {
             session.flash('error', `Ce lien n'est pas valide`)
             return response.redirect().toPath('/')
         }
+        
         const id = params.id
         const url = Route.makeSignedUrl(
             'AuthController.showResetPassword',

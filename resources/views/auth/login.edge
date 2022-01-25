@@ -2,6 +2,11 @@
 @set('title', 'Connexion')
 
 @section('body')
+@if(flashMessages.has('auth.errors'))
+    <p>
+      Aucun utilisateur n'a été trouvé avec ces identifiants.
+    </p>
+  @end
 <form action="{{route('AuthController.login')}}" method="post">
     {{ csrfField() }}
     @form.group({ name: 'email' })
