@@ -12,6 +12,9 @@
 
   <main>
     <div> 
+        @if(auth.isLoggedIn && auth.user.status == 5)
+          <a style="position: absolute;top:0;left:0;" href="{{route('AdminsController.showDashboard')}}">Admin</a>
+        @endif
         @!section('body')
     </div>
   </main>

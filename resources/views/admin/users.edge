@@ -1,0 +1,19 @@
+@layout('layouts/admin')
+@set('title', 'Users')
+
+@section('body')
+    <ul>
+        @each(user in users)
+            <li>{{user.first_name}} {{user.last_name}} [{{user.email}} / 
+                @if(user.status == 1)
+                    ☑️
+                @elseif(user.status == 5)
+                    Admin
+                @else
+                    Non validé
+                @endif
+                ]  - <a href="{{route('AdminsController.showEditUser',{id:user.id})}}">Modifier</a>  </li>
+        @end
+    </ul>
+    <a href="{{route('AdminsController.showCreateUser')}}">Ajouter un utilisateur</a>
+@end

@@ -1,0 +1,30 @@
+@layout('layouts/admin')
+@set('title', 'Créer un user')
+
+@section('body')
+<form action="{{route('AdminsController.createUser')}}" method="post">
+    {{ csrfField() }}
+    @form.group({ name: 'email' })
+        @!form.label({ title: 'Email' })
+        @!form.input({ type: 'email' })
+    @end
+    @form.group({ name: 'firstName' })
+        @!form.label({ title: 'Prénom' })
+        @!form.input({ type: 'text' })
+    @end
+    @form.group({ name: 'lastName' })
+        @!form.label({ title: 'Nom' })
+        @!form.input({ type: 'text' })
+    @end
+    @form.group({ name: 'password' })
+        @!form.label({ title: 'Mot de passe' })
+        @!form.input({ type: 'password' })
+    @end
+    @form.group({ name: 'password_confirmation' })
+        @!form.label({ title: 'Confirmation' })
+        @!form.input({ type: 'password' })
+    @end
+    <input type="submit" value="Créer">
+</form>
+<a href="{{route('AdminsController.showUsers')}}">Retour</a>
+@end

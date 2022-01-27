@@ -1,0 +1,11 @@
+@layout('layouts/admin')
+@set('title', 'Users')
+
+@section('body')
+    <form action="{{route('AdminsController.editCategory',{id:category.id})}}" method="post">
+        {{ csrfField() }}
+        <input type="text" name="name" value="{{category.name}}" id="">
+        <input type="submit" value="Save">
+    </form>
+    <a href="{{route('AdminsController.showSectorsAndCategories')}}">Annuler</a>
+@end

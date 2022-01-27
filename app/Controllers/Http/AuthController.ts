@@ -91,7 +91,7 @@ export default class AuthController {
         return view.render('auth/resetpassword',{url:url})
     }
 
-    public async forgotPassword({ request, response }) {
+    public async forgotPassword({ request,view }) {
         const { email } = request.only(["email"])
         console.log(email)
         const user = await User.findByOrFail('email', email)
@@ -104,6 +104,6 @@ export default class AuthController {
         )
         new ForgotPassword(user, `${`http://localhost:3333`}${url}`).sendLater()
 
-        return response.redirect().toPath("/")
+        return view.render("message",{content:"Votre demande a bien été reçue."})
     }
 }

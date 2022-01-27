@@ -46,3 +46,26 @@ Route.group(()=>{
 }).prefix("/dashboard").middleware("auth")
 
 Route.post("/deconnexion",'AuthController.logout')
+
+
+Route.group(()=>{
+  Route.get("/","AdminsController.showDashboard")
+  Route.get("/users","AdminsController.showUsers")
+  Route.get("/shops","AdminsController.showShops")
+  Route.get("/sectors-and-categories","AdminsController.showSectorsAndCategories")
+
+  Route.get("/users/add","AdminsController.showCreateUser")
+  Route.post("/users/add","AdminsController.createUser")
+  Route.post("/users/:id/delete","AdminsController.deleteUser")
+  Route.get("/users/:id/edit",'AdminsController.showEditUser')
+  Route.post("/users/:id/edit",'AdminsController.editUser')
+
+  Route.get("/sector/:id/edit","AdminsController.showEditSector")
+  Route.post("/sector/:id/edit","AdminsController.editSector")
+  Route.post("/sector/add","AdminsController.createSector")
+  Route.post("/sector/:id/delete","AdminsController.deleteSector")
+
+  Route.get("/category/:id/edit","AdminsController.showEditCategory")
+  Route.post("/category/:id/edit","AdminsController.editCategory")
+  Route.post("/category/add","AdminsController.createCategory")
+}).prefix("/admin").middleware("auth").middleware("admin")

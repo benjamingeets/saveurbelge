@@ -46,6 +46,10 @@ export default class RegisterValidator {
    */
   public messages = {
     'email.required': `L'email est requis`,
+
+    'firstName.required': `Le prénom est requis`,
+
+    'lastName.required': `Le nom est requis`,
     'email.email': `L'email n'est pas valide`,
     'email.unique': `Cet email est déjà utilisé`,
     'password.required': `Le mot de passe est requis`,

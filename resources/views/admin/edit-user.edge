@@ -1,0 +1,23 @@
+@layout('layouts/admin')
+@set('title', 'Edit user')
+
+@section('body')
+<form action="{{route('AdminsController.editUser',{id:user.id})}}" method="post">
+    {{ csrfField() }}
+    <input type="text" name="email" value="{{user.email}}" id="">
+    <input type="text" name="firstName" value="{{user.firstName}}" id="">
+    <input type="text" name="lastName" value="{{user.lastName}}" id="">
+    <input type="password" name="password" value="" id="">
+    <select name="status" id="">
+        <option value="0">Non validé</option>
+        <option value="1"
+            @if(user.status == 1)
+                selected
+            @endif
+        >Validé</option>
+    </select>
+    <input type="submit" value="Enregister">
+</form>
+<form action="{{route('AdminsController.deleteUser',{id:user.id})}}" method="post"> {{ csrfField() }} <input type="submit" value="Supprimer"></form>
+<a href="{{route('AdminsController.showUsers')}}">Retour</a>
+@end
