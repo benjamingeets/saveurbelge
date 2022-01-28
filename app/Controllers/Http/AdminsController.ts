@@ -18,13 +18,11 @@ export default class AdminsController {
     }
     public async createUser({ request, response }) {
         const payload = await request.validate(RegisterValidator)
-        console.log(payload)
         await User.create(payload)
         response.redirect().toRoute('AdminsController.showUsers')
     }
     public async deleteUser({ response, params }) {
         const id = params.id
-        console.log(id)
         const user = await User.findByOrFail('id', id)
         await user.delete()
         response.redirect().toRoute('AdminsController.showUsers')

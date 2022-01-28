@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ADMIN | {{title}}</title>
-  <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+  <link rel="stylesheet" href="https://unpkg.com/unpoly@2.5.0/unpoly.min.css">
   @entryPointStyles('app')
   @entryPointScripts('app')
 </head>
-<body hx-boost="true">
+<body>
 
   <main>
     <div> 
@@ -16,12 +16,14 @@
         <nav>
             
                 <a href="{{route('AdminsController.showDashboard')}}">Index</a> //
-                <a href="{{route('AdminsController.showUsers')}}">Utilisateurs</a> //
+                <a href="{{route('AdminsController.showUsers')}}" >Utilisateurs</a> //
                 <a href="{{route('AdminsController.showShops')}}">Shops</a> //
                 <a href="{{route('AdminsController.showSectorsAndCategories')}}">Catégories et secteurs</a>
             
         </nav>
-        @!section('body')
+        <div>
+          @!section('body')
+        </div>
     </div>
   </main>
 </body>
