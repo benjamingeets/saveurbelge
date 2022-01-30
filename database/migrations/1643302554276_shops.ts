@@ -14,7 +14,7 @@ export default class Shops extends BaseSchema {
       table.string('slug').notNullable().unique()
       table.string('description').notNullable()
       table.string('sector').notNullable()
-      table.json('categories')
+      table.json('categories').notNullable().defaultTo('[]')
       table.string('address_number').notNullable()
       table.string('address_street').notNullable()
       table.string('address_postcode').notNullable()

@@ -9,6 +9,7 @@ export default class UserSeeder extends BaseSeeder {
     user.email="geets@tuta.io"
     user.firstName="benjamin"
     user.lastName="geets"
+    user.status=5
     await user.save()
   }
 }

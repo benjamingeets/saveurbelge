@@ -1,7 +1,7 @@
 import { schema,rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class RegisterValidator {
+export default class CreateShopValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,13 +24,21 @@ export default class RegisterValidator {
    *    ```
    */
   public schema = schema.create({
-    email:schema.string({trim:true},[
-      rules.email(),
-      rules.unique({table:'users',column:'email'})
-    ]),
-    password: schema.string({}, [rules.confirmed(), rules.minLength(6)]),
-    firstName:schema.string({trim:true}),
-    lastName:schema.string({trim:true})
+    name:schema.string({trim:true}),
+    description:schema.string({trim:true}),
+    addressNumber:schema.string({trim:true}),
+    addressStreet:schema.string({trim:true}),
+    addressCity:schema.string({trim:true}),
+    addressPostcode:schema.string({trim:true}),
+    phone:schema.string.nullableAndOptional({trim:true}),
+    optionIsBio:schema.boolean.nullableAndOptional(),
+    optionAcceptLocalCurrency:schema.boolean.nullableAndOptional(),
+    optionIsProductor:schema.boolean.nullableAndOptional(),
+    instagramUsername:schema.string.nullableAndOptional(),
+    facebookUsername:schema.string.nullableAndOptional(),
+    websiteUrl:schema.string.nullableAndOptional({},[rules.url()]),
+    categories:schema.array.nullableAndOptional().members(schema.string()),
+    sector:schema.string()
   })
 
   /**
@@ -45,13 +53,7 @@ export default class RegisterValidator {
    *
    */
   public messages = {
-    'email.required': `L'email est requis`,
-    'firstName.required': `Le prénom est requis`,
-    'lastName.required': `Le nom est requis`,
-    'email.email': `L'email n'est pas valide`,
-    'email.unique': `Cet email est déjà utilisé`,
-    'password.required': `Le mot de passe est requis`,
-    'password_confirmation.confirmed': `Les mots de passe ne correspondent pas`,
-    'password.minLength': `Le mot de passe doit contenir au moins 6 caractères`,
+    'name.required': `Le nom est requis`,
+    'websiteUrl.url':'Le lien n\'est pas bon'
   }
 }

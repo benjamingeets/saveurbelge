@@ -33,6 +33,7 @@
     "@adonisjs/session": "^6.1.2",
     "@adonisjs/shield": "^7.0.7",
     "@adonisjs/view": "^6.1.1",
+    "alpinejs": "^3.8.1",
     "luxon": "^2.3.0",
     "mjml": "^4.11.0",
     "pg": "^8.7.1",

@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { column, beforeSave, BaseModel, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, beforeCreate, afterFind } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuidv4 } from 'uuid'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 export default class Shop extends BaseModel {
@@ -64,7 +64,7 @@ export default class Shop extends BaseModel {
   public sector:string
 
   @column()
-  public categories:Array<string>
+  public categories:any
 
   @column()
   public facebookUsername:string
@@ -81,6 +81,7 @@ export default class Shop extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+
   @beforeCreate()
   public static assignUuid(shop: Shop) {
     shop.id = uuidv4()
@@ -94,5 +95,12 @@ export default class Shop extends BaseModel {
       shop.longitude = "att"
       shop.latitude = "att"
     }
+    if(shop.$dirty.categories){
+      shop.categories = JSON.stringify(shop.$dirty.categories)
+    }
+  }
+  @afterFind()
+  public static dsqdsq(shop:Shop){
+    shop.categories = JSON.parse(shop.categories)
   }
 }

@@ -70,11 +70,10 @@ main li:before {
   left: 0;
 }
 
-main code {
-  font-size: 16px;
-  background: #e6e2ff;
-}
 
 .up-current{
   text-decoration: underline;
+}
+[x-cloak]{
+  display: none;
 }

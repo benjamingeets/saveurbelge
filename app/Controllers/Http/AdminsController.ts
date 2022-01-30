@@ -1,17 +1,20 @@
-// import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import User from "App/Models/User"
 import RegisterValidator from "App/Validators/RegisterValidator"
 import Sector from "App/Models/Sector"
 import Category from "App/Models/Category"
-import Database from "@ioc:Adonis/Lucid/Database"
+import Shop from "App/Models/Shop"
+import Application from '@ioc:Adonis/Core/Application'
+import fs from 'fs'
+import CreateShopValidator from "App/Validators/CreateShopValidator"
+
 export default class AdminsController {
     public async showDashboard({ view }) {
         const users = await User.all()
-        return view.render("admin/dashboard", { infos: { users: users.length } })
+        const shops = await Shop.all()
+        return view.render("admin/dashboard", { infos: { users: users.length,shops:shops.length } })
     }
     public async showUsers({ view }) {
-        return view.render("admin/users", { users:await Database.from('users').select('*').orderBy('updated_at', 'desc') })
+        return view.render("admin/users", { users:await User.query().select('*').orderBy('updated_at', 'desc') })
     }
     public async showCreateUser({ view }) {
         return view.render("admin/create-user")
@@ -36,9 +39,7 @@ export default class AdminsController {
         const id = params.id
         const { email, password, firstName, lastName, status } = request.only(['email', 'password', 'firstName', 'lastName', 'status'])
         const user = await User.findByOrFail('id', id)
-        user.email = email
-        user.firstName = firstName
-        user.lastName = lastName
+        user.merge({email,firstName,lastName})
         if(user.status != 5){
             user.status = status
         }
@@ -49,7 +50,57 @@ export default class AdminsController {
         response.redirect().toRoute('AdminsController.showUsers')
     }
     public async showShops({ view }) {
-        return view.render("admin/dashboard", { infos: { users: 0 } })
+        const shops = await Shop.all()
+        return view.render("admin/shops", {shops})
+    }
+    public async showEditShop({view,params}){
+        const id = params.id
+        const shop = await Shop.findByOrFail('id',id)
+        const categories = await Category.query().select('*').where('sector',shop.sector)
+        const sectors = await Sector.all()
+        return view.render("admin/edit-shop",{shop,categories,sectors})
+    }
+    public async editShop({params,request,response}){
+        const payload = await request.validate(CreateShopValidator)
+        const logo = request.file('logo')
+        const shop = await Shop.findOrFail(params.id)
+        await shop.merge({...payload,status:request.input('ownerId')}).save()
+        
+        if(logo){
+            await logo.move(Application.tmpPath('uploads'))
+            const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
+            shop.logo = `data:image/${logo.subtype};base64, ${binary}`
+            await shop.save()
+            fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`,()=>{})
+        }
+        return response.redirect().toRoute('AdminsController.showShops')
+    }
+    public async showCreateShop({view}){
+        const sectors = await Sector.all()
+        const categories = await Category.query().select('*').where('sector',sectors[0].id)
+        return view.render('admin/create-shop',{sectors,categories})
+    }
+    public async createShop({request,auth,response}){
+        const logo = request.file('logo')
+        const payload = await request.validate(CreateShopValidator)
+        if(request.input('ownerId')){
+            payload.ownerId = request.input('ownerId')
+        }else{
+            payload.ownerId = auth.user.id
+        }
+        const shop = await Shop.create(payload)
+        if(logo){
+            await logo.move(Application.tmpPath('uploads'))
+            const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
+            shop.logo = binary
+            await shop.save()
+            fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`,()=>{})
+        }
+        return response.redirect().toRoute('AdminsController.showShops')
+    }
+    public async getCategories({params,view}){
+        const categories = await Category.query().select('*').where('sector',params.id)
+        return view.render('admin/create-shop',{categories})
     }
     public async showSectorsAndCategories({ view }) {
         const categories = await Category.all()
@@ -100,4 +151,5 @@ export default class AdminsController {
         await sector.delete()
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }
+
 }

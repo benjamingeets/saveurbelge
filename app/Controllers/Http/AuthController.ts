@@ -9,17 +9,15 @@ export default class AuthController {
     public async showLoginForm({ view }) {
         return view.render("auth/login")
     }
-    public async login({ auth, request, response, view }) {
+    public async login({ auth, request, response }) {
         const { email, password } = request.only(["email", "password"])
         await auth.attempt(email, password)
-        response.header('HX-Push','/')
-        return view.render("welcome")
+        response.redirect().toRoute('DashboardController.showDashboard')
     }
 
-    public async logout({ auth, response,view }) {
+    public async logout({ auth, response }) {
         await auth.logout()
-        response.header('HX-Push',Route.makeUrl("AuthController.showLoginForm"))
-        return view.render("auth/login")
+        response.redirect().toRoute('AuthController.showLoginForm')
     }
 
     public async showRegisterForm({ view }) {
@@ -93,7 +91,6 @@ export default class AuthController {
 
     public async forgotPassword({ request,view }) {
         const { email } = request.only(["email"])
-        console.log(email)
         const user = await User.findByOrFail('email', email)
         const url = Route.makeSignedUrl(
             'AuthController.showResetPassword',

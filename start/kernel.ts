@@ -46,4 +46,5 @@ Server.middleware.registerNamed({
     auth: () => import('App/Middleware/Auth'),
     redirectIfAuth:() => import('App/Middleware/RedirectIfAuth'),
     admin:() => import('App/Middleware/Admin'),
+    doOwnShop:() => import('App/Middleware/DoOwnShop')  
 })

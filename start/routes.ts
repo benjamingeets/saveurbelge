@@ -20,9 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async ({ view }) => {
-  return view.render('welcome')
-})
+Route.get('/', "SearchesController.showSearchForm")
 Route.get("/commerce/:slug", ({ request }) => {
   return request.params().slug
 })
@@ -42,15 +40,17 @@ Route.group(() => {
 }).middleware("redirectIfAuth")
 
 Route.group(() => {
-  Route.get("/", () => { return "dash" })
-}).prefix("/dashboard").middleware("auth")
+  Route.get("/","DashboardController.showDashboard")
+  Route.get("/shop/add","DashboardController.showAddShop")
+  Route.get("/shop/:id","DashboardController.showShop")
+  Route.get("/account","DashboardController.showAccount")
+}).prefix("/dashboard").middleware("auth").middleware("doOwnShop")
 
 Route.post("/deconnexion", 'AuthController.logout')
 
 
 Route.group(() => {
   Route.get("/", "AdminsController.showDashboard")
-  Route.get("/shops", "AdminsController.showShops")
   Route.get("/sectors-and-categories", "AdminsController.showSectorsAndCategories")
   Route.group(() => {
     Route.get("/", "AdminsController.showUsers")
@@ -71,4 +71,14 @@ Route.group(() => {
     Route.post("/:id/edit", "AdminsController.editCategory")
     Route.post("/add", "AdminsController.createCategory")
   }).prefix("/category")
+  Route.group(()=>{
+    Route.get("/", "AdminsController.showShops")
+    Route.get('/:id/edit',"AdminsController.showEditShop")
+    Route.post('/:id/edit',"AdminsController.editShop")
+    Route.get('/add','AdminsController.showCreateShop')
+    Route.post('/add','AdminsController.createShop')
+  }).prefix("/shops")
 }).prefix("/admin").middleware("auth").middleware("admin")
+
+
+Route.get('/get-categories/:id','AdminsController.getCategories')
