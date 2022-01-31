@@ -9,13 +9,28 @@
   @entryPointScripts('app')
 </head>
 <body>
+ 
 
-  <main>
+    <h2>Dashboard</h2>
+    <p>Mes commerces</p>
+    <ul>
+        @if(shops.length <= 3)
+        <li><a href="{{route('DashboardController.showAddShop')}}">Ajouter un commerce</a></li>
+        @endif
+        <li>Mes commerces:
+            <ul>
+                @each(shop in shops)
+                    <li><a href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a></li>
+                @endeach
+            </ul>
+        </li>
+        <li><a href="{{route('DashboardController.showAccount')}}">Mon compte</a></li>
+    </ul>
     <div> 
         <div>
           @!section('body')
         </div>
     </div>
-  </main>
+
 </body>
 </html>

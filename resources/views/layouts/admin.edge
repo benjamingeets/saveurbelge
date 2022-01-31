@@ -9,22 +9,15 @@
   @entryPointScripts('app')
 </head>
 <body>
-
-  <main>
-    <div> 
-        <a href="/">Homepage</a>
-        <nav>
-            
-                <a href="{{route('AdminsController.showDashboard')}}">Index</a> //
-                <a href="{{route('AdminsController.showUsers')}}" >Utilisateurs</a> //
-                <a href="{{route('AdminsController.showShops')}}">Shops</a> //
-                <a href="{{route('AdminsController.showSectorsAndCategories')}}">Catégories et secteurs</a>
-            
-        </nav>
-        <div>
-          @!section('body')
-        </div>
-    </div>
-  </main>
+  <a href="/">Homepage</a>
+  <nav>
+      <a href="{{route('AdminsController.showDashboard')}}">Index</a> //
+      <a href="{{route('AdminsController.showUsers')}}" >Utilisateurs</a> //
+      <a href="{{route('AdminsController.showShops')}}">Shops</a> //
+      <a href="{{route('AdminsController.showSectorsAndCategories')}}">Catégories et secteurs</a>
+  </nav>
+  <div>
+    @!section('body')
+  </div>
 </body>
 </html>

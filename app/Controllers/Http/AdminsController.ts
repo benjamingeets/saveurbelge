@@ -64,6 +64,9 @@ export default class AdminsController {
         const payload = await request.validate(CreateShopValidator)
         const logo = request.file('logo')
         const shop = await Shop.findOrFail(params.id)
+        if(request.input('ownerId')){
+            shop.ownerId = request.input('ownerId')
+        }
         await shop.merge({...payload,status:request.input('ownerId')}).save()
         
         if(logo){

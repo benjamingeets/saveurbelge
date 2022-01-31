@@ -4,20 +4,19 @@ import Shop from "App/Models/Shop"
 import User from "App/Models/User"
 
 export default class DashboardController {
-    public async showDashboard({view,auth}){
-        const shops = await Shop.query().select('*').where('ownerId',auth.user.id)
-        return view.render('dashboard/index',{shops})
+    public async showDashboard({view,request}){
+        return view.render('dashboard/index',{shops:request.all().shops})
     }
-    public async showShop({view,params}){
+    public async showShop({view,params,request}){
         const id = params.id
-        const shop = await Shop.findOrFail(id)
-        return view.render('dashboard/shop',{shop})
+        const selectedShop = await Shop.findOrFail(id)
+        return view.render('dashboard/shop',{selectedShop,shops:request.all().shops})
     }
-    public async showAddShop({view}){
-        return view.render('dashboard/create-shop')
+    public async showAddShop({view,request}){
+        return view.render('dashboard/create-shop',{shops:request.all().shops})
     }
-    public async showAccount({view,auth}){
+    public async showAccount({view,auth,request}){
         const user = await User.findOrFail(auth.user.id)
-        return view.render('dashboard/account',{user})
+        return view.render('dashboard/account',{user,shops:request.all().shops})
     }
 }
