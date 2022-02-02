@@ -67,7 +67,7 @@ export default class AdminsController {
         if(request.input('ownerId')){
             shop.ownerId = request.input('ownerId')
         }
-        await shop.merge({...payload,status:request.input('ownerId')}).save()
+        await shop.merge({...payload,status:request.input('status')}).save()
         
         if(logo){
             await logo.move(Application.tmpPath('uploads'))

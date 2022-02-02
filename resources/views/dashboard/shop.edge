@@ -2,5 +2,55 @@
 @set('title', 'Users')
 
 @section('body')
-{{selectedShop.name}} ({{selectedShop.slug}})
+    <div>
+        <h2>Informations</h2>
+        <p>Edit</p>
+        @if(selectedShop.logo)
+        <img style="max-width: 200px;" src="{{selectedShop.logo}}" alt="">
+        @else
+        Pas de logo
+        @endif
+        <p>{{selectedShop.name}} ({{selectedShop.slug}})</p>
+        <p>Secteur: {{sector.name}}</p>
+        <p>Adresse: {{selectedShop.addressNumber}}, {{selectedShop.addressStreet}}</p>
+        <p>{{selectedShop.addressPostcode}} {{selectedShop.addressCity}}</p>
+        <p>Description: {{selectedShop.description}}</p>
+    </div>
+    <div>
+        <div>
+            <h2>Catégories</h2>
+            @each(c in categories)
+            {{c.name}}
+            @endeach
+            @if(categories.length == 0)
+                Aucune catégorie
+            @endif
+            <h2>Particularités</h2>
+            @if(selectedShop.optionIsBio)
+            bio
+            @endif
+            @if(selectedShop.optionIsProductor)
+            Producteur
+            @endif
+            @if(selectedShop.optionAcceptLocalCurrency)
+            monnaie locale
+            @endif
+        </div>
+        <div>
+            <h2>Liens</h2>
+            @if(selectedShop.facebookUsername)
+            {{selectedShop.facebookUsername}}
+            @endif
+            @if(selectedShop.instagramUsername)
+            {{selectedShop.instagramUsername}}
+            @endif
+            @if(selectedShop.websiteUrl)
+            {{selectedShop.websiteUrl}}
+            @endif
+        </div>
+    </div>
+    <div>
+        <h2>Zone à risk</h2>
+        <a href="">Suppr</a>
+    </div>
 @end
