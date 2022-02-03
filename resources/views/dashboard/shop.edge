@@ -4,7 +4,7 @@
 @section('body')
     <div>
         <h2>Informations</h2>
-        <p>Edit</p>
+        <a href="{{route('DashboardController.showShopEditInformations',{id:selectedShop.id})}}">Edit</a>
         @if(selectedShop.logo)
         <img style="max-width: 200px;" src="{{selectedShop.logo}}" alt="">
         @else
@@ -18,14 +18,16 @@
     </div>
     <div>
         <div>
-            <h2>Catégories</h2>
+            <h2>Options</h2>
+            <a href="{{route('DashboardController.showShopEditOptions',{id:selectedShop.id})}}">Edit</a>
+            <h3>Catégories</h3>
             @each(c in categories)
             {{c.name}}
             @endeach
             @if(categories.length == 0)
                 Aucune catégorie
             @endif
-            <h2>Particularités</h2>
+            <h3>Particularités</h3>
             @if(selectedShop.optionIsBio)
             bio
             @endif
@@ -38,14 +40,16 @@
         </div>
         <div>
             <h2>Liens</h2>
+            
+        <a href="{{route('DashboardController.showShopEditLinks',{id:selectedShop.id})}}">Edit</a>
             @if(selectedShop.facebookUsername)
-            {{selectedShop.facebookUsername}}
+            Facebook: {{selectedShop.facebookUsername}}
             @endif
             @if(selectedShop.instagramUsername)
-            {{selectedShop.instagramUsername}}
+            Insta: {{selectedShop.instagramUsername}}
             @endif
             @if(selectedShop.websiteUrl)
-            {{selectedShop.websiteUrl}}
+            website: {{selectedShop.websiteUrl}}
             @endif
         </div>
     </div>

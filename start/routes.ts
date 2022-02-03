@@ -43,6 +43,10 @@ Route.group(() => {
   Route.get("/","DashboardController.showDashboard")
   Route.get("/shop/add","DashboardController.showAddShop")
   Route.get("/shop/:id","DashboardController.showShop")
+  Route.get("/shop/:id/informations/edit","DashboardController.showShopEditInformations")
+  Route.get("/shop/:id/links/edit","DashboardController.showShopEditLinks")
+  Route.get("/shop/:id/options/edit","DashboardController.showShopEditOptions")
+  Route.post("/shop/:id/edit","DashboardController.editShop")
   Route.get("/account","DashboardController.showAccount")
 }).prefix("/dashboard").middleware("auth").middleware("doOwnShop")
 

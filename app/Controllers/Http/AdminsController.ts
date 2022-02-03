@@ -63,6 +63,7 @@ export default class AdminsController {
     public async editShop({params,request,response}){
         const payload = await request.validate(CreateShopValidator)
         const logo = request.file('logo')
+        console.log(logo)
         const shop = await Shop.findOrFail(params.id)
         if(request.input('ownerId')){
             shop.ownerId = request.input('ownerId')

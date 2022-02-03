@@ -4,23 +4,51 @@ import Category from "App/Models/Category"
 import Sector from "App/Models/Sector"
 import Shop from "App/Models/Shop"
 import User from "App/Models/User"
+import EditShopValidator from "App/Validators/EditShopValidator"
+import Application from '@ioc:Adonis/Core/Application'
+import fs from 'fs'
 
 export default class DashboardController {
-    public async showDashboard({view,request}){
-        return view.render('dashboard/index',{shops:request.all().shops})
+    public async showDashboard({ view, request }) {
+        return view.render('dashboard/index', { shops: request.all().shops })
     }
-    public async showShop({view,params,request}){
+    public async showShop({ view, params, request }) {
         const id = params.id
         const selectedShop = await Shop.findOrFail(id)
-        const categories = await Category.query().select('name').whereIn('id',selectedShop.categories)
+        const categories = await Category.query().select('name').whereIn('id', selectedShop.categories)
         const sector = await Sector.findOrFail(selectedShop.sector)
-        return view.render('dashboard/shop',{selectedShop,shops:request.all().shops,categories,sector})
+        return view.render('dashboard/shop', { selectedShop, shops: request.all().shops, categories, sector })
     }
-    public async showAddShop({view,request}){
-        return view.render('dashboard/create-shop',{shops:request.all().shops})
+    public async showShopEditInformations({ view, params, request }) {
+        const shop = await Shop.findOrFail(params.id)
+        const categories = await Category.all()
+        const sectors = await Sector.all()
+        return view.render('dashboard/edit-informations', { shop, shops: request.all().shops, categories, sectors })
     }
-    public async showAccount({view,auth,request}){
+    public async editShop({ params, request, response }) {
+        const id = params.id
+        const logo = request.file('logo')
+        const shop = await Shop.findOrFail(id)
+        const payload = await request.validate(EditShopValidator)
+        await shop.merge(payload).save()
+        if (logo) {
+            try {
+                await logo.move(Application.tmpPath('uploads/'))
+                const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
+                shop.logo = `data:image/${logo.subtype};base64, ${binary}`
+                await shop.save()
+                fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`, () => { })
+            }catch(e){
+                console.log(e)
+            }
+        }
+        return response.redirect().toRoute('DashboardController.showShop', { id })
+    }
+    public async showAddShop({ view, request }) {
+        return view.render('dashboard/create-shop', { shops: request.all().shops })
+    }
+    public async showAccount({ view, auth, request }) {
         const user = await User.findOrFail(auth.user.id)
-        return view.render('dashboard/account',{user,shops:request.all().shops})
+        return view.render('dashboard/account', { user, shops: request.all().shops })
     }
 }

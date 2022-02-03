@@ -12,6 +12,7 @@
  
 
     <h2>Dashboard</h2>
+    @unless(hideAside)
     <p>Mes commerces</p>
     <ul>
         @if(shops.length <= 3)
@@ -26,6 +27,7 @@
         </li>
         <li><a href="{{route('DashboardController.showAccount')}}">Mon compte</a></li>
     </ul>
+    @end
     <div> 
         <div>
           @!section('body')
