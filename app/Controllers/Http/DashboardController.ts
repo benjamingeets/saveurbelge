@@ -37,12 +37,18 @@ export default class DashboardController {
                 const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
                 shop.logo = `data:image/${logo.subtype};base64, ${binary}`
                 await shop.save()
-                fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`, () => { })
+                fs.unlinkSync(`${Application.tmpPath('uploads')}/${logo.clientName}`)
             }catch(e){
                 console.log(e)
             }
         }
         return response.redirect().toRoute('DashboardController.showShop', { id })
+    }
+
+    public async deleteShop({params,response}){
+        const shop = await Shop.findOrFail(params.id)
+        console.log(shop.name)
+        return response.redirect().toRoute('DashboardController.showDashboard')
     }
     public async showAddShop({ view, request }) {
         return view.render('dashboard/create-shop', { shops: request.all().shops })

@@ -11,10 +11,10 @@ export default class AdminsController {
     public async showDashboard({ view }) {
         const users = await User.all()
         const shops = await Shop.all()
-        return view.render("admin/dashboard", { infos: { users: users.length,shops:shops.length } })
+        return view.render("admin/dashboard", { infos: { users: users.length, shops: shops.length } })
     }
     public async showUsers({ view }) {
-        return view.render("admin/users", { users:await User.query().select('*').orderBy('updated_at', 'desc') })
+        return view.render("admin/users", { users: await User.query().select('*').orderBy('updated_at', 'desc') })
     }
     public async showCreateUser({ view }) {
         return view.render("admin/create-user")
@@ -39,11 +39,11 @@ export default class AdminsController {
         const id = params.id
         const { email, password, firstName, lastName, status } = request.only(['email', 'password', 'firstName', 'lastName', 'status'])
         const user = await User.findByOrFail('id', id)
-        user.merge({email,firstName,lastName})
-        if(user.status != 5){
+        user.merge({ email, firstName, lastName })
+        if (user.status != 5) {
             user.status = status
         }
-        if(password){
+        if (password) {
             user.password = password
         }
         await user.save()
@@ -51,105 +51,108 @@ export default class AdminsController {
     }
     public async showShops({ view }) {
         const shops = await Shop.all()
-        return view.render("admin/shops", {shops})
+        return view.render("admin/shops", { shops })
     }
-    public async showEditShop({view,params}){
+    public async showEditShop({ view, params }) {
         const id = params.id
-        const shop = await Shop.findByOrFail('id',id)
-        const categories = await Category.query().select('*').where('sector',shop.sector)
+        const shop = await Shop.findByOrFail('id', id)
+        const categories = await Category.query().select('*').where('sector', shop.sector)
         const sectors = await Sector.all()
-        return view.render("admin/edit-shop",{shop,categories,sectors})
+        return view.render("admin/edit-shop", { shop, categories, sectors })
     }
-    public async editShop({params,request,response}){
+    public async editShop({ params, request, response }) {
         const payload = await request.validate(CreateShopValidator)
         const logo = request.file('logo')
-        console.log(logo)
         const shop = await Shop.findOrFail(params.id)
-        if(request.input('ownerId')){
+        if (request.input('ownerId')) {
             shop.ownerId = request.input('ownerId')
         }
-        await shop.merge({...payload,status:request.input('status')}).save()
-        
-        if(logo){
-            await logo.move(Application.tmpPath('uploads'))
-            const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
-            shop.logo = `data:image/${logo.subtype};base64, ${binary}`
-            await shop.save()
-            fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`,()=>{})
+        await shop.merge({ ...payload, status: request.input('status') }).save()
+
+        if (logo) {
+            try {
+                await logo.move(Application.tmpPath('uploads'))
+                const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
+                shop.logo = `data:image/${logo.subtype};base64, ${binary}`
+                await shop.save()
+                fs.unlinkSync(`${Application.tmpPath('uploads')}/${logo.clientName}`)
+            } catch (error) {
+                console.log(error)
+            }
         }
         return response.redirect().toRoute('AdminsController.showShops')
     }
-    public async showCreateShop({view}){
+    public async showCreateShop({ view }) {
         const sectors = await Sector.all()
-        const categories = await Category.query().select('*').where('sector',sectors[0].id)
-        return view.render('admin/create-shop',{sectors,categories})
+        const categories = await Category.query().select('*').where('sector', sectors[0].id)
+        return view.render('admin/create-shop', { sectors, categories })
     }
-    public async createShop({request,auth,response}){
+    public async createShop({ request, auth, response }) {
         const logo = request.file('logo')
         const payload = await request.validate(CreateShopValidator)
-        if(request.input('ownerId')){
+        if (request.input('ownerId')) {
             payload.ownerId = request.input('ownerId')
-        }else{
+        } else {
             payload.ownerId = auth.user.id
         }
         const shop = await Shop.create(payload)
-        if(logo){
+        if (logo) {
             await logo.move(Application.tmpPath('uploads'))
             const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
             shop.logo = binary
             await shop.save()
-            fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`,()=>{})
+            fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`, () => { })
         }
         return response.redirect().toRoute('AdminsController.showShops')
     }
-    public async getCategories({params,view}){
-        const categories = await Category.query().select('*').where('sector',params.id)
-        return view.render('admin/create-shop',{categories})
+    public async getCategories({ params, view }) {
+        const categories = await Category.query().select('*').where('sector', params.id)
+        return view.render('admin/create-shop', { categories })
     }
     public async showSectorsAndCategories({ view }) {
         const categories = await Category.all()
         const sectors = await Sector.all()
-        return view.render("admin/sectors-and-categories", {categories,sectors})
+        return view.render("admin/sectors-and-categories", { categories, sectors })
     }
-    public async showEditCategory({view,params}){
+    public async showEditCategory({ view, params }) {
         const id = params.id
         const category = await Category.findOrFail(id)
-        return view.render('admin/edit-category',{category})
+        return view.render('admin/edit-category', { category })
     }
 
-    public async editCategory({params,request,response}){
+    public async editCategory({ params, request, response }) {
         const id = params.id
-        const {name} = request.only(["name"])
+        const { name } = request.only(["name"])
         const category = await Category.findOrFail(id)
         category.name = name
         await category.save()
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }
 
-    public async showEditSector({view,params}){
+    public async showEditSector({ view, params }) {
         const id = params.id
         const sector = await Sector.findOrFail(id)
-        return view.render('admin/edit-sector',{sector})
+        return view.render('admin/edit-sector', { sector })
     }
-    public async editSector({params,request,response}){
+    public async editSector({ params, request, response }) {
         const id = params.id
-        const {name} = request.only(["name"])
+        const { name } = request.only(["name"])
         const sector = await Sector.findOrFail(id)
         sector.name = name
         await sector.save()
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }
-    public async createSector({request,response}){
-        const {sector} = request.only(['sector'])
-        await Sector.create({name:sector})
+    public async createSector({ request, response }) {
+        const { sector } = request.only(['sector'])
+        await Sector.create({ name: sector })
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }
-    public async createCategory({request,response}){
-        const {category,sectorId} = request.only(["category","sectorId"])
-        await Category.create({name:category,sector:sectorId})
+    public async createCategory({ request, response }) {
+        const { category, sectorId } = request.only(["category", "sectorId"])
+        await Category.create({ name: category, sector: sectorId })
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }
-    public async deleteSector({params,response}){
+    public async deleteSector({ params, response }) {
         const id = params.id
         const sector = await Sector.findOrFail(id)
         await sector.delete()
