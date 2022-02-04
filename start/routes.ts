@@ -47,9 +47,10 @@ Route.group(() => {
   Route.get("/shop/:id/links/edit","DashboardController.showShopEditLinks")
   Route.get("/shop/:id/options/edit","DashboardController.showShopEditOptions")
   Route.post("/shop/:id/edit","DashboardController.editShop")
-  Route.get("/shop/:id/delete","DashboardController.deleteShop")
+  Route.get("/shop/:id/delete","DashboardController.showDeleteShop")
+  Route.post("/shop/:id/delete","DashboardController.deleteShop")
   Route.get("/account","DashboardController.showAccount")
-}).prefix("/dashboard").middleware("auth").middleware("doOwnShop")
+}).prefix("/dashboard").middleware("auth")
 
 Route.post("/deconnexion", 'AuthController.logout')
 

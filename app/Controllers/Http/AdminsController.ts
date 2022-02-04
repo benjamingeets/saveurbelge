@@ -99,7 +99,7 @@ export default class AdminsController {
         if (logo) {
             await logo.move(Application.tmpPath('uploads'))
             const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
-            shop.logo = binary
+            shop.logo = `data:image/${logo.subtype};base64, ${binary}`
             await shop.save()
             fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`, () => { })
         }

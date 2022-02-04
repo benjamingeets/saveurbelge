@@ -5,7 +5,7 @@ import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 export default class Shop extends BaseModel {
   public static selfAssignPrimaryKey = true
   @column({ isPrimary: true })
-  public id: number
+  public id: string
 
   @column()
   public latitude:string

@@ -8,5 +8,5 @@ window.Alpine = Alpine
 
 Alpine.start()
 
-up.link.config.followSelectors.push('a[href]')
-up.form.config.submitSelectors.push(['form'])
+//up.link.config.followSelectors.push('a[href]')
+//up.form.config.submitSelectors.push(['form'])

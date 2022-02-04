@@ -10,20 +10,24 @@ import fs from 'fs'
 
 export default class DashboardController {
     public async showDashboard({ view, request }) {
-        return view.render('dashboard/index', { shops: request.all().shops })
+        const shops = await Shop.all()
+        return view.render('dashboard/index', { shops: shops })
     }
     public async showShop({ view, params, request }) {
+        const shops = await Shop.all()
+
         const id = params.id
         const selectedShop = await Shop.findOrFail(id)
         const categories = await Category.query().select('name').whereIn('id', selectedShop.categories)
         const sector = await Sector.findOrFail(selectedShop.sector)
-        return view.render('dashboard/shop', { selectedShop, shops: request.all().shops, categories, sector })
+        return view.render('dashboard/shop', { selectedShop, shops, categories, sector })
     }
     public async showShopEditInformations({ view, params, request }) {
         const shop = await Shop.findOrFail(params.id)
         const categories = await Category.all()
         const sectors = await Sector.all()
-        return view.render('dashboard/edit-informations', { shop, shops: request.all().shops, categories, sectors })
+        const shops = await Shop.all()
+        return view.render('dashboard/edit-informations', { shop, shops, categories, sectors })
     }
     public async editShop({ params, request, response }) {
         const id = params.id
@@ -44,17 +48,34 @@ export default class DashboardController {
         }
         return response.redirect().toRoute('DashboardController.showShop', { id })
     }
-
+    public async showDeleteShop({params,response,view}){
+        return view.renderRaw(`
+            <h2>Attention</h2>
+            <p>Êtes-vous certain de vouloir supprimer votre commerce?<p>
+            <form action="{{route('DashboardController.deleteShop',{id:id})}}" method="post">
+            {{ csrfField() }}
+            <input type="submit" value="Supprimer">
+            </form>
+        `, {id:params.id})
+    }
     public async deleteShop({params,response}){
-        const shop = await Shop.findOrFail(params.id)
-        console.log(shop.name)
-        return response.redirect().toRoute('DashboardController.showDashboard')
+        const id = params.id
+        const shop = await Shop.firstOrFail(id)
+        console.log(shop)
+        try{
+            await shop.delete()
+        }catch(e){
+            console.log(e)
+        }
+        return "finito"
     }
     public async showAddShop({ view, request }) {
-        return view.render('dashboard/create-shop', { shops: request.all().shops })
+        const shops = await Shop.all()
+        return view.render('dashboard/create-shop', { shops })
     }
     public async showAccount({ view, auth, request }) {
         const user = await User.findOrFail(auth.user.id)
-        return view.render('dashboard/account', { user, shops: request.all().shops })
+        const shops = await Shop.all()
+        return view.render('dashboard/account', { user, shops })
     }
 }
