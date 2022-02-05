@@ -1,4 +1,6 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
-  "assets/app.js": "http://localhost:8080/assets/app.js"
+  "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/fonts/Comfortaa-Medium.ttf": "http://localhost:8080/assets/fonts/Comfortaa-Medium.e26e46e9.ttf",
+  "assets/vendors-node_modules_leaflet_dist_leaflet-src_js.js": "http://localhost:8080/assets/vendors-node_modules_leaflet_dist_leaflet-src_js.js"
 }
