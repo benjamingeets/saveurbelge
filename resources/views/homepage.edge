@@ -2,22 +2,16 @@
 @set('title', 'Home page')
 
 @section('body')
-      @if(auth.isLoggedIn)
-        <a href="/dashboard">backoffice</a>
-        {{auth.user.firstName}}
-        {{auth.user.lastName}}
-        {{auth.user.email}}
-        @if(auth.user.status === 1)
-          Email validé
-        @endif
-        <form up-submit="false" action="{{route('AuthController.logout')}}" method="post">
-          {{ csrfField() }}
-          <input  type="submit" value="Déconnexion">
-        </form>
-      @endif
-      @if(!auth.isLoggedIn)
-          Pas connecté.
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+<div class="absolute z-10 bg-gray-100 p-3 right-3 top-3">
+  @if(auth.isLoggedIn)
+  mon compte
+  @else
+  se conneceter
+  @endif
+</div>
+<div class="w-screen h-screen z-0" id="map"></div>
 
-          <a href="{{route('AuthController.showLoginForm')}}">Connexion</a>
-      @endif
 @end
