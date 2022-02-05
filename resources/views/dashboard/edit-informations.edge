@@ -16,11 +16,7 @@
     <input type="text" name="addressPostcode" value="{{shop.addressPostcode}}">
     <input type="text" name="addressCity" value="{{shop.addressCity}}">
     <input type="text" name="phone" value="{{shop.phone}}">
-    <select name="sector" id="sector-select">
-        @each(sector in sectors)
-                <option value="{{sector.id}}">{{sector.name}}</option>
-        @end
-    </select>
+
 
     </div>
     <input type="submit" value="envoyer">

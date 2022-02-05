@@ -8,16 +8,21 @@
   @entryPointStyles('app')
   @entryPointScripts('app')
 </head>
-<body>
-  <a href="/">Homepage</a>
-  <nav>
-      <a href="{{route('AdminsController.showDashboard')}}">Index</a> //
-      <a href="{{route('AdminsController.showUsers')}}" >Utilisateurs</a> //
-      <a href="{{route('AdminsController.showShops')}}">Shops</a> //
-      <a href="{{route('AdminsController.showSectorsAndCategories')}}">Catégories et secteurs</a>
-  </nav>
-  <div>
-    @!section('body')
-  </div>
+<body class="flex">
+  <aside class="fixed h-screen flex flex-col justify-center px-4 w-60">
+      <nav class="flex flex-col">
+        <a before="📊" class="before:content-[attr(before)] before:mr-2" href="{{route('AdminsController.showDashboard')}}">Stats</a> 
+        <a before="👨🏻‍🌾" class="before:content-[attr(before)] before:mr-2" href="{{route('AdminsController.showUsers')}}" >Utilisateurs</a> 
+        <a before="🏬" class="before:content-[attr(before)] before:mr-2" href="{{route('AdminsController.showShops')}}">Shops</a> 
+        <a before="🤖" class="before:content-[attr(before)] before:mr-2" href="{{route('AdminsController.showSectorsAndCategories')}}">Secteurs</a>
+        <a before="🏠" class="before:content-[attr(before)] before:mr-2" href="{{route('DashboardController.showDashboard')}}">Mon dashboard</a>
+        <a before="🔎" class="before:content-[attr(before)] before:mr-2" href="{{route('SearchesController.showSearchForm')}}">Homepage</a>
+      </nav>
+  </aside>
+
+    <main class="flex justify-center items-center w-full min-h-screen py-20">
+      @!section('body')
+    </main>
+
 </body>
 </html>

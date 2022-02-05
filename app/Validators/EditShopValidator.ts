@@ -38,7 +38,6 @@ export default class EditShopValidator {
     facebookUsername:schema.string.nullableAndOptional(),
     websiteUrl:schema.string.nullableAndOptional({},[rules.url()]),
     categories:schema.array.nullableAndOptional().members(schema.string()),
-    sector:schema.string.optional()
   })
 
 

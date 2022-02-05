@@ -8,9 +8,6 @@
   @entryPointScripts('app')
 </head>
 <body>
-  @if(auth.isLoggedIn && auth.user.status == 5)
-    <a href="{{route('AdminsController.showDashboard')}}">Admin</a>
-  @endif
   @!section('body')
 </body>
 </html>

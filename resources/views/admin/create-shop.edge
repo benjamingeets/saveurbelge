@@ -2,73 +2,72 @@
 @set('title', 'Ajouter un shop')
 
 @section('body')
-
-{{inspect(flashMessages)}}
-
-<form action="{{route('AdminsController.createShop')}}" method="post">
-    {{ csrfField() }}
-    @form.group({ name: 'name' })
-        @!form.label({ title: 'Nom' })
-        @!form.input({ type: 'text' })
-    @end
-    <textarea name="description" id=""></textarea>
-    @if(flashMessages.get('errors.description'))
-        {{flashMessages.get('errors.description')}}
-    @endif
-    <input type="file" name="logo" id="" accept="image/png, image/jpeg, image/jpg, image/webp">
-    @form.group({ name: 'ownerId' })
-        @!form.label({ title: 'ID du propriétaire' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'addressNumber' })
-        @!form.label({ title: 'Numéro' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'addressStreet' })
-        @!form.label({ title: 'Rue' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'addressPostcode' })
-        @!form.label({ title: 'Code postal' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'addressCity' })
-        @!form.label({ title: 'Ville' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'phone' })
-        @!form.label({ title: 'Numéro de téléphone' })
-        @!form.input({ type: 'text' })
-    @end
-    <label for=""><input type="checkbox" name="optionIsProductor" value="true" id=""> Producteur </label>
-    <label for=""><input type="checkbox" name="optionIsBio" value="true" id=""> Bio </label>
-    <label for=""><input type="checkbox" name="optionAcceptLocalCurrency" value="true" id=""> Monnaie </label>
-    @form.group({ name: 'instagramUsername' })
-        @!form.label({ title: 'Nom d\'utilisateur instagram' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'facebookUsername' })
-        @!form.label({ title: 'Nom d\'utilisateur facebook' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'websiteUrl' })
-        @!form.label({ title: 'Site web' })
-        @!form.input({ type: 'text' })
-    @end
-    <select name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
-        @each(sector in sectors)
-                <option value="{{sector.id}}">{{sector.name}}</option>
+<div class="flex flex-col">
+    <form class="flex flex-col" action="{{route('AdminsController.createShop')}}" method="post">
+        {{ csrfField() }}
+        @form.group({ name: 'name' })
+            @!form.label({ title: 'Nom' })
+            @!form.input({ type: 'text' })
         @end
-    </select>
-    <div id="categories">
-        <p>Catégories:</p>
-        @each(category in categories)
-
-
-    <label for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
+        <textarea name="description" id=""></textarea>
+        @if(flashMessages.get('errors.description'))
+            {{flashMessages.get('errors.description')}}
+        @endif
+        <input type="file" name="logo" id="" accept="image/png, image/jpeg, image/jpg, image/webp">
+        @form.group({ name: 'ownerId' })
+            @!form.label({ title: 'ID du propriétaire' })
+            @!form.input({ type: 'text' })
         @end
-    </div>
-    <input type="submit" value="envoyer">
-</form>
-<a href="{{route('AdminsController.showShops')}}">Annuler</a>
+        @form.group({ name: 'addressNumber' })
+            @!form.label({ title: 'Numéro' })
+            @!form.input({ type: 'text' })
+        @end
+        @form.group({ name: 'addressStreet' })
+            @!form.label({ title: 'Rue' })
+            @!form.input({ type: 'text' })
+        @end
+        @form.group({ name: 'addressPostcode' })
+            @!form.label({ title: 'Code postal' })
+            @!form.input({ type: 'text' })
+        @end
+        @form.group({ name: 'addressCity' })
+            @!form.label({ title: 'Ville' })
+            @!form.input({ type: 'text' })
+        @end
+        @form.group({ name: 'phone' })
+            @!form.label({ title: 'Numéro de téléphone' })
+            @!form.input({ type: 'text' })
+        @end
+        <label for=""><input type="checkbox" name="optionIsProductor" value="true" id=""> Producteur </label>
+        <label for=""><input type="checkbox" name="optionIsBio" value="true" id=""> Bio </label>
+        <label for=""><input type="checkbox" name="optionAcceptLocalCurrency" value="true" id=""> Monnaie </label>
+        @form.group({ name: 'instagramUsername' })
+            @!form.label({ title: 'Nom d\'utilisateur instagram' })
+            @!form.input({ type: 'text' })
+        @end
+        @form.group({ name: 'facebookUsername' })
+            @!form.label({ title: 'Nom d\'utilisateur facebook' })
+            @!form.input({ type: 'text' })
+        @end
+        @form.group({ name: 'websiteUrl' })
+            @!form.label({ title: 'Site web' })
+            @!form.input({ type: 'text' })
+        @end
+        <select name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
+            @each(sector in sectors)
+                    <option value="{{sector.id}}">{{sector.name}}</option>
+            @end
+        </select>
+        <div id="categories">
+            <p>Catégories:</p>
+            @each(category in categories)
+    
+    
+        <label for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
+            @end
+        </div>
+        <input type="submit" value="envoyer">
+    </form>
+    <a href="{{route('AdminsController.showShops')}}">Annuler</a>
+</div>
 @end

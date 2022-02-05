@@ -2,32 +2,35 @@
 @set('title', 'Secteurs et catégories')
 
 @section('body')
-@each(sector in sectors)
-    <h2 style="display: flex;">{{sector.name}} // {{sector.id}}
-        <a href="{{route('AdminsController.showEditSector',{id:sector.id})}}">Modifier</a> 
-       <!-- <form action="{{route('AdminsController.deleteSector',{id:sector.id})}}" method="post">
+<div class="max-w-64ch w-full">
+    @each(sector in sectors)
+    <div class="bg-gray-200 my-2 px-4 py-3 rounded-md">
+        <h2 class="text-2xl"><a href="{{route('AdminsController.showEditSector',{id:sector.id})}}">{{sector.name}}
+            </a> 
+        <!-- <form action="{{route('AdminsController.deleteSector',{id:sector.id})}}" method="post">
+                {{ csrfField() }}
+                <input type="submit" value="Supprimer">
+            </form>-->
+        </h2>
+        <ul>
+            @each(c in categories)
+            @if(c.sector == sector.id)
+            <li><a href="{{route('AdminsController.showEditCategory',{id:c.id})}}" up-target="[body]"> {{c.name}} </a></li>
+            @endif
+        @endeach
+        </ul>
+        <form action="{{route('AdminsController.createCategory')}}" method="post">
             {{ csrfField() }}
-            <input type="submit" value="Supprimer">
-        </form>-->
-    </h2>
-    <ul>
-        @each(c in categories)
-        @if(c.sector == sector.id)
-           <li> {{c.name}} <a href="{{route('AdminsController.showEditCategory',{id:c.id})}}" up-target="[body]">Modifier</a></li>
-        @endif
+            <input type="text" name="category" id="">
+            <input type="hidden" name="sectorId" value="{{sector.id}}">
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
     @endeach
-    </ul>
-    <form action="{{route('AdminsController.createCategory')}}" method="post">
+    <form action="{{route('AdminsController.createSector')}}" method="post">
         {{ csrfField() }}
-        <input type="text" name="category" id="">
-        <input type="hidden" name="sectorId" value="{{sector.id}}">
-        <input type="submit" value="Créer une catégorie dans {{sector.name}}">
+        <input type="text" name="sector" id="">
+        <input type="submit" value="Créer un secteur">
     </form>
-@endeach
-<hr>
-<form action="{{route('AdminsController.createSector')}}" method="post">
-    {{ csrfField() }}
-    <input type="text" name="sector" id="">
-    <input type="submit" value="Créer un secteur">
-</form>
+</div>
 @end

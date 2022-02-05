@@ -52,7 +52,7 @@ Route.group(() => {
   Route.get("/account","DashboardController.showAccount")
 }).prefix("/dashboard").middleware("auth")
 
-Route.post("/deconnexion", 'AuthController.logout')
+Route.get("/deconnexion", 'AuthController.logout')
 
 
 Route.group(() => {

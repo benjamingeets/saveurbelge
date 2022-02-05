@@ -42,13 +42,13 @@ export default class DashboardController {
                 shop.logo = `data:image/${logo.subtype};base64, ${binary}`
                 await shop.save()
                 fs.unlinkSync(`${Application.tmpPath('uploads')}/${logo.clientName}`)
-            }catch(e){
+            } catch (e) {
                 console.log(e)
             }
         }
         return response.redirect().toRoute('DashboardController.showShop', { id })
     }
-    public async showDeleteShop({params,response,view}){
+    public async showDeleteShop({ params, response, view }) {
         return view.renderRaw(`
             <h2>Attention</h2>
             <p>Êtes-vous certain de vouloir supprimer votre commerce?<p>
@@ -56,15 +56,15 @@ export default class DashboardController {
             {{ csrfField() }}
             <input type="submit" value="Supprimer">
             </form>
-        `, {id:params.id})
+        `, { id: params.id })
     }
-    public async deleteShop({params,response}){
+    public async deleteShop({ params, response }) {
         const id = params.id
         const shop = await Shop.firstOrFail(id)
         console.log(shop)
-        try{
+        try {
             await shop.delete()
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
         return "finito"

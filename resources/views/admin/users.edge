@@ -2,9 +2,12 @@
 @set('title', 'Users')
 
 @section('body')
-    <ul>
+<div class="flex flex-col items-start max-w-64ch">
+    <ul class="flex flex-col space-y-4 mb-4">
         @each(user in users)
-            <li>{{user.firstName}} {{user.lastName}} [{{user.email}} / 
+            <li>
+                <a class="hover:bg-gray-100 transition p-3 rounded-md" href="{{route('AdminsController.showEditUser',{id:user.id})}}">
+                {{user.firstName}} {{user.lastName}} [{{user.email}} / 
                 @if(user.status == 1)
                     ☑️
                 @elseif(user.status == 5)
@@ -12,8 +15,9 @@
                 @else
                     Non validé
                 @endif
-                ]  - <a href="{{route('AdminsController.showEditUser',{id:user.id})}}">Modifier</a>  </li>
+                ] </a>  </li>
         @end
     </ul>
-    <a href="{{route('AdminsController.showCreateUser')}}">Ajouter un utilisateur</a>
-@end
+    <a class="text-primary hover:text-primary-dark transition" href="{{route('AdminsController.showCreateUser')}}">Ajouter un utilisateur</a>
+</div>
+    @end
