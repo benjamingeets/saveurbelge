@@ -9,12 +9,12 @@ import Application from '@ioc:Adonis/Core/Application'
 import fs from 'fs'
 
 export default class DashboardController {
-    public async showDashboard({ view, request }) {
-        const shops = await Shop.all()
+    public async showDashboard({ view, request,auth }) {
+        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/index', { shops: shops })
     }
-    public async showShop({ view, params, request }) {
-        const shops = await Shop.all()
+    public async showShop({ view, params, request,auth }) {
+        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
 
         const id = params.id
         const selectedShop = await Shop.findOrFail(id)
@@ -22,11 +22,11 @@ export default class DashboardController {
         const sector = await Sector.findOrFail(selectedShop.sector)
         return view.render('dashboard/shop', { selectedShop, shops, categories, sector })
     }
-    public async showShopEditInformations({ view, params, request }) {
+    public async showShopEditInformations({ view, params, request,auth }) {
         const shop = await Shop.findOrFail(params.id)
         const categories = await Category.all()
         const sectors = await Sector.all()
-        const shops = await Shop.all()
+        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/edit-informations', { shop, shops, categories, sectors })
     }
     public async editShop({ params, request, response }) {
@@ -69,13 +69,13 @@ export default class DashboardController {
         }
         return "finito"
     }
-    public async showAddShop({ view, request }) {
-        const shops = await Shop.all()
+    public async showAddShop({ view, request,auth }) {
+        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/create-shop', { shops })
     }
     public async showAccount({ view, auth, request }) {
         const user = await User.findOrFail(auth.user.id)
-        const shops = await Shop.all()
+        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/account', { user, shops })
     }
 }

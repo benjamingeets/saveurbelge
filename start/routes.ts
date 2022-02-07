@@ -27,6 +27,7 @@ Route.get("/commerce/:slug", ({ request }) => {
 
 Route.get("/account-validation/:id", "AuthController.validateUser")
 Route.get("/reinitialisation-mot-de-passe/:id", "AuthController.showResetPassword")
+Route.get("/shops","SearchesController.getShops")
 
 Route.post("/reinitialisation-mot-de-passe/:id", "AuthController.resetPassword")
 

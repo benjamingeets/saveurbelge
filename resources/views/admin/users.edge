@@ -7,17 +7,11 @@
         @each(user in users)
             <li>
                 <a class="hover:bg-gray-100 transition p-3 rounded-md" href="{{route('AdminsController.showEditUser',{id:user.id})}}">
-                {{user.firstName}} {{user.lastName}} [{{user.email}} / 
-                @if(user.status == 1)
-                    ☑️
-                @elseif(user.status == 5)
-                    Admin
-                @else
-                    Non validé
-                @endif
-                ] </a>  </li>
+                {{user.firstName}} {{user.lastName}}
+                </a>  
+            </li>
         @end
     </ul>
-    <a class="text-primary hover:text-primary-dark transition" href="{{route('AdminsController.showCreateUser')}}">Ajouter un utilisateur</a>
+    <a class="text-primary hover:text-primary-dark m-3 transition" href="{{route('AdminsController.showCreateUser')}}">Ajouter un utilisateur</a>
 </div>
     @end

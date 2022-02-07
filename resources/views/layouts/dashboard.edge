@@ -21,7 +21,7 @@
         <li>Mes commerces:
             <ul>
                 @each(shop in shops)
-                    <li><a href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a></li>
+                    <li class="ml-2"><a href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a></li>
                 @endeach
             </ul>
         </li>

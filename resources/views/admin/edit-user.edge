@@ -5,6 +5,7 @@
 <div>
     <form class="flex flex-col" action="{{route('AdminsController.editUser',{id:user.id})}}" method="post">
         {{ csrfField() }}
+        {{user.id}}
         <input type="text" name="email" value="{{user.email}}" id="">
         <input type="text" name="firstName" value="{{user.firstName}}" id="">
         <input type="text" name="lastName" value="{{user.lastName}}" id="">

@@ -8,6 +8,25 @@
   @entryPointScripts('app')
 </head>
 <body>
+  <div class="absolute z-10 bg-gray-400 right-4 top-4 border-2" x-data="{ open: false }">
+    @if(auth.isLoggedIn)
+      <div class="p-3">mon compte</a> <span x-on:click="open = ! open">V</div>
+      <div x-show="open" class="absolute w-40 mt-3 right-0 bg-gray-100 p-2">
+          <nav>
+            <ul>
+              <li><a href="{{route('DashboardController.showDashboard')}}">Mes commerces</a></li>
+              <li><a href="{{route('AuthController.logout')}}">Me déconnecter</a></li>
+              @if(auth.user.status == 5)
+              <li><a href="{{route('AdminsController.showDashboard')}}">Panel admin</a></li>
+              @endif
+            </ul>
+          </nav>
+      </div>
+    @else
+      <a href="{{route('AuthController.showLoginForm')}}">se connecter</a>
+    @endif
+  </div>
+  
   @!section('body')
 </body>
 </html>

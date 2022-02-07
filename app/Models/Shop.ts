@@ -2,6 +2,8 @@ import { DateTime } from 'luxon'
 import { column, beforeSave, BaseModel, beforeCreate, afterFind } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuidv4 } from 'uuid'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
+import axios from 'axios'
+import utf8 from 'utf8'
 export default class Shop extends BaseModel {
   public static selfAssignPrimaryKey = true
   @column({ isPrimary: true })
@@ -92,8 +94,11 @@ export default class Shop extends BaseModel {
       shop.$dirty.addressStreet ||
       shop.$dirty.addressPostcode ||
       shop.$dirty.addressCity) {
-      shop.longitude = "att"
-      shop.latitude = "att"
+      const {data} = await axios.get(utf8.encode(`https://nominatim.openstreetmap.org/search?street=${shop.$dirty.addressNumber ? shop.$dirty.addressNumber : shop.addressNumber}%20${shop.$dirty.addressStreet ? shop.$dirty.addressStreet : shop.addressStreet}&city=${shop.$dirty.addressCity ? shop.$dirty.addressCity : shop.addressCity}&country=belgique&format=json`))
+      if(data[0]){
+        shop.longitude = data[0].lon
+        shop.latitude = data[0].lat
+      }
     }
     if(shop.$dirty.categories){
       shop.categories = JSON.stringify(shop.$dirty.categories)
