@@ -1,0 +1,4 @@
+
+<a href="{{href}}" class="flex items-center gap-4 px-5 py-3 border-2 border-{{color ? color : 'primary'}} text-{{color ? color : 'primary'}} {{outline ? '' : 'bg-' + color}} rounded-md hover:text-white hover:bg-{{color?color:'primary'}} transition">
+    {{{ await $slots.main() }}}
+</a>

@@ -8,11 +8,23 @@ module.exports = {
     extend: {
       colors:{
         'primary':{
-          'DEFAULT':'#7EA172',
-          'dark':'#A8D09A'
+          'light':'#E1F9D9',
+          'DEFAULT':'#A8D09A',
+          'dark':'#7EA172'
         },
         'grey':{
-          'DEFAULT':'#cccccc'
+          'DEFAULT':'#cccccc',
+          'light':'#F5F5F5',
+          'dark':'#817D7D'
+        },
+        'red':{
+          'DEFAULT':'#FF7373'
+        },
+        'black':{
+          'DEFAULT':'#252323'
+        },
+        'white':{
+          'DEFAULT':'#FDFDFD'
         }
       },
       maxWidth:{
