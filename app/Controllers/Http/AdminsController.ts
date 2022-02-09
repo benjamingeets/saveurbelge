@@ -3,8 +3,6 @@ import RegisterValidator from "App/Validators/RegisterValidator"
 import Sector from "App/Models/Sector"
 import Category from "App/Models/Category"
 import Shop from "App/Models/Shop"
-import Application from '@ioc:Adonis/Core/Application'
-import fs from 'fs'
 import CreateShopValidator from "App/Validators/CreateShopValidator"
 
 export default class AdminsController {
@@ -70,15 +68,9 @@ export default class AdminsController {
         await shop.merge({ ...payload, status: request.input('status') }).save()
 
         if (logo) {
-            try {
-                await logo.move(Application.tmpPath('uploads'))
-                const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
-                shop.logo = `data:image/${logo.subtype};base64, ${binary}`
-                await shop.save()
-                fs.unlinkSync(`${Application.tmpPath('uploads')}/${logo.clientName}`)
-            } catch (error) {
-                console.log(error)
-            }
+            await logo.moveToDisk('./')
+            shop.logo = logo.fileName
+            shop.save()
         }
         return response.redirect().toRoute('AdminsController.showShops')
     }
@@ -97,11 +89,9 @@ export default class AdminsController {
         }
         const shop = await Shop.create(payload)
         if (logo) {
-            await logo.move(Application.tmpPath('uploads'))
-            const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
-            shop.logo = `data:image/${logo.subtype};base64, ${binary}`
+            await logo.moveToDisk('./')
+            shop.logo = logo.fileName
             await shop.save()
-            fs.unlink(`${Application.tmpPath('uploads')}/${logo.clientName}`, () => { })
         }
         return response.redirect().toRoute('AdminsController.showShops')
     }

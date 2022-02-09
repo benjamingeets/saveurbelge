@@ -9,7 +9,7 @@ export default class Shops extends BaseSchema {
       table.string('latitude').notNullable()
       table.string('longitude').notNullable()
       table.string('owner_id').notNullable()
-      table.binary('logo')
+      table.string('logo')
       table.string('name').notNullable().unique()
       table.string('slug').notNullable().unique()
       table.string('description').notNullable()

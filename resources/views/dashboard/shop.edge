@@ -6,12 +6,12 @@
         <h2>Informations</h2>
         <a href="{{route('DashboardController.showShopEditInformations',{id:selectedShop.id})}}">Edit</a>
         @if(selectedShop.logo)
-        <img style="max-width: 200px;" src="{{selectedShop.logo}}" alt="">
+        <img style="max-width: 200px;" src="/uploads/{{selectedShop.logo}}" alt="">
         @else
         Pas de logo
         @endif
         <p>{{selectedShop.name}} ({{selectedShop.slug}})</p>
-        <p>Secteur: {{sector.name}}</p>
+        <p>Secteur: {{selectedShop.sector}}</p>
         <p>Adresse: {{selectedShop.addressNumber}}, {{selectedShop.addressStreet}}</p>
         <p>{{selectedShop.addressPostcode}} {{selectedShop.addressCity}}</p>
         <p>Description: {{selectedShop.description}}</p>

@@ -5,24 +5,22 @@ import Sector from "App/Models/Sector"
 import Shop from "App/Models/Shop"
 import User from "App/Models/User"
 import EditShopValidator from "App/Validators/EditShopValidator"
-import Application from '@ioc:Adonis/Core/Application'
-import fs from 'fs'
 
 export default class DashboardController {
-    public async showDashboard({ view, request,auth }) {
+    public async showDashboard({ view,auth }) {
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/index', { shops: shops })
     }
-    public async showShop({ view, params, request,auth }) {
+    public async showShop({ view, params,auth }) {
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
 
         const id = params.id
-        const selectedShop = await Shop.findOrFail(id)
-        const categories = await Category.query().select('name').whereIn('id', selectedShop.categories)
-        const sector = await Sector.findOrFail(selectedShop.sector)
-        return view.render('dashboard/shop', { selectedShop, shops, categories, sector })
+        const selectedShop = await Shop.query().where('shops.id',id).join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.*','sectors.name as sector','categories')
+        const categories = await Category.query().select('name').whereIn('id', selectedShop[0].categories)
+        console.log(selectedShop[0].categories)
+        return view.render('dashboard/shop', { selectedShop:selectedShop[0], shops, categories })
     }
-    public async showShopEditInformations({ view, params, request,auth }) {
+    public async showShopEditInformations({ view, params,auth }) {
         const shop = await Shop.findOrFail(params.id)
         const categories = await Category.all()
         const sectors = await Sector.all()
@@ -36,19 +34,13 @@ export default class DashboardController {
         const payload = await request.validate(EditShopValidator)
         await shop.merge(payload).save()
         if (logo) {
-            try {
-                await logo.move(Application.tmpPath('uploads/'))
-                const binary = fs.readFileSync(`${Application.tmpPath('uploads')}/${logo.clientName}`, 'base64')
-                shop.logo = `data:image/${logo.subtype};base64, ${binary}`
-                await shop.save()
-                fs.unlinkSync(`${Application.tmpPath('uploads')}/${logo.clientName}`)
-            } catch (e) {
-                console.log(e)
-            }
+            await logo.moveToDisk('./')
+            shop.logo = logo.fileName
+            await shop.save()
         }
         return response.redirect().toRoute('DashboardController.showShop', { id })
     }
-    public async showDeleteShop({ params, response, view }) {
+    public async showDeleteShop({ params, view }) {
         return view.renderRaw(`
             <h2>Attention</h2>
             <p>Êtes-vous certain de vouloir supprimer votre commerce?<p>
@@ -58,10 +50,9 @@ export default class DashboardController {
             </form>
         `, { id: params.id })
     }
-    public async deleteShop({ params, response }) {
+    public async deleteShop({ params }) {
         const id = params.id
         const shop = await Shop.firstOrFail(id)
-        console.log(shop)
         try {
             await shop.delete()
         } catch (e) {
@@ -69,11 +60,11 @@ export default class DashboardController {
         }
         return "finito"
     }
-    public async showAddShop({ view, request,auth }) {
+    public async showAddShop({ view,auth }) {
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/create-shop', { shops })
     }
-    public async showAccount({ view, auth, request }) {
+    public async showAccount({ view, auth }) {
         const user = await User.findOrFail(auth.user.id)
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         return view.render('dashboard/account', { user, shops })
