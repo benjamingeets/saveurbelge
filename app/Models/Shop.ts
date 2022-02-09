@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { column, beforeSave, BaseModel, beforeCreate, afterFind } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, beforeCreate, afterFetch, afterFind } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuidv4 } from 'uuid'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 import axios from 'axios'
@@ -104,8 +104,14 @@ export default class Shop extends BaseModel {
       shop.categories = JSON.stringify(shop.$dirty.categories)
     }
   }
+  @afterFetch()
+  public static async parseFetch(shops:Shop[]){
+    shops.forEach(async s=>{
+      s.categories= await JSON.parse(s.categories)
+    })
+  }
   @afterFind()
-  public static dsqdsq(shop:Shop){
-    shop.categories = JSON.parse(shop.categories)
+  public static async parseFind(shop:Shop){
+    shop.categories = await JSON.parse(shop.categories)
   }
 }
