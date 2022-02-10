@@ -4,48 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon compte | {{title}}</title>
+  <title>{{title}} | Dashboard</title>
   <link rel="stylesheet" href="https://unpkg.com/unpoly@2.5.0/unpoly.min.css">
   @entryPointStyles('app')
   @entryPointScripts('app')
 </head>
 
 <body class="h-screen overflow-y-hidden">
-
   @!navbar()
   <div class="flex h-full">
-    <aside class="w-full h-full max-w-xs text-sm px-7 bg-white ">
-      @unless(hideAside)
-      <ul class="mt-7 space-y-4">
-        @if(shops.length <= 3) 
-        <li>
-          <a href="{{route('DashboardController.showAddShop')}}" class="flex items-center gap-2 p-4 text-white rounded-md hover:text-white hover:bg-primary bg-primary-dark transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current" width="20"
-            height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <circle cx="12" cy="12" r="9" />
-            <line x1="9" y1="12" x2="15" y2="12" />
-            <line x1="12" y1="9" x2="12" y2="15" />
-          </svg>
-          Ajouter commerce
-        </a>
-          </li>
-          @endif
-              @each(shop in shops)
-                @if(selectedShop && shop.id == selectedShop.id)
-                <li><a class="border-l-primary block border-l-4 p-3 rounded-r-md bg-primary-light text-black" href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a></li>
-                @else
-                <li><a class="block focus:bg-primary-light rounded-r-md transition text-grey-dark border-l-4 border-l-white hover:border-l-primary p-3 hover:text-black" href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a></li>
-                @endif
-              @endeach
-      </ul>
-      @end
-    </aside>
-    <div class="bg-grey-light w-full">
-      @!section('body')
+    @!component('components/dashboard/sidebar',{
+      selectedShop,shops
+    })
+    @!section('body')
 
-    </div>
+
   </div>
 
 </body>

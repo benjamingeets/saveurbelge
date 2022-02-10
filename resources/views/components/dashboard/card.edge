@@ -1,0 +1,7 @@
+<div class="bg-white p-5 rounded-md xl:max-w-md w-full relative">
+    <h2 class="text-2xl">{{title}}</h2>
+    @if(editHref)
+    <a  class="absolute right-5 top-5" href="{{editHref}}">Edit</a>
+    @endif
+    {{{ await $slots.main() }}}
+</div>

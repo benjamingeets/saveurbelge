@@ -101,6 +101,6 @@ export default class AuthController {
         )
         new ForgotPassword(user, `${`http://localhost:3333`}${url}`).sendLater()
 
-        return view.render("message",{content:"Votre demande a bien été reçue."})
+        return "Votre demande a bien été reçue."
     }
 }
