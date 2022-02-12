@@ -1,0 +1,10 @@
+@set('oldValue', flashMessages.get($props.name) || $props.value || '')
+@set('type',$props.type || 'text')
+@set('error', flashMessages.get(`errors.${$props.name}`) || '')
+<label for="{{$props.name}}" {{$props.serialize({ class: classes })}}>
+    {{$props.text}}
+    <input type="{{type}}" value="{{oldValue ? oldValue : ''}}" name="{{$props.name}}" id="{{$props.name}}" {{$props.serializeOnly('accept')}}>
+    @if(error)
+        <span>{{error}}</span>
+    @endif
+</label>

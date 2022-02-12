@@ -2,77 +2,28 @@
 @set('title', 'Modifier un shop')
 
 @section('body')
+{{ inspect(flashMessages.all()) }}
 <div class="bg-gray-50 p-4 rounded-md max-w-64ch w-full">
-    <form  action="{{route('AdminsController.editShop',{id:shop.id})}}" method="post">
-        {{ csrfField() }}
-        <label for="">
-            <span>Nom</span>
-            <input type="text" name="name" value="{{shop.name}}" id="">
-        </label>
-        <label for="description">
-            <span>Description</span>
-        <textarea name="description" id="description"> {{shop.description}} </textarea>
-        </label>
-        @if(flashMessages.get('errors.description'))
-            {{flashMessages.get('errors.description')}}
-        @endif
-        @if(shop.logo)
-        <img style="width: 300px;" src="{{shop.logo}}"/>
-        @endif
-        <input type="file" name="logo" id="" accept="image/png, image/jpeg, image/jpg, image/webp">
-        <label for="">
-            <span>Propriétaire</span>
-            <input type="text" name="ownerId" value="{{shop.ownerId}}" id="">
-        </label>
-        <label for="">
-            <span>Numéro</span>
-            <input type="text" name="addressNumber" value="{{shop.addressNumber}}" id="">
-        </label>
-        <label for="">
-            <span>Rue</span>
-            <input type="text" name="addressStreet" value="{{shop.addressStreet}}" id="">
-        </label>
-        <label for="">
-            <span>Code postal</span>
-            <input type="text" name="addressPostcode" value="{{shop.addressPostcode}}" id="">
-        </label>
-        <label for="">
-            <span>Ville</span>
-            <input type="text" name="addressCity" value="{{shop.addressCity}}" id="">
-        </label>
-        <label for="">
-            <span>Téléphone</span>
-            <input type="text" name="phone" value="{{shop.phone ? shop.phone : ''}}" id="">
-        </label>
-        <label for="optionIsProductor"><input type="checkbox" name="optionIsProductor" value="true" id="optionIsProductor"  
-            @if(shop.optionIsProductor)
-                checked
-            @endif
-            > Producteur </label>
-            <label for="optionIsBio"><input type="checkbox" name="optionIsBio" value="true" id="optionIsBio"  
-                @if(shop.optionIsBio)
-                    checked
-                @endif
-                > Bio </label>
-                <label for="optionAcceptLocalCurrency"><input type="checkbox" name="optionAcceptLocalCurrency" value="true" id="optionAcceptLocalCurrency"  
-                    @if(shop.optionAcceptLocalCurrency)
-                        checked
-                    @endif
-                    > Monnaie locale </label>
-        <label for="">
-            <span>Instagram</span>
-            <input type="text" name="instagramUsername" value="{{shop.instagramUsername ? shop.instagramUsername : ''}}" id="">
-        </label>
-        <label for="">
-            <span>Facebook</span>
-            <input type="text" name="facebookUsername" value="{{shop.facebookUsername ? shop.facebookUsername : ''}}" id="">
-        </label>
-        <label for="">
-            <span>Website</span>
-            <input type="text" name="websiteUrl" value="{{shop.websiteUrl ? shop.websiteUrl : ''}}" id="">
-        </label>
+    <form class="grid grid-cols-12 gap-2" action="{{route('AdminsController.editShop',{id:shop.id})}}" method="post">
         
-        <select name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
+        {{ csrfField() }}
+        @!input({class:"col-span-9",text:"Name",name:"name",value:shop.name})
+        @!input({class:"col-span-12",text:"Logo",name:"logo",accept:'image/png, image/jpeg, image/jpg, image/webp',type:"file"})
+        @!input({class:"col-span-3",text:"Numéro",name:"addressNumber",value:shop.addressNumber})
+        @!input({class:"col-span-9",text:"Rue",name:"addressStreet",value:shop.addressStreet})
+        @!input({class:"col-span-4",text:"Code postal",name:"addressPostcode",value:shop.addressPostcode})
+        @!input({class:"col-span-8",text:"Vile",name:"addressCity",value:shop.addressCity})
+        @!input({class:"col-span-12",text:"Numéro de téléphone",name:"phone",value:shop.phone})
+        @!textarea({class:"col-span-12",text:"Description",name:"description",value:shop.description})
+        @!checkbox({class:"col-span-12 flex gap-4",text:"Producteur",name:"optionIsProductor",checked:shop.optionIsProductor ? true : false})
+        @!checkbox({class:"col-span-12 flex gap-4",text:"Bio",name:"optionIsBio",checked:shop.optionIsBio ? true : false})
+        @!checkbox({class:"col-span-12 flex gap-4",text:"Monnaie locale",name:"optionAcceptLocalCurrency",checked:shop.optionAcceptLocalCurrency ? true : false})
+
+        @!input({class:"col-span-12",text:"Instagram",name:"instagramUsername",value:shop.instagramUsername})
+        @!input({class:"col-span-12",text:"Facebook",name:"facebookUsername",value:shop.facebookUsername})
+        @!input({class:"col-span-12",text:"Site internet",name:"websiteUrl",value:shop.websiteUrl})
+        
+        <select class="col-span-12" name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
             @each(sector in sectors)
                     @if(sector.id == shop.sector)
                     <option value="{{sector.id}}" selected>{{sector.name}}</option> 
@@ -81,7 +32,7 @@
                     @endif
             @end
         </select>
-        <div id="categories">
+        <div class="col-span-12" id="categories">
             <p>Catégories:</p>
             @each(category in categories)
                 <label for="{{category.id}}">
@@ -93,15 +44,15 @@
                 </label>
             @end
         </div>
-        <select name="status" id="">
+        <select class="col-span-12" name="status" id="">
             <option value="0">Non validé</option>
-            <option value="1"
-                @if(shop.status == 1)
-                    selected
-                @endif
+            <option value="1" 
+            @if(shop.status == 1)
+            selected 
+            @endif
             >Validé</option>
         </select>
-        <input type="submit" value="Sauver">
+        <input class="col-span-5" type="submit" value="Sauver">
     </form>
     <a href="{{route('AdminsController.showShops')}}">Annuler</a>
 </div>

@@ -2,63 +2,52 @@
 @set('title', 'Users')
 
 @section('body')
-<div class="bg-grey-light w-full px-9 py-7 flex xl:flex-row flex-col items-start gap-7 overflow-y-scroll">
-    @component('components/dashboard/card',{
-        title:'Informations',
-        editHref:route('DashboardController.showShopEditInformations',{id:selectedShop.id})
-    })
+<div class="bg-grey-light w-full md:px-9 md:py-7 flex xl:flex-row flex-col items-start gap-7 overflow-y-scroll" >
+    @dashboard.card({title:'Informations',editHref:route('DashboardController.showShopEditInformations',{id:selectedShop.id})})
         @if(selectedShop.logo)
-        <p>Logo</p>
-        <img style="max-width: 200px;" src="/uploads/{{selectedShop.logo}}" alt="">
-        @else
-        Pas de logo
+        <p class="col-span-12">Logo</p>
+        <img class="col-span-12" style="max-width: 200px;" src="/uploads/{{selectedShop.logo}}" alt="">
         @endif
-        <h3>Nom de l'établissement</h3>
-        <p class="pl-4">{{selectedShop.name}}</p>
+        <h3 class="col-span-12">Nom de l'établissement</h3>
+        <p class="pl-4 col-span-12">{{selectedShop.name}}</p>
+        @if(selectedShop.phone)
+            <h3 class="col-span-12">Numéro de téléphone</h3>
+            <p class="pl-4 col-span-12">{{selectedShop.phone}}</p>
+        @endif
         <h3>Adresse</h3>
-        <p class="pl-4">{{selectedShop.addressNumber}}, {{selectedShop.addressStreet}}</p>
-        <p class="pl-4">{{selectedShop.addressPostcode}} {{selectedShop.addressCity}}</p>
-        <h3>Description</h3>
-        <p class="pl-4">{{selectedShop.description}}</p>
+        <p class="pl-4 col-span-12">{{selectedShop.addressNumber}}, {{selectedShop.addressStreet}}</p>
+        <p class="pl-4 col-span-12" >{{selectedShop.addressPostcode}} {{selectedShop.addressCity}}</p>
+        <h3 class="col-span-12">Description</h3>
+        <p class="pl-4 col-span-12">{{selectedShop.description}}</p>
     @end
     <div class="w-full xl:max-w-md flex flex-col gap-7">
-        @component('components/dashboard/card',{
-            title:'Options',
-            editHref:route('DashboardController.showShopEditOptions',{id:selectedShop.id})
-        })
-            <h3>Secteur d'activité</h3>
-            <p class="ml-4">{{selectedShop.sector}}</p>
-            <h3>Catégories</h3>
+        @dashboard.card({title:'Options',editHref:route('DashboardController.showShopEditOptions',{id:selectedShop.id})})
+            <h3 class="col-span-12">Secteur d'activité</h3>
+            <p class="ml-4 col-span-12">{{selectedShop.sector}}</p>
+            <h3 class="col-span-12">Catégories</h3>
             @each(c in categories)
-            <ul>
-                <li class="ml-4">{{c.name}}</li>
+            <ul class="col-span-12">
+                <li class="ml-4 col-span-12">{{c.name}}</li>
             </ul>
             @endeach
             @if(categories.length == 0)
-                Aucune catégorie
+               <p class="col-span-12"> Aucune catégorie</p>
             @endif
-            <h3>Particularités</h3>
-            <ul>
+            <h3 class="col-span-12">Particularités</h3>
+            <ul class="col-span-12 pl-4">
                 @if(selectedShop.optionIsBio)
-                <li class="ml-4">
-                    Mon commerce propose des produits bios
-                </li>
+                <li> Mon commerce propose des produits bios </li>
                 @endif
                 @if(selectedShop.optionIsProductor)
-                <li class="ml-4">
-                    Mon commerce propose ce que je produis
-                </li>
+                <li> Mon commerce propose ce que je produis </li>
                 @endif
                 @if(selectedShop.optionAcceptLocalCurrency)
-                <li class="ml-4">Mon commerce accepte une monnaie locale</li>
+                <li>Mon commerce accepte une monnaie locale</li>
                 @endif
             </ul>
         @end
-        @component('components/dashboard/card',{
-            title:'Liens',
-            editHref:route('DashboardController.showShopEditLinks',{id:selectedShop.id})
-        })
-            <ul>
+        @dashboard.card({title:'Liens',editHref:route('DashboardController.showShopEditLinks',{id:selectedShop.id})})
+            <ul class="col-span-12">
                 @if(selectedShop.facebookUsername)
                 <li>Facebook {{selectedShop.facebookUsername}}</li>
                 @endif

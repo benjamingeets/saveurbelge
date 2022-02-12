@@ -8,7 +8,7 @@
 *{
     font-family: 'Comfortaa';
 }
-input[type='text'], textarea, select{
+input[type='text'],input[type='password'], textarea, select{
     @apply border border-grey px-4 py-3 rounded-md;
 }
 
@@ -26,3 +26,4 @@ label{
 aside nav a{
     @apply rounded-md px-4 py-3 my-2 hover:bg-gray-50 transition;
 }
+[x-cloak] { display: none !important; }

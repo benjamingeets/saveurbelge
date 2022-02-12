@@ -40,9 +40,12 @@ Route.group(() => {
   Route.post("/mot-de-passe-oublie", "AuthController.forgotPassword")
 }).middleware("redirectIfAuth")
 
+Route.get("/deconnexion", 'AuthController.logout')
+
 Route.group(() => {
   Route.get("/","DashboardController.showDashboard")
   Route.get("/shop/add","DashboardController.showAddShop")
+  Route.post("/shop/add","DashboardController.createShop")
   Route.get("/shop/:id","DashboardController.showShop")
   Route.get("/shop/:id/informations/edit","DashboardController.showShopEditInformations")
   Route.get("/shop/:id/links/edit","DashboardController.showShopEditLinks")
@@ -51,10 +54,11 @@ Route.group(() => {
   Route.get("/shop/:id/delete","DashboardController.showDeleteShop")
   Route.post("/shop/:id/delete","DashboardController.deleteShop")
   Route.get("/account","DashboardController.showAccount")
+  Route.get("/account/delete","DashboardController.showDeleteAccount")
+  Route.post("/account/delete","DashboardController.deleteAccount")
+  Route.get("/account/edit","DashboardController.showEditAccount")
+  Route.post("/account/edit","DashboardController.editAccount")
 }).prefix("/dashboard").middleware("auth")
-
-Route.get("/deconnexion", 'AuthController.logout')
-
 
 Route.group(() => {
   Route.get("/", "AdminsController.showDashboard")
@@ -86,6 +90,5 @@ Route.group(() => {
     Route.post('/add','AdminsController.createShop')
   }).prefix("/shops")
 }).prefix("/admin").middleware("auth").middleware("admin")
-
 
 Route.get('/get-categories/:id','AdminsController.getCategories')

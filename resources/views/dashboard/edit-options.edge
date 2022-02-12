@@ -1,0 +1,27 @@
+@layout('layouts/dashboard')
+@set('title', 'Users')
+
+@section('body')
+{{inspect(flashMessages.all())}}
+<div>
+    <form class="grid grid-cols-12 gap-4 items-center" action="{{route('DashboardController.editShop',{id:shop.id})}}" method="post">
+        {{ csrfField() }}
+        @!checkbox({class:"col-span-12 flex gap-4",text:"Producteur",name:"optionIsProductor",checked:shop.optionIsProductor ? true : false})
+        @!checkbox({class:"col-span-12 flex gap-4",text:"Bio",name:"optionIsBio",checked:shop.optionIsBio ? true : false})
+        @!checkbox({class:"col-span-12 flex gap-4",text:"Monnaie locale",name:"optionAcceptLocalCurrency",checked:shop.optionAcceptLocalCurrency ? true : false})
+        <div class="col-span-12" id="categories">
+            <p>Catégories:</p>
+            @each(category in categories)
+                <label for="{{category.id}}">
+                    @if(shop.categories.includes(category.id.toString()))
+                    <input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}" checked> {{category.name}} 
+                    @else
+                    <input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}}
+                    @endif
+                </label>
+            @end
+        </div>
+        <input type="submit" value="envoyer">
+    </form>
+</div>
+@end

@@ -4,6 +4,7 @@ import Sector from "App/Models/Sector"
 import Category from "App/Models/Category"
 import Shop from "App/Models/Shop"
 import CreateShopValidator from "App/Validators/CreateShopValidator"
+import EditShopValidator from "App/Validators/EditShopValidator"
 
 export default class AdminsController {
     public async showDashboard({ view }) {
@@ -59,7 +60,7 @@ export default class AdminsController {
         return view.render("admin/edit-shop", { shop, categories, sectors })
     }
     public async editShop({ params, request, response }) {
-        const payload = await request.validate(CreateShopValidator)
+        const payload = await request.validate(EditShopValidator)
         const logo = request.file('logo')
         const shop = await Shop.findOrFail(params.id)
         if (request.input('ownerId')) {

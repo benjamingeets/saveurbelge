@@ -2,6 +2,19 @@
 @set('title', 'Users')
 
 @section('body')
-
-    Index
+<div class="w-full bg-grey-bg text-center pt-7">
+    @dashboard.card()
+    <span class="col-span-12 flex justify-center">
+        @!icons.shop()
+    </span>
+    <h2 class="col-span-12 text-2xl">Pas encore de commerce</h2>
+    <p class="col-span-12 text-sm">Vous n'avez pas encore de commerce
+        @if(auth.user.status > 0)
+        <a class="text-primary" href="{{route('DashboardController.showAddShop')}}">ajoutez en un</a>
+        @else
+        confirmez votre compte pour en ajouter un
+        @endif
+    </p>
+    @end
+</div>
 @end

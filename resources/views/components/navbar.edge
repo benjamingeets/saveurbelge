@@ -1,25 +1,31 @@
 <nav class="w-full flex justify-between px-5 py-3 bg-white">
     <figure class="flex items-center relative">
-        <img class="w-11 mr-5" src="/saveurbelge.svg" alt="">
+        <img class="hidden md:block w-11 mr-5" src="/saveurbelge.svg" alt="">
         <figcaption>
             <a class="before:absolute before:w-full before:h-full before:top-0 before:left-0 text-2xl" href="/">Saveur Belge</a>
         </figcaption>
     </figure>
     <div class="flex items-center gap-6">
-        @if(auth.isLoggedIn && auth.user.status == 5)
-        <a href="{{route('AdminsController.showDashboard')}}">Admin</a>
+        @if(auth.isLoggedIn)
+        <a class="flex items-center text-sm gap-4 px-5 py-2  rounded-md hover:text-white  border-2 text-primary-dark border-primary-dark hover:bg-primary-dark transition" href="{{route('AuthController.logout')}}">Se déconnecter</a>
         @endif
-            <a class="flex items-center text-sm gap-4 px-5 py-2  rounded-md hover:text-white  border-2 text-primary-dark border-primary-dark hover:bg-primary-dark transition" href="{{route('AuthController.logout')}}">Se déconnecter</a>
-        
         <div class="flex items-center text-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current mr-5" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+              @if(auth.isLoggedIn)
+                <a class="flex items-center" href="{{route('DashboardController.showAccount')}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current mr-5" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <circle cx="12" cy="7" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                      </svg>
+                      <span class="hidden md:inline">{{auth.user.firstName}} {{auth.user.lastName}}</span>
+                    </a>
+              @else
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current mr-5" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <circle cx="12" cy="7" r="4" />
                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
               </svg>
-              @if(auth.isLoggedIn)
-                <a href="{{route('DashboardController.showAccount')}}">{{auth.user.firstName}} {{auth.user.lastName}}</a>
-              @else
                 Se connecter
                @endif
         </div>

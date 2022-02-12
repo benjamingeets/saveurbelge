@@ -98,6 +98,8 @@ export default class Shop extends BaseModel {
       if(data[0]){
         shop.longitude = data[0].lon
         shop.latitude = data[0].lat
+      }else{
+        console.log('la boulette')
       }
     }
     if(shop.$dirty.categories){

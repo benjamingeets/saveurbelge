@@ -10,17 +10,11 @@
   @entryPointScripts('app')
 </head>
 
-<body class="h-screen overflow-y-hidden">
+<body>
   @!navbar()
-  <div class="flex h-full">
-    @!component('components/dashboard/sidebar',{
-      selectedShop,shops
-    })
+  <div class="flex md:flex-row flex-col w-full">
+    @!dashboard.sidebar({selectedShop,shops,hideAside:hideAside? true:false})
     @!section('body')
-
-
   </div>
-
 </body>
-
 </html>

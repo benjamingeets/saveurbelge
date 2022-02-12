@@ -1,9 +1,0 @@
-@set('classes',  '')
-
-<label {{ $props.serialize({ class: classes }, false) }} for="{{ $context.name }}">
-  @if(title)
-    {{ title }}
-  @else
-    {{{ await $slots.main() }}}
-  @end
-</label>

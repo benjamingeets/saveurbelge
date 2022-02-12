@@ -2,5 +2,24 @@
 @set('title', 'Users')
 
 @section('body')
-{{user.firstName}}
+<div class="bg-grey-light w-full md:px-9 md:py-7 flex flex-col items-center gap-7 justify-center">
+    @dashboard.card({title:'Compte',editHref:route('DashboardController.showEditAccount')})
+    <h3 class="col-span-12">Nom</h3>
+    <p class="ml-4 col-span-12">{{auth.user.firstName}}</p>
+    <h3 class="col-span-12">Prénom</h3>
+    <p class="ml-4 col-span-12">{{auth.user.lastName}}</p>
+    <h3 class="col-span-12">Mail</h3>
+    <p class="ml-4 col-span-12">{{auth.user.email}}</p>
+    @end
+    @dashboard.card({title:'mot de passe'})
+    <a class="col-span-12" href="">
+        Modifier mon mot de passe
+    </a>
+    @end
+    @dashboard.card({title:'Zone à risque'})
+    <a class="col-span-12 text-red" href="{{route('DashboardController.showDeleteAccount')}}">
+        Supprimer mon compte
+    </a>
+    @end
+</div>
 @end

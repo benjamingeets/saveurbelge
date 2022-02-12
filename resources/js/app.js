@@ -31,7 +31,7 @@ up.compiler('#map', () => {
             l.forEach(s => {
                 let m = L.marker([s.latitude, s.longitude],{riseOnHover:true}).addTo(map);
                 m.bindTooltip(`<div class="flex w-80 h-40">
-                    <img loading="lazy" src="/uploads/${s.logo}"/>
+                    ${s.logo ? `<img loading="lazy" src="/uploads/${s.logo}"/>` : ''}
                     <div class="text-2xl">${s.name}</div>
                 </div>`,{direction:'center',interactive:true,opacity:1});
             })

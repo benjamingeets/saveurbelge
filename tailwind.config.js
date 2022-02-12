@@ -15,7 +15,8 @@ module.exports = {
         'grey':{
           'DEFAULT':'#cccccc',
           'light':'#F5F5F5',
-          'dark':'#817D7D'
+          'dark':'#817D7D',
+          'bg':'#F5F5F5'
         },
         'red':{
           'DEFAULT':'#FF7373'
