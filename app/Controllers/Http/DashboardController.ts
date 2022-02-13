@@ -6,6 +6,7 @@ import Shop from "App/Models/Shop"
 import User from "App/Models/User"
 import CreateShopValidator from "App/Validators/CreateShopValidator"
 import EditAccountValidator from "App/Validators/EditAccountValidator"
+import EditPasswordValidator from "App/Validators/EditPasswordValidator"
 import EditShopValidator from "App/Validators/EditShopValidator"
 
 export default class DashboardController {
@@ -28,23 +29,24 @@ export default class DashboardController {
         const categories = await Category.all()
         const sectors = await Sector.all()
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
-        return view.render('dashboard/edit-informations', { shop, shops, categories, sectors })
+        return view.render('dashboard/modals/edit-informations', { shop, shops, categories, sectors })
     }
     public async showShopEditOptions({view,params,auth}){
         const shop = await Shop.findOrFail(params.id)
         const categories = await Category.query().select('*').where('sector',shop.sector)
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
-        return view.render('dashboard/edit-options', { shop, shops, categories })
+        return view.render('dashboard/modals/edit-options', { shop, shops, categories })
     }
-    public async showShopEditLinks({view,params,auth}){
+    public async showShopEditLinks({view,params,bouncer}){
         const shop = await Shop.findOrFail(params.id)
-        return view.render('dashboard/edit-links', { shop, shops:[]})
+        await bouncer.authorize('editShop',shop)
+        return view.render('dashboard/modals/edit-links', { shop, shops:[]})
     }
-    public async editShop({ params, request, response }) {
-        console.log('idi')
+    public async editShop({ params, request, response,bouncer }) {
         const id = params.id
         const logo = request.file('logo')
         const shop = await Shop.findOrFail(id)
+        await bouncer.authorize('editShop',shop)
         const payload = await request.validate(EditShopValidator)
         await shop.merge(payload).save()
         if (logo) {
@@ -64,9 +66,10 @@ export default class DashboardController {
             </form>
         `, { id: params.id })
     }
-    public async deleteShop({ params,response }) {
+    public async deleteShop({ params,response,bouncer }) {
         const id = params.id
         const shop = await Shop.firstOrFail(id)
+        await bouncer.authorize('editShop',shop)
         try {
             await shop.delete()
         } catch (e) {
@@ -82,7 +85,7 @@ export default class DashboardController {
         const categories = await Category.all()
         return view.render('dashboard/create-shop', {sectors,categories ,hideAside:true })
     }
-    public async createShop({request,response,auth}){
+    public async createShop({request,auth,response}){
         const logo = request.file('logo')
         const payload = await request.validate(CreateShopValidator)
         payload.ownerId = auth.user.id
@@ -92,7 +95,7 @@ export default class DashboardController {
             shop.logo = logo.fileName
             await shop.save()
         }
-        return "created"
+        return response.redirect().toRoute('DashboardController.showDashboard')
     }
     public async showAccount({ view, auth }) {
         const user = await User.findOrFail(auth.user.id)
@@ -100,7 +103,7 @@ export default class DashboardController {
         return view.render('dashboard/account', { user, shops })
     }
     public async showEditAccount({view}){
-        return view.render('dashboard/edit-account',{hideAside:true})
+        return view.render('dashboard/modals/edit-account',{hideAside:true})
     }
     public async editAccount({request,response,auth}){
         const payload = await request.validate(EditAccountValidator)
@@ -127,5 +130,15 @@ export default class DashboardController {
         await user.delete()
         await auth.logout()
         return response.redirect().toRoute('SearchesController.showSearchForm')
+    }
+    public async showEditPassword({view}){
+        return view.render('dashboard/modals/edit-password',{hideAside:true})
+    }
+    public async editPassword({request,auth}){
+        const payload = await request.validate(EditPasswordValidator)
+        const user = await User.findOrFail(auth.user.id)
+        user.password = payload.password
+        await user.save()
+        return "oui"
     }
 }
