@@ -53,11 +53,15 @@ Route.group(() => {
   Route.post("/shop/:id/edit","DashboardController.editShop")
   Route.get("/shop/:id/delete","DashboardController.showDeleteShop")
   Route.post("/shop/:id/delete","DashboardController.deleteShop")
-  Route.get("/account","DashboardController.showAccount")
-  Route.get("/account/delete","DashboardController.showDeleteAccount")
-  Route.post("/account/delete","DashboardController.deleteAccount")
-  Route.get("/account/edit","DashboardController.showEditAccount")
-  Route.post("/account/edit","DashboardController.editAccount")
+  Route.group(()=>{
+    Route.get("/","DashboardController.showAccount")
+    Route.get("/delete","DashboardController.showDeleteAccount")
+    Route.post("/delete","DashboardController.deleteAccount")
+    Route.get("/edit","DashboardController.showEditAccount")
+    Route.post("/edit","DashboardController.editAccount")
+    Route.get("/edit/password","DashboardController.showEditPassword")
+    Route.post("/edit/password","DashboardController.editPassword")
+  }).prefix("/account")
 }).prefix("/dashboard").middleware("auth")
 
 Route.group(() => {
