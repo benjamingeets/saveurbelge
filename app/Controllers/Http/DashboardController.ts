@@ -39,7 +39,6 @@ export default class DashboardController {
     }
     public async showShopEditLinks({view,params,bouncer}){
         const shop = await Shop.findOrFail(params.id)
-        await bouncer.authorize('editShop',shop)
         return view.render('dashboard/modals/edit-links', { shop, shops:[]})
     }
     public async editShop({ params, request, response,bouncer }) {
@@ -68,7 +67,7 @@ export default class DashboardController {
     }
     public async deleteShop({ params,response,bouncer }) {
         const id = params.id
-        const shop = await Shop.firstOrFail(id)
+        const shop = await Shop.findOrFail(id)
         await bouncer.authorize('editShop',shop)
         try {
             await shop.delete()
