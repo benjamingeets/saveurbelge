@@ -12,7 +12,6 @@ input[type='text'],input[type='password'], textarea, select{
     @apply border border-grey px-4 py-3 rounded-md;
 }
 
-
 input[type='submit']{
     @apply border-2 bg-primary text-white rounded-md p-2 border-none cursor-pointer;
 }
@@ -23,7 +22,4 @@ label{
     @apply bg-gray-100;
 }
 
-aside nav a{
-    @apply rounded-md px-4 py-3 my-2 hover:bg-gray-50 transition;
-}
 [x-cloak] { display: none !important; }
