@@ -2,28 +2,14 @@
 @set('title', 'Créer un user')
 
 @section('body')
-<form action="{{route('AdminsController.createUser')}}" method="post">
+<form class="grid grid-cols-12" action="{{route('AdminsController.createUser')}}" method="post">
     {{ csrfField() }}
-    @form.group({ name: 'email' })
-        @!form.label({ title: 'Email' })
-        @!form.input({ type: 'email' })
-    @end
-    @form.group({ name: 'firstName' })
-        @!form.label({ title: 'Prénom' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'lastName' })
-        @!form.label({ title: 'Nom' })
-        @!form.input({ type: 'text' })
-    @end
-    @form.group({ name: 'password' })
-        @!form.label({ title: 'Mot de passe' })
-        @!form.input({ type: 'password' })
-    @end
-    @form.group({ name: 'password_confirmation' })
-        @!form.label({ title: 'Confirmation' })
-        @!form.input({ type: 'password' })
-    @end
+    @!input({class:"col-span-12",text:"Nom",name:"firstName"})
+    @!input({class:"col-span-12",text:"Prénom",name:"lastName"})
+    @!input({class:"col-span-12",text:"Mot de passe",name:"password"})
+    @!input({class:"col-span-12",text:"Confirmation",name:"password_confirmation"})
+    @!input({class:"col-span-12",text:"Email",name:"email"})
+
     <input type="submit" value="Créer">
 </form>
 <a href="{{route('AdminsController.showUsers')}}">Retour</a>

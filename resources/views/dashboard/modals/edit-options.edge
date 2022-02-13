@@ -3,7 +3,6 @@
 
 @section('body')
 {{inspect(flashMessages.all())}}
-<div>
     <form class="grid grid-cols-12 gap-4 items-center" action="{{route('DashboardController.editShop',{id:shop.id})}}" method="post">
         {{ csrfField() }}
         @!checkbox({class:"col-span-12 flex gap-4",text:"Producteur",name:"optionIsProductor",checked:shop.optionIsProductor ? true : false})
@@ -23,5 +22,4 @@
         </div>
         <input type="submit" value="envoyer">
     </form>
-</div>
 @end

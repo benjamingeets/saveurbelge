@@ -2,7 +2,6 @@
 @set('title', 'Users')
 
 @section('body')
-<div>
     <form class="grid grid-cols-12 gap-4 items-center" action="{{route('DashboardController.editShop',{id:shop.id})}}" method="post">
         {{ csrfField() }}
         @!input({class:"col-span-9",text:"Name",name:"name",value:shop.name})
@@ -15,5 +14,5 @@
         @!textarea({class:"col-span-12",text:"Description",name:"description",value:shop.description})
         <input type="submit" value="envoyer">
     </form>
-</div>
+
 @end

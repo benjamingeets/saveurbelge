@@ -2,7 +2,7 @@
 @set('title', 'Users')
 
 @section('body')
-<div class="bg-grey-bg w-full h-full">
+    @!backToDashboard()
     <form class="w-full xl:max-w-md mx-auto" action="{{route('DashboardController.createShop')}}" method="post" x-data="{step:0}">
         {{ csrfField() }}
         <div class="flex text-white items-center justify-center mt-9 mb-6">
@@ -41,7 +41,7 @@
         </div>
         <div x-cloak x-show="step == 2" class="w-full flex justify-center">
             @dashboard.card({title:"Liens"})         
-                @!input({class:"col-span-12",text:"Facebook",name:"facebokoUsername"})
+                @!input({class:"col-span-12",text:"Facebook",name:"facebookUsername"})
                 @!input({class:"col-span-12",text:"Instagram",name:"instagramUsername"})
                 @!input({class:"col-span-12",text:"Site internet",name:"websiteUrl"})
             @end
@@ -52,5 +52,4 @@
             <input x-cloak x-show="step == 2" type="submit" value="Confirmer">
         </div>
     </form>
-</div>
 @end

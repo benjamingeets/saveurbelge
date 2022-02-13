@@ -7,7 +7,9 @@
     <form class="grid grid-cols-12 gap-2" action="{{route('AdminsController.editShop',{id:shop.id})}}" method="post">
         
         {{ csrfField() }}
-        @!input({class:"col-span-9",text:"Name",name:"name",value:shop.name})
+        <p class="col-span-12">ID du shop: {{shop.id}}</p>
+        @!input({class:'col-span-12',text:'OwnerID',name:"ownerId",value:shop.ownerId})
+        @!input({class:"col-span-12",text:"Name",name:"name",value:shop.name})
         @!input({class:"col-span-12",text:"Logo",name:"logo",accept:'image/png, image/jpeg, image/jpg, image/webp',type:"file"})
         @!input({class:"col-span-3",text:"Numéro",name:"addressNumber",value:shop.addressNumber})
         @!input({class:"col-span-9",text:"Rue",name:"addressStreet",value:shop.addressStreet})

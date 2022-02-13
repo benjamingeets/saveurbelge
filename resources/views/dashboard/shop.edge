@@ -2,7 +2,7 @@
 @set('title', 'Users')
 
 @section('body')
-<div class="bg-grey-light w-full md:px-9 md:py-7 flex xl:flex-row flex-col items-start gap-7 overflow-y-scroll" >
+
     @dashboard.card({title:'Informations',editHref:route('DashboardController.showShopEditInformations',{id:selectedShop.id})})
         @if(selectedShop.logo)
         <p class="col-span-12">Logo</p>
@@ -64,5 +64,5 @@
         <h2 class="text-2xl">Zone à risque</h2>
         <a class="text-red ml-4" href="{{route('DashboardController.showDeleteShop',{id:selectedShop.id})}}">Supprimer mon commerce</a>
     </div>
-</div>
+
 @end

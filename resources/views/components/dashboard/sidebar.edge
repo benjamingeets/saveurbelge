@@ -1,5 +1,5 @@
-@unless(hideAside)
-<aside class="w-full md:h-full md:max-w-xs text-sm p-2 md:p-0 bg-grey-light md:bg-white">
+@if(shops)
+<aside class="w-full md:max-w-xs text-sm p-2 md:p-0 bg-white">
   <ul class="md:mt-7 py-1 md:py-2 md:space-y-4 md:px-2 flex md:block justify-center bg-primary md:bg-white rounded-md">
     @if(shops.length <= 3) 
     <li class="md:static fixed bottom-3 right-3 z-10">
@@ -27,7 +27,7 @@
             href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a></li>
         @else
         <li><a
-            class="block focus:rounded-md focus:bg-primary-light md:rounded-r-md transition text-grey-dark md:border-l-4 md:border-l-white hover:border-l-primary py-1 px-2 md:p-3  hover:text-black"
+            class="block focus:rounded-r-md focus:bg-primary-light md:rounded-r-md transition text-grey-dark md:border-l-4 md:border-l-white hover:border-l-primary py-1 px-2 md:p-3  hover:text-black"
             href="{{route('DashboardController.showShop',{id:shop.id})}}">{{shop.name}}</a>
           </li>
         @endif
