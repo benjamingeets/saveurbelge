@@ -149,5 +149,11 @@ export default class AdminsController {
         await sector.delete()
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }
+    public async deleteShop({ params, response }) {
+        const id = params.id
+        const shop = await Shop.findOrFail(id)
+        await shop.delete()
+        response.redirect().toRoute('AdminsController.showShops')
+    }
 
 }

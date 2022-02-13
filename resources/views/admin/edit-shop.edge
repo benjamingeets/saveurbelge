@@ -56,6 +56,10 @@
         </select>
         <input class="col-span-5" type="submit" value="Sauver">
     </form>
+    <form action="{{route('AdminsController.deleteShop',{id:shop.id})}}" method="post">
+        {{ csrfField() }}
+        <input type="submit" value="Supprimer">
+    </form>
     <a href="{{route('AdminsController.showShops')}}">Annuler</a>
 </div>
 @end
