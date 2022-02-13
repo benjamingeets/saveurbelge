@@ -12,7 +12,7 @@
 
 <body class="h-screen flex flex-col">
   @!navbar()
-  <div class="flex h-full">
+  <div class="flex md:flex-row flex-col h-full">
     @!dashboard.sidebar({selectedShop,shops,hideAside:hideAside? true:false})
     <div class="bg-grey-light w-full md:px-9 md:py-7 flex xl:flex-row flex-col items-start gap-7 overflow-y-scroll h-full" >
       @!section('body')

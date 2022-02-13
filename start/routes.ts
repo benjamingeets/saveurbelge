@@ -92,6 +92,7 @@ Route.group(() => {
     Route.post('/:id/edit',"AdminsController.editShop")
     Route.get('/add','AdminsController.showCreateShop')
     Route.post('/add','AdminsController.createShop')
+    Route.post('/:id/delete','AdminsController.deleteShop')
   }).prefix("/shops")
 }).prefix("/admin").middleware("auth").middleware("admin")
 
