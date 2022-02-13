@@ -30,10 +30,16 @@ up.compiler('#map', () => {
         r.json().then((l) => {
             l.forEach(s => {
                 let m = L.marker([s.latitude, s.longitude],{riseOnHover:true}).addTo(map);
-                m.bindTooltip(`<div class="flex w-80 h-40">
-                    ${s.logo ? `<img loading="lazy" src="/uploads/${s.logo}"/>` : ''}
+                m.bindTooltip(`
+                <div class="flex p-5">
+                    ${s.logo ? `<img class="h-20" loading="lazy" src="/uploads/${s.logo}"/>` : ''}
                     <div class="text-2xl">${s.name}</div>
-                </div>`,{direction:'center',interactive:true,opacity:1});
+                </div>`,
+                {direction:'center',interactive:true,opacity:1});
+                m.on('click',()=>{
+                    console.log("oui")
+                    window.open('/commerce/' + s.slug)
+                })
             })
         })
     })
