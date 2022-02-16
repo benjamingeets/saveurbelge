@@ -79,13 +79,12 @@ export default class AuthController {
         
         const id = params.id
         const url = Route.makeSignedUrl(
-            'AuthController.showResetPassword',
+            'AuthController.resetPassword',
             {
                 id: id,
             },
             { expiresIn: '1h' }
         )
-
         return view.render('auth/resetpassword',{url:url})
     }
 

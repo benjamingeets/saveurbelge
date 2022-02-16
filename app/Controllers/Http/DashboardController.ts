@@ -10,36 +10,20 @@ import EditPasswordValidator from "App/Validators/EditPasswordValidator"
 import EditShopValidator from "App/Validators/EditShopValidator"
 
 export default class DashboardController {
-    public async showDashboard({ view,auth,response }) {
-        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
-        if(shops.length > 0){
-            return response.redirect().toRoute('DashboardController.showShop',{id:shops[0].id})
-        }
-        return view.render('dashboard/index', { shops: shops })
+    public async showDashboard({ view }) {
+        return view.render('dashboard/index')
     }
     public async showShop({ view, params,auth }) {
         const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
         const id = params.id
         const selectedShop = await Shop.query().where('shops.id',id).join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.*','sectors.name as sector','categories')
-        const categories = await Category.query().select('name').whereIn('id', selectedShop[0].categories)
+        const categories = await Category.query().select('*').whereIn('id', selectedShop[0].categories)
         return view.render('dashboard/shop', { selectedShop:selectedShop[0], shops, categories })
     }
-    public async showShopEditInformations({ view, params,auth }) {
-        const shop = await Shop.findOrFail(params.id)
-        const categories = await Category.all()
-        const sectors = await Sector.all()
-        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
-        return view.render('dashboard/modals/edit-informations', { shop, shops, categories, sectors })
-    }
-    public async showShopEditOptions({view,params,auth}){
+    public async showShopEdit({view,params,}){
         const shop = await Shop.findOrFail(params.id)
         const categories = await Category.query().select('*').where('sector',shop.sector)
-        const shops = await Shop.query().select('*').where('ownerId', auth.user.id)
-        return view.render('dashboard/modals/edit-options', { shop, shops, categories })
-    }
-    public async showShopEditLinks({view,params,bouncer}){
-        const shop = await Shop.findOrFail(params.id)
-        return view.render('dashboard/modals/edit-links', { shop, shops:[]})
+        return view.render('dashboard/edit-shop', { selectedShop:shop, categories })
     }
     public async editShop({ params, request, response,bouncer }) {
         const id = params.id

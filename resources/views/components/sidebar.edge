@@ -1,0 +1,33 @@
+@set('active','flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-700 dark:text-gray-200')
+@set('notactive','flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700')
+<div class="flex flex-col w-64 h-screen px-4 py-8 bg-white border-r dark:bg-gray-800 dark:border-gray-600">
+    <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">SaveurBelge</h2>
+    <div class="flex flex-col justify-between flex-1 mt-6">
+        <nav>
+            <a class="{{request.url() == route('DashboardController.showAddShop') ? active : notactive}}" href="{{route('DashboardController.showAddShop')}}">
+                @!icons.plus()
+                <span class="mx-4 font-medium">Ajouter un commerce</span>
+            </a>
+            <hr class="my-6 border-gray-200 dark:border-gray-600" />
+            @each(s in request.requestData.shops)
+            <a class="{{request.url() == route('DashboardController.showShop',{id:s.id}) ? active : notactive}}" href="{{route('DashboardController.showShop',{id:s.id})}}">
+                @!icons.shop()
+                <span class="mx-4 font-medium">{{s.name}}</span>
+            </a>
+            @end
+            <hr class="my-6 border-gray-200 dark:border-gray-600" />
+            <a class="{{request.url() == route('DashboardController.showAccount') ? active : notactive}}" href="{{route('DashboardController.showAccount')}}">
+              @!icons.account()
+              <span class="mx-4 font-medium">Mon compte</span>
+          </a>
+          <a class="{{notactive}}" href="{{route('AuthController.logout')}}">
+            @!icons.logout()
+            <span class="mx-4 font-medium">Déconnexion</span>
+        </a>
+        </nav>
+
+        <div class="flex items-center px-4 -mx-2">
+            <h4 class="mx-2 font-medium text-gray-800 dark:text-gray-200">{{auth.user.firstName}} {{auth.user.lastName}}</h4>
+        </div>
+    </div>
+</div>

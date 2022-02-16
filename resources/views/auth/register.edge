@@ -2,11 +2,10 @@
 @set('title', 'Inscription')
 
 @section('body')
-@!navbar()
-<div class="bg-grey-bg pt-16">
-    @dashboard.card()
-    <h2 class="col-span-12 text-center text-xl">S'inscrire</h2>
-    <form class="col-span-12" action="{{route('AuthController.register')}}" method="post">
+<div>
+    @card()
+    <h2>S'inscrire</h2>
+    <form action="{{route('AuthController.register')}}" method="post">
         {{ csrfField() }}
 
         @!input({text:'Nom',name:'firstName'})
@@ -17,7 +16,7 @@
         <input type="submit" value="S'inscrire">
     </form>
 
-  <a class="col-span-12" href="{{route('AuthController.showLoginForm')}}">Se connecter</a>
+  <a href="{{route('AuthController.showLoginForm')}}">Se connecter</a>
     @end
 </div>
 @end

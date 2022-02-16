@@ -1,24 +1,22 @@
-@layout('layouts/dashboard')
+@layout('layouts/auth')
 @set('title', 'Connexion')
 
 @section('body')
-<div class="bg-grey-bg pt-16 mx-auto">
-    @dashboard.card()
+    @card()
     @if(flashMessages.has('auth.errors'))
-    <p class="col-span-12">
+    <p>
       Aucun utilisateur n'a été trouvé avec ces identifiants.
     </p>
   @end
-  <form class="col-span-12 grid grid-cols-12" up-submit="false" action="{{route('AuthController.login')}}" method="post">
+  <form up-submit="false" action="{{route('AuthController.login')}}" method="post">
       {{ csrfField() }}
-    <h2 class="text-center text-xl col-span-12">Se connecter</h2>
+    <h2>Se connecter</h2>
       @!input({class:'col-span-12',text:'Email',name:'email'})
       @!input({class:'col-span-12',text:'Mot de passe',name:'password',type:'password'})
-      <input class="mx-auto col-span-12 mt-4" type="submit" value="Connexion">
+      <input type="submit" value="Connexion">
   </form>
 
-  <a class="col-span-6" href="{{route('AuthController.showRegisterForm')}}">S'inscrire</a>
-  <a class="col-span-6" href="{{route('AuthController.showForgotPassword')}}">Mot de passe oublié</a></div>
+  <a href="{{route('AuthController.showRegisterForm')}}">S'inscrire</a>
+  <a href="{{route('AuthController.showForgotPassword')}}">Mot de passe oublié</a>
     @end
-</div>
 @end

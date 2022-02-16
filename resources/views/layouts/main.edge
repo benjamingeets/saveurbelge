@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
+  <title>{{title}} | Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/unpoly@2.5.0/unpoly.min.css">
   @entryPointStyles('app')
   @entryPointScripts('app')
 </head>
-<body>  
+
+<body class="flex">
+@!sidebar({shops})
+<div class="flex flex-col items-start w-full gap-4">
+  <section class="w-full h-full text-white bg-white dark:bg-gray-900">
   @!section('body')
+  </section>
+</div>
 </body>
 </html>

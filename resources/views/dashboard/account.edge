@@ -1,25 +1,11 @@
-@layout('layouts/dashboard')
+@layout('layouts/main')
 @set('title', 'Users')
 
 @section('body')
-    <div class="flex flex-col w-full gap-7">
-        @dashboard.card({title:'Compte',editHref:route('DashboardController.showEditAccount')})
-    <h3 class="col-span-12">Nom</h3>
-    <p class="ml-4 col-span-12">{{auth.user.firstName}}</p>
-    <h3 class="col-span-12">Prénom</h3>
-    <p class="ml-4 col-span-12">{{auth.user.lastName}}</p>
-    <h3 class="col-span-12">Mail</h3>
-    <p class="ml-4 col-span-12">{{auth.user.email}}</p>
-    @end
-    @dashboard.card({title:'mot de passe'})
-    <a class="col-span-12" href="{{route('DashboardController.showEditPassword')}}">
-        Modifier mon mot de passe
-    </a>
-    @end
-    @dashboard.card({title:'Zone à risque'})
-    <a class="col-span-12 text-red" href="{{route('DashboardController.showDeleteAccount')}}">
-        Supprimer mon compte
-    </a>
-    @end
-    </div>
+<div>
+    <h2 class="text-2xl">{{auth.user.firstName}} {{auth.user.lastName}} </h2>
+    <p>{{auth.user.email}}</p>
+    @!button({label:'Modifier mon mot de passe',href:route('DashboardController.showEditPassword')})
+    @!button({label:'Supprimer mon compte'})
+</div>
 @end

@@ -12,7 +12,7 @@ up.form.config.submitSelectors.push(['form'])
 up.compiler('#map', () => {
     let lat = 50.850340
     let lon = 4.351710
-    const map = L.map('map').setView([lat, lon], 9);
+    const map = L.map('map',{zoomControl:false}).setView([lat, lon], 9);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
@@ -42,5 +42,16 @@ up.compiler('#map', () => {
                 })
             })
         })
+    })
+})
+up.compiler('#edit-shop',()=>{
+    console.log("oui")
+    const bouton = document.querySelector('#logo')
+    bouton.addEventListener('change',(e)=>{
+        var output = document.querySelector("img");
+        output.src = URL.createObjectURL(e.target.files[0]);
+        output.onload = function() {
+        URL.revokeObjectURL(output.src)
+        }
     })
 })

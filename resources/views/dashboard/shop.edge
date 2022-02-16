@@ -1,68 +1,53 @@
-@layout('layouts/dashboard')
+@layout('layouts/main')
 @set('title', 'Users')
 
 @section('body')
+            <div class="container px-6 py-12 mx-auto">
+                <div class="flex items-center gap-4">
 
-    @dashboard.card({title:'Informations',editHref:route('DashboardController.showShopEditInformations',{id:selectedShop.id})})
-        @if(selectedShop.logo)
-        <p class="col-span-12">Logo</p>
-        <img class="col-span-12" style="max-width: 200px;" src="/uploads/{{selectedShop.logo}}" alt="">
-        @endif
-        <h3 class="col-span-12">Nom de l'établissement</h3>
-        <p class="pl-4 col-span-12">{{selectedShop.name}}</p>
-        @if(selectedShop.phone)
-            <h3 class="col-span-12">Numéro de téléphone</h3>
-            <p class="pl-4 col-span-12">{{selectedShop.phone}}</p>
-        @endif
-        <h3>Adresse</h3>
-        <p class="pl-4 col-span-12">{{selectedShop.addressNumber}}, {{selectedShop.addressStreet}}</p>
-        <p class="pl-4 col-span-12" >{{selectedShop.addressPostcode}} {{selectedShop.addressCity}}</p>
-        <h3 class="col-span-12">Description</h3>
-        <p class="pl-4 col-span-12">{{selectedShop.description}}</p>
-    @end
-    <div class="w-full xl:max-w-md flex flex-col gap-7">
-        @dashboard.card({title:'Options',editHref:route('DashboardController.showShopEditOptions',{id:selectedShop.id})})
-            <h3 class="col-span-12">Secteur d'activité</h3>
-            <p class="ml-4 col-span-12">{{selectedShop.sector}}</p>
-            <h3 class="col-span-12">Catégories</h3>
-            @each(c in categories)
-            <ul class="col-span-12">
-                <li class="ml-4 col-span-12">{{c.name}}</li>
-            </ul>
-            @endeach
-            @if(categories.length == 0)
-               <p class="col-span-12"> Aucune catégorie</p>
-            @endif
-            <h3 class="col-span-12">Particularités</h3>
-            <ul class="col-span-12 pl-4">
-                @if(selectedShop.optionIsBio)
-                <li> Mon commerce propose des produits bios </li>
-                @endif
-                @if(selectedShop.optionIsProductor)
-                <li> Mon commerce propose ce que je produis </li>
-                @endif
-                @if(selectedShop.optionAcceptLocalCurrency)
-                <li>Mon commerce accepte une monnaie locale</li>
-                @endif
-            </ul>
-        @end
-        @dashboard.card({title:'Liens',editHref:route('DashboardController.showShopEditLinks',{id:selectedShop.id})})
-            <ul class="col-span-12">
-                @if(selectedShop.facebookUsername)
-                <li>Facebook {{selectedShop.facebookUsername}}</li>
-                @endif
-                @if(selectedShop.instagramUsername)
-                <li>Insta {{selectedShop.instagramUsername}}</li>
-                @endif
-                @if(selectedShop.websiteUrl)
-                <li>Website {{selectedShop.websiteUrl}}</li>
-                @endif
-            </ul>
-        @end
-    </div>
-    <div class="bg-white p-5 rounded-md xl:max-w-md relative w-full mb-32">
-        <h2 class="text-2xl">Zone à risque</h2>
-        <a class="text-red ml-4" href="{{route('DashboardController.showDeleteShop',{id:selectedShop.id})}}">Supprimer mon commerce</a>
-    </div>
+                    <figure class="w-16 h-16 overflow-hidden rounded-full">
+                        <img class="" src="/uploads/{{selectedShop.logo}}"/>
+                    </figure>
+                    <h2 class="text-2xl">{{selectedShop.name}} ({{selectedShop.sector}})</h2>
+                </div>
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div>
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Informations</h3>
+                        <p class="before:content-['🏡']">{{selectedShop.addressNumber}},{{selectedShop.addressStreet}}, {{selectedShop.addressCity}}</p>
+                        @if(selectedShop.phone)
+                        <p class="before:content-['☎️']">{{selectedShop.phone}}</p>
+                        @endif
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Description:</h3>
+                        <p>{{selectedShop.description}}</p>
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Liens:</h3>
+                        <p>Facebook: {{selectedShop.facebookUsername}}</p>
+                        <p>Instagram: {{selectedShop.instagramUsername}}</p>
+                        <p>Site web: {{selectedShop.websiteUrl}}</p>
+                    </div>
+        
+                    <div>
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Catégories</h3>
+                        <ul class="list-disc">
+                            @each(c in selectedShop.categories)
+                                @each(cat in categories)
+                                    @if(cat.id == c)
+                                        <li class="ml-4">{{cat.name}}</li>
+                                    @endif
+                                @end
+                            @end
+                        </ul> </div>
+                    
+                    <div>
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Particulatités</h3>
+                        <p class="{{selectedShop.optionIsBio ? '':'line-through text-gray-500'}}">🥒 Mon commerce vend des produits bios</p>
+                        <p class="{{selectedShop.optionIsProductor ? '':'line-through text-gray-500'}}">👨🏻‍🌾 Mon commerce vend ce que je produits</p>
+                        <p class="{{selectedShop.optionAcceptLocalCurrency ? '':'line-through text-gray-500'}}">💶 Mon commerce accepte une monnaie locale</p>
+                    </div>
+                </div>
+            </div>
 
+        <div class="flex justify-center gap-4">
+            @!button({label:'Modifier',href:route('DashboardController.showShopEdit',{id:selectedShop.id})})
+            @!button({label:'Supprimer',href:route('DashboardController.showDeleteShop',{id:selectedShop.id})})
+        </div>
 @end

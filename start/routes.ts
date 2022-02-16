@@ -47,9 +47,7 @@ Route.group(() => {
   Route.get("/shop/add","DashboardController.showAddShop")
   Route.post("/shop/add","DashboardController.createShop")
   Route.get("/shop/:id","DashboardController.showShop")
-  Route.get("/shop/:id/informations/edit","DashboardController.showShopEditInformations")
-  Route.get("/shop/:id/links/edit","DashboardController.showShopEditLinks")
-  Route.get("/shop/:id/options/edit","DashboardController.showShopEditOptions")
+  Route.get("/shop/:id/edit","DashboardController.showShopEdit")
   Route.post("/shop/:id/edit","DashboardController.editShop")
   Route.get("/shop/:id/delete","DashboardController.showDeleteShop")
   Route.post("/shop/:id/delete","DashboardController.deleteShop")
@@ -62,7 +60,7 @@ Route.group(() => {
     Route.get("/edit/password","DashboardController.showEditPassword")
     Route.post("/edit/password","DashboardController.editPassword")
   }).prefix("/account")
-}).prefix("/dashboard").middleware("auth")
+}).prefix("/dashboard").middleware("auth").middleware("getShops")
 
 Route.group(() => {
   Route.get("/", "AdminsController.showDashboard")

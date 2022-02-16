@@ -1,0 +1,11 @@
+<div>
+    @if(title)
+        <h2 >{{title}}</h2>
+    @endif
+    @if(editHref)
+    <a href="{{editHref}}">
+        @!component('components/icons/edit')
+    </a>
+    @endif
+    {{{ await $slots.main() }}}
+</div>

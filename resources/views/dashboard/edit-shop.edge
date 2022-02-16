@@ -1,0 +1,50 @@
+@layout('layouts/main')
+@set('title', 'Users')
+
+@section('body')
+<form id="edit-shop" class="grid grid-cols-12 gap-4 px-4 mx-auto mt-4" action="{{route('DashboardController.editShop',{id:selectedShop.id})}}" method="post">
+    {{ csrfField() }}
+    <div class="grid grid-cols-12 col-span-12 gap-4 lg:col-span-4">
+        <h3 class="col-span-12 text-2xl">Informations</h3>
+        
+        <label class="flex items-center col-span-12 gap-4" for="logo">
+            <figure class="relative w-20 h-20 overflow-hidden rounded-full cursor-pointer group">
+                <div class="absolute flex items-center justify-center w-full h-full text-black bg-gray-300 bg-opacity-0 opacity-0 hover:bg-opacity-50 group-hover:opacity-100">
+                    Modifier
+                </div>
+                <img class="object-cover object-center w-full" src="/uploads/{{selectedShop.logo}}"/>
+            </figure>
+            <input hidden type="file" name="logo" id="logo" accept="image/png, image/jpeg, image/jpg, image/webp">
+        </label>
+        @!input({text:'Nom',class:"col-span-12",value:selectedShop.name,name:'name'})
+        @!input({text:'Numéro',name:'addressNumber',class:"col-span-3",value:selectedShop.addressNumber})
+        @!input({text:'Rue',name:'addressStreet',class:"col-span-9",value:selectedShop.addressStreet})
+        @!input({text:'Code postal',name:'addressPostcode',class:"col-span-5",value:selectedShop.addressPostcode})
+        @!input({text:'Ville',name:'addressCity',class:"col-span-7",value:selectedShop.addressCity})
+        @!textarea({class:'col-span-12',text:'Description',name:'description',value:selectedShop.description})
+    </div>
+    <div class="grid content-start grid-cols-12 col-span-12 gap-4 md:col-span-4">
+        <h3 class="col-span-12 text-2xl">Liens</h3>
+        @!input({text:'Instagram',name:'instagramUsername',class:"col-span-12",value:selectedShop.instagramUsername})
+        @!input({text:'Facebook',name:'facebookUsername',class:"col-span-12",value:selectedShop.facebookUsername})
+        @!input({text:'Site web',name:'websiteUrl',class:"col-span-12",value:selectedShop.websiteUrl})
+    </div>
+    <div class="grid content-start grid-cols-12 col-span-12 gap-4 md:col-span-4">
+        <h3 class="col-span-12 text-2xl">Catégories</h3>
+        @each(category in categories)
+            <label for="{{category.id}}" class="col-span-12">
+                @if(selectedShop.categories.includes(category.id.toString()))
+                    <input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}" checked> {{category.name}} 
+                @else
+                    <input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}}
+                @endif
+            </label>
+        @end
+    </div>
+    <div class="flex gap-4">
+        <input type="submit" value="Enregister" class="px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+        @!button({label:'Annuler',href:route('DashboardController.showShop',{id:selectedShop.id})})
+    </div>
+</form>
+
+@end
