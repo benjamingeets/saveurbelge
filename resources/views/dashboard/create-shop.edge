@@ -2,5 +2,62 @@
 @set('title', 'Users')
 
 @section('body')
-    dsqd
+<form class="w-full mx-auto xl:max-w-md" action="{{route('DashboardController.createShop')}}" method="post" x-data="{step:0}">
+    {{ csrfField() }}
+    <div class="flex items-center justify-center mb-6 text-white mt-9">
+        <span class="z-10 flex items-center justify-center w-8 h-8 rounded-full bg-primary">1</span>
+        <div class="z-0 w-24 h-1 -mx-1" :class="step > 0 ? 'bg-primary' : 'bg-grey'"></div>
+        <span class="z-10 flex items-center justify-center w-8 h-8 rounded-full" :class="step > 0 ? 'bg-primary' : 'bg-grey'">2</span>
+        <div class="z-0 w-24 h-1 -mx-1" :class="step > 1 ? 'bg-primary' : 'bg-grey'"></div>
+        <span class="z-10 flex items-center justify-center w-8 h-8 rounded-full" :class="step > 1 ? 'bg-primary' : 'bg-grey'">3</span>
+    </div>
+    <div class="grid grid-cols-12 gap-4" x-show="step==0">
+            @!input({class:"col-span-12",text:"Name",name:"name"})
+            @!input({class:"col-span-12",text:"Logo",name:"logo",accept:'image/png, image/jpeg, image/jpg, image/webp',type:"file"})
+            @!input({class:"col-span-3",text:"Numéro",name:"addressNumber"})
+            @!input({class:"col-span-9",text:"Rue",name:"addressStreet"})
+            @!input({class:"col-span-4",text:"Code postal",name:"addressPostcode"})
+            @!input({class:"col-span-8",text:"Vile",name:"addressCity"})
+            @!input({class:"col-span-12",text:"Numéro de téléphone",name:"phone"})
+            @!textarea({class:"col-span-12",text:"Description",name:"description"})
+    </div>
+    <div  class="grid grid-cols-12 gap-4" x-cloak x-show="step == 1" class="flex justify-center w-full">
+        <select class="col-span-12" name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
+            @each(sector in sectors)
+                    <option value="{{sector.id}}">{{sector.name}}</option>
+            @end
+        </select>
+        <div id="categories">
+            <p>Catégories:</p>
+            @each(category in categories)
+                <label for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
+            @end
+        </div>
+        <label class="flex items-center col-span-12 gap-1" x-data="{ oui: false}">
+            <input type="checkbox" x-model="oui">  🥒 Mon commerce vend des produits bios
+            <input type="hidden" name="optionIsBio" :value="oui">
+        </label>
+        <label class="flex items-center col-span-12 gap-1" x-data="{ oui: false }">
+            <input type="checkbox" x-model="oui">  👨🏻‍🌾 Mon commerce vend ce que je produits
+            <input type="hidden" name="optionIsProductor" :value="oui">
+        </label>
+        <label class="flex items-center col-span-12 gap-1" x-data="{ oui: false }">
+            <input type="checkbox" x-model="oui">  💶 Mon commerce accepte une monnaie locale
+            <input type="hidden" name="optionAcceptLocalCurrency" :value="oui">
+        </label>
+   
+    </div>
+    <div  class="grid grid-cols-12 gap-4" x-cloak x-show="step == 2" class="flex justify-center w-full">
+            
+            @!input({class:"col-span-12",text:"Facebook",name:"facebookUsername"})
+            @!input({class:"col-span-12",text:"Instagram",name:"instagramUsername"})
+            @!input({class:"col-span-12",text:"Site internet",name:"websiteUrl"})
+       
+    </div>
+    <div class="flex w-full" :class="step > 0 ? 'justify-between' : 'justify-end'">
+        <button type="button" x-show="step > 0" x-on:click="step--">Précédent</button>
+        <button class="" type="button" x-on:click="step++" x-show="step < 2" >Suivant</button>
+        <input x-cloak x-show="step == 2" type="submit" value="Confirmer">
+    </div>
+</form>
 @end

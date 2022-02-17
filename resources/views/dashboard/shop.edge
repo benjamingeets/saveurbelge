@@ -20,9 +20,15 @@
                         <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Description:</h3>
                         <p>{{selectedShop.description}}</p>
                         <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Liens:</h3>
+                        @if(selectedShop.facebookUsername)
                         <p>Facebook: {{selectedShop.facebookUsername}}</p>
+                        @endif
+                        @if(selectedShop.instagramUsername)
                         <p>Instagram: {{selectedShop.instagramUsername}}</p>
+                        @endif
+                        @if(selectedShop.websiteUrl)
                         <p>Site web: {{selectedShop.websiteUrl}}</p>
+                        @endif
                     </div>
         
                     <div>

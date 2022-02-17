@@ -10,7 +10,15 @@ import EditPasswordValidator from "App/Validators/EditPasswordValidator"
 import EditShopValidator from "App/Validators/EditShopValidator"
 
 export default class DashboardController {
-    public async showDashboard({ view }) {
+    public async showDashboard({ view,auth,response }) {
+        try {
+            const shops = await Shop.findByOrFail('ownerId',auth.user.id)
+        if(shops){
+            response.redirect().toRoute('DashboardController.showShop',{id:shops.id})
+        }
+        } catch (error) {
+            
+        }
         return view.render('dashboard/index')
     }
     public async showShop({ view, params,auth }) {
@@ -26,6 +34,7 @@ export default class DashboardController {
         return view.render('dashboard/edit-shop', { selectedShop:shop, categories })
     }
     public async editShop({ params, request, response,bouncer }) {
+        console.log(request.all())
         const id = params.id
         const logo = request.file('logo')
         const shop = await Shop.findOrFail(id)

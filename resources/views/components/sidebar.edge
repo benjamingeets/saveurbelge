@@ -15,7 +15,9 @@
                 <span class="mx-4 font-medium">{{s.name}}</span>
             </a>
             @end
+            @if(request.requestData.shops.length >0 )
             <hr class="my-6 border-gray-200 dark:border-gray-600" />
+            @endif
             <a class="{{request.url() == route('DashboardController.showAccount') ? active : notactive}}" href="{{route('DashboardController.showAccount')}}">
               @!icons.account()
               <span class="mx-4 font-medium">Mon compte</span>

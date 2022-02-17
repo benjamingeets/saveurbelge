@@ -40,6 +40,20 @@
                 @endif
             </label>
         @end
+        <h3 class="col-span-12 text-2xl">Options</h3>
+
+        <label class="flex items-center col-span-12 gap-1" x-data="{ oui: {{selectedShop.optionIsBio}} }">
+            <input type="checkbox" x-model="oui" {{selectedShop.optionIsBio ? 'checked': ''}}>  🥒 Mon commerce vend des produits bios
+            <input type="hidden" name="optionIsBio" :value="oui">
+        </label>
+        <label class="flex items-center col-span-12 gap-1" x-data="{ oui: {{selectedShop.optionIsProductor}} }">
+            <input type="checkbox" x-model="oui" {{selectedShop.optionIsProductor ? 'checked': ''}}>  👨🏻‍🌾 Mon commerce vend ce que je produits
+            <input type="hidden" name="optionIsProductor" :value="oui">
+        </label>
+        <label class="flex items-center col-span-12 gap-1" x-data="{ oui: {{selectedShop.optionAcceptLocalCurrency}} }">
+            <input type="checkbox" x-model="oui" {{selectedShop.optionAcceptLocalCurrency ? 'checked': ''}}>  💶 Mon commerce accepte une monnaie locale
+            <input type="hidden" name="optionAcceptLocalCurrency" :value="oui">
+        </label>
     </div>
     <div class="flex gap-4">
         <input type="submit" value="Enregister" class="px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
