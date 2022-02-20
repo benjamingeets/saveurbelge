@@ -54,6 +54,6 @@ export default class CreateShopValidator {
    */
   public messages = {
     'name.required': `Le nom est requis`,
-    'websiteUrl.url':'Le lien n\'est pas bon'
+    'websiteUrl.url':'Le lien n\'est pas dans un format valide'
   }
 }

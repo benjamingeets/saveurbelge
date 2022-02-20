@@ -34,7 +34,6 @@ export default class DashboardController {
         return view.render('dashboard/edit-shop', { selectedShop:shop, categories })
     }
     public async editShop({ params, request, response,bouncer }) {
-        console.log(request.all())
         const id = params.id
         const logo = request.file('logo')
         const shop = await Shop.findOrFail(id)
@@ -49,14 +48,7 @@ export default class DashboardController {
         return response.redirect().toRoute('DashboardController.showShop', { id })
     }
     public async showDeleteShop({ params, view }) {
-        return view.renderRaw(`
-            <h2>Attention</h2>
-            <p>Êtes-vous certain de vouloir supprimer votre commerce?<p>
-            <form action="{{route('DashboardController.deleteShop',{id:id})}}" method="post">
-            {{ csrfField() }}
-            <input type="submit" value="Supprimer">
-            </form>
-        `, { id: params.id })
+        return view.render('dashboard/delete-shop', { id: params.id })
     }
     public async deleteShop({ params,response,bouncer }) {
         const id = params.id
@@ -74,7 +66,7 @@ export default class DashboardController {
             return "Votre compte n'est pas validé"
         }
         const sectors = await Sector.all()
-        const categories = await Category.all()
+        const categories = await Category.query().select('*').where('sector',sectors[0].id)
         return view.render('dashboard/create-shop', {sectors,categories ,hideAside:true })
     }
     public async createShop({request,auth,response}){
@@ -103,15 +95,8 @@ export default class DashboardController {
         await user.merge(payload).save()
         return response.redirect().toRoute('DashboardController.showAccount')
     }
-    public async showDeleteAccount({ params, view }) {
-        return view.renderRaw(`
-            <h2>Attention</h2>
-            <p>Êtes-vous certain de vouloir supprimer votre compte?<p>
-            <form action="{{route('DashboardController.deleteAccount',{id:id})}}" method="post">
-            {{ csrfField() }}
-            <input type="submit" value="Supprimer">
-            </form>
-        `, { id: params.id })
+    public async showDeleteAccount({  view }) {
+        return view.render('dashboard/delete-account')
     }
     public async deleteAccount({auth,response}){
         const user = await User.findOrFail(auth.user.id)
@@ -124,7 +109,7 @@ export default class DashboardController {
         return response.redirect().toRoute('SearchesController.showSearchForm')
     }
     public async showEditPassword({view}){
-        return view.render('dashboard/modals/edit-password',{hideAside:true})
+        return view.render('dashboard/edit-password',{hideAside:true})
     }
     public async editPassword({request,auth}){
         const payload = await request.validate(EditPasswordValidator)

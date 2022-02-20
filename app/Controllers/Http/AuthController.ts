@@ -88,7 +88,7 @@ export default class AuthController {
         return view.render('auth/resetpassword',{url:url})
     }
 
-    public async forgotPassword({ request,view }) {
+    public async forgotPassword({ request }) {
         const { email } = request.only(["email"])
         const user = await User.findByOrFail('email', email)
         const url = Route.makeSignedUrl(
