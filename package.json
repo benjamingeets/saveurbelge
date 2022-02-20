@@ -42,7 +42,6 @@
     "leaflet": "^1.7.1",
     "luxon": "^2.3.0",
     "mjml": "^4.11.0",
-    "pg": "^8.7.1",
     "phc-argon2": "^1.1.2",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
