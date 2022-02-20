@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
+  <title>SaveurBelge 👨🏻‍🌾 Des produits de chez nous 🥕</title>
   @entryPointStyles('app')
   @entryPointScripts('app')
 </head>
@@ -11,12 +11,16 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 crossorigin=""/>
-@!homepage.search()
-<div class="p-2 w-screen h-screen">
-  <div class="z-0 h-full w-full rounded-md" id="map"></div>
+@!search()
+<div class="w-screen h-screen p-2">
+  <div class="z-0 w-full h-full rounded-md" id="map"></div>
 </div>
-<div class="fixed top-0 right-0 bg-gray-50 p-2">
-  <a class="before:w-full before:h-full before:top-0 before:left-0" href="{{route('AuthController.showLoginForm')}}">Se connecter</a>
+<div class="fixed flex items-center p-2 transition rounded-md top-5 right-5 bg-gray-50 hover:bg-gray-300">
+
+    @!icons.account()
+    <a class="before:w-full before:absolute before:h-full before:top-0 before:left-0" href="{{route('AuthController.showLoginForm')}}">
+      Se connecter</a>
+
 </div>
 </body>
 </html>

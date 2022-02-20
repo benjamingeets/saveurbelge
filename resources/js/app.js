@@ -37,15 +37,18 @@ up.compiler('#map', () => {
                 </div>`,
                 {direction:'center',interactive:true,opacity:1});
                 m.on('click',()=>{
-                    console.log("oui")
-                    window.open('/commerce/' + s.slug)
+                    up.visit('/commerce/' + s.slug)
                 })
             })
         })
     })
+
+    const search = document.querySelector('#search')
+    search.addEventListener('click',()=>{
+        map.flyTo(new L.LatLng(50.85045, 4.34878), 12)  
+    })
 })
 up.compiler('#edit-shop',()=>{
-    console.log("oui")
     const bouton = document.querySelector('#logo')
     bouton.addEventListener('change',(e)=>{
         var output = document.querySelector("img");
