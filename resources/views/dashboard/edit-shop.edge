@@ -12,11 +12,12 @@
                 <div class="absolute flex items-center justify-center w-full h-full text-black bg-gray-300 bg-opacity-0 opacity-0 hover:bg-opacity-50 group-hover:opacity-100">
                     Modifier
                 </div>
-                <img class="object-cover object-center w-full" src="/uploads/{{selectedShop.logo}}"/>
+                <img class="object-cover object-center w-full h-full" src="/uploads/{{selectedShop.logo}}"/>
             </figure>
             <input hidden type="file" name="logo" id="logo" accept="image/png, image/jpeg, image/jpg, image/webp">
         </label>
         @!input({text:'Nom',class:"col-span-12",value:selectedShop.name,name:'name'})
+        @!input({text:'Numéro de téléphone',class:"col-span-12",value:selectedShop.phone,name:'phone'})
         @!input({text:'Numéro',name:'addressNumber',class:"col-span-3",value:selectedShop.addressNumber})
         @!input({text:'Rue',name:'addressStreet',class:"col-span-9",value:selectedShop.addressStreet})
         @!input({text:'Code postal',name:'addressPostcode',class:"col-span-5",value:selectedShop.addressPostcode})
@@ -56,7 +57,7 @@
         </label>
     </div>
     <div class="flex gap-4">
-        <input type="submit" value="Enregister" class="px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+        @!button({label:'Confirmer',type:'input'})
         @!button({label:'Annuler',href:route('DashboardController.showShop',{id:selectedShop.id})})
     </div>
 </form>

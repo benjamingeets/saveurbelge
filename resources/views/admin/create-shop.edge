@@ -3,7 +3,7 @@
 
 @section('body')
 <div class="flex flex-col">
-    <form class="grid grid-cols-12 max-w-lg gap-2" action="{{route('AdminsController.createShop')}}" method="post">
+    <form class="grid max-w-lg grid-cols-12 gap-2" action="{{route('AdminsController.createShop')}}" method="post">
         {{ csrfField() }}
         @!input({class:"col-span-12",text:"Name",name:"name"})
         @!input({class:"col-span-12",text:"Logo",name:"logo",accept:'image/png, image/jpeg, image/jpg, image/webp',type:"file"})
@@ -27,7 +27,7 @@
         <div id="categories">
             <p>Catégories:</p>
             @each(category in categories)
-                <label for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
+                <label class="flex gap-1" for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
             @end
         </div>
         <input type="submit" value="envoyer">

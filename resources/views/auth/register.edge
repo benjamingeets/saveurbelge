@@ -1,11 +1,10 @@
-@layout('layouts/main')
+@layout('layouts/public')
 @set('title', 'Inscription')
 
 @section('body')
 <div>
-    @card()
-    <h2>S'inscrire</h2>
-    <form action="{{route('AuthController.register')}}" method="post">
+    <h2 class="text-2xl text-center">S'inscrire</h2>
+    <form action="{{route('AuthController.register')}}" method="post" class="space-y-5">
         {{ csrfField() }}
 
         @!input({text:'Nom',name:'firstName'})
@@ -13,10 +12,9 @@
         @!input({text:'Email',name:'email'})
         @!input({text:'Mot de passe',name:'password',type:'password'})
         @!input({text:'Confirmation',name:'password_confirmation',type:'password'})
-        <input type="submit" value="S'inscrire">
-    </form>
+        @!button({label:'S\'inscrire',type:'input'})
+      </form>
 
-  <a href="{{route('AuthController.showLoginForm')}}">Se connecter</a>
-    @end
+  <a class="text-primary-dark hover:text-primary" href="{{route('AuthController.showLoginForm')}}">Se connecter</a>
 </div>
 @end

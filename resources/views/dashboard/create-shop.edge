@@ -1,5 +1,5 @@
 @layout('layouts/main')
-@set('title', 'Users')
+@set('title', 'Ajouter mon commerce')
 
 @section('body')
 <form class="w-full mx-auto xl:max-w-md" action="{{route('DashboardController.createShop')}}" method="post" x-data="{step:0}">
@@ -12,17 +12,17 @@
         <span class="z-10 flex items-center justify-center w-8 h-8 rounded-full" :class="step > 1 ? 'bg-primary' : 'bg-grey'">3</span>
     </div>
     <div class="grid grid-cols-12 gap-4" x-show="step==0">
-            @!input({class:"col-span-12",text:"Name",name:"name"})
+            @!input({class:"col-span-12",text:"Nom de l'établissement",name:"name"})
             @!input({class:"col-span-12",text:"Logo",name:"logo",accept:'image/png, image/jpeg, image/jpg, image/webp',type:"file"})
             @!input({class:"col-span-3",text:"Numéro",name:"addressNumber"})
             @!input({class:"col-span-9",text:"Rue",name:"addressStreet"})
             @!input({class:"col-span-4",text:"Code postal",name:"addressPostcode"})
-            @!input({class:"col-span-8",text:"Vile",name:"addressCity"})
+            @!input({class:"col-span-8",text:"Ville",name:"addressCity"})
             @!input({class:"col-span-12",text:"Numéro de téléphone",name:"phone"})
             @!textarea({class:"col-span-12",text:"Description",name:"description"})
     </div>
     <div  class="grid grid-cols-12 gap-4" x-cloak x-show="step == 1" class="flex justify-center w-full">
-        <select class="col-span-12" name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
+        <select class="block w-full col-span-12 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" name="sector" id="sector-select" up-observe="up.render({target:'#categories',url:`/get-categories/${document.querySelector('#sector-select').value}`});">
             @each(sector in sectors)
                     <option value="{{sector.id}}">{{sector.name}}</option>
             @end
@@ -30,7 +30,7 @@
         <div id="categories">
             <p>Catégories:</p>
             @each(category in categories)
-                <label for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
+                <label class="flex gap-1" for="{{category.id}}"><input type="checkbox" name="categories[]" value="{{category.id}}" id="{{category.id}}"> {{category.name}} </label>
             @end
         </div>
         <label class="flex items-center col-span-12 gap-1" x-data="{ oui: false}">
@@ -54,10 +54,10 @@
             @!input({class:"col-span-12",text:"Site internet",name:"websiteUrl"})
        
     </div>
-    <div class="flex w-full" :class="step > 0 ? 'justify-between' : 'justify-end'">
-        <button type="button" x-show="step > 0" x-on:click="step--">Précédent</button>
-        <button class="" type="button" x-on:click="step++" x-show="step < 2" >Suivant</button>
-        <input x-cloak x-show="step == 2" type="submit" value="Confirmer">
+    <div class="flex w-full mt-4" :class="step > 0 ? 'justify-between' : 'justify-end'">
+        <button class="px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 transform rounded-md bg-primary-dark hover:bg-primary focus:outline-none focus:ring focus:ring-primary-light focus:ring-opacity-80" type="button" x-show="step > 0" x-on:click="step--">Précédent</button>
+        <button class="px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 transform rounded-md bg-primary-dark hover:bg-primary focus:outline-none focus:ring focus:ring-primary-light focus:ring-opacity-80" type="button" x-on:click="step++" x-show="step < 2" >Suivant</button>
+        <input class="px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 transform rounded-md bg-primary-dark hover:bg-primary focus:outline-none focus:ring focus:ring-primary-light focus:ring-opacity-80" x-cloak x-show="step == 2" type="submit" value="Confirmer">
     </div>
 </form>
 @end

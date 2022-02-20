@@ -1,59 +1,61 @@
 @layout('layouts/main')
-@set('title', 'Users')
+@set('title', `${selectedShop.name}`)
 
 @section('body')
-            <div class="container px-6 py-12 mx-auto">
-                <div class="flex items-center gap-4">
+<div class="container mx-auto mt-10 md:px-6 md:py-12 md:mt-0">
+    <div class="flex items-center gap-4">
 
-                    <figure class="w-16 h-16 overflow-hidden rounded-full">
-                        <img class="" src="/uploads/{{selectedShop.logo}}"/>
-                    </figure>
-                    <h2 class="text-2xl">{{selectedShop.name}} ({{selectedShop.sector}})</h2>
-                </div>
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    <div>
-                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Informations</h3>
-                        <p class="before:content-['🏡']">{{selectedShop.addressNumber}},{{selectedShop.addressStreet}}, {{selectedShop.addressCity}}</p>
-                        @if(selectedShop.phone)
-                        <p class="before:content-['☎️']">{{selectedShop.phone}}</p>
-                        @endif
-                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Description:</h3>
-                        <p>{{selectedShop.description}}</p>
-                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Liens:</h3>
-                        @if(selectedShop.facebookUsername)
-                        <p>Facebook: {{selectedShop.facebookUsername}}</p>
-                        @endif
-                        @if(selectedShop.instagramUsername)
-                        <p>Instagram: {{selectedShop.instagramUsername}}</p>
-                        @endif
-                        @if(selectedShop.websiteUrl)
-                        <p>Site web: {{selectedShop.websiteUrl}}</p>
-                        @endif
-                    </div>
-        
-                    <div>
-                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Catégories</h3>
-                        <ul class="list-disc">
-                            @each(c in selectedShop.categories)
-                                @each(cat in categories)
-                                    @if(cat.id == c)
-                                        <li class="ml-4">{{cat.name}}</li>
-                                    @endif
-                                @end
-                            @end
-                        </ul> </div>
-                    
-                    <div>
-                        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Particulatités</h3>
-                        <p class="{{selectedShop.optionIsBio ? '':'line-through text-gray-500'}}">🥒 Mon commerce vend des produits bios</p>
-                        <p class="{{selectedShop.optionIsProductor ? '':'line-through text-gray-500'}}">👨🏻‍🌾 Mon commerce vend ce que je produits</p>
-                        <p class="{{selectedShop.optionAcceptLocalCurrency ? '':'line-through text-gray-500'}}">💶 Mon commerce accepte une monnaie locale</p>
-                    </div>
-                </div>
-            </div>
-
-        <div class="flex justify-center gap-4">
-            @!button({label:'Modifier',href:route('DashboardController.showShopEdit',{id:selectedShop.id})})
-            @!button({label:'Supprimer',href:route('DashboardController.showDeleteShop',{id:selectedShop.id})})
+        <figure class="w-16 h-16 overflow-hidden rounded-full">
+            <img class="object-cover w-full h-full aspect-square" src="/uploads/{{selectedShop.logo}}"/>
+        </figure>
+        <h2 class="text-lg md:text-2xl">{{selectedShop.name}}</h2>
+    </div>
+    <div class="grid grid-cols-1 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div>
+            <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Informations</h3>
+            <p class="before:content-['🏡']">{{selectedShop.addressNumber}},{{selectedShop.addressStreet}}, {{selectedShop.addressCity}}</p>
+            @if(selectedShop.phone)
+            <p class="before:content-['☎️']">{{selectedShop.phone}}</p>
+            @endif
+            <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Description:</h3>
+            <p>{{selectedShop.description.length > 200 ? selectedShop.description.substr(0,200) + "..." : selectedShop.description}}</p>
+            @if(selectedShop.facebookUsername || selectedShop.instagramUsername || selectedShop.websiteUrl)
+            <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Liens:</h3>
+            @endif
+            @if(selectedShop.facebookUsername)
+            <p>Facebook: {{selectedShop.facebookUsername}}</p>
+            @endif
+            @if(selectedShop.instagramUsername)
+            <p>Instagram: {{selectedShop.instagramUsername}}</p>
+            @endif
+            @if(selectedShop.websiteUrl)
+            <p>Site web: {{selectedShop.websiteUrl}}</p>
+            @endif
         </div>
+
+        <div>
+            <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Catégories</h3>
+            <ul class="list-disc">
+                @each(c in selectedShop.categories)
+                    @each(cat in categories)
+                        @if(cat.id == c)
+                            <li class="ml-4">{{cat.name}}</li>
+                        @endif
+                    @end
+                @end
+            </ul> </div>
+        
+        <div>
+            <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">Particulatités</h3>
+            <p class="{{selectedShop.optionIsBio ? '':'line-through text-gray-500'}}">🥒 Mon commerce vend des produits bios</p>
+            <p class="{{selectedShop.optionIsProductor ? '':'line-through text-gray-500'}}">👨🏻‍🌾 Mon commerce vend ce que je produits</p>
+            <p class="{{selectedShop.optionAcceptLocalCurrency ? '':'line-through text-gray-500'}}">💶 Mon commerce accepte une monnaie locale</p>
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-center gap-4">
+@!button({label:'Modifier',href:route('DashboardController.showShopEdit',{id:selectedShop.id})})
+@!button({label:'Supprimer',href:route('DashboardController.showDeleteShop',{id:selectedShop.id})})
+</div>
 @end

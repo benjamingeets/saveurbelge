@@ -1,18 +1,18 @@
 @layout('layouts/main')
-@set('title', 'Users')
+@set('title', 'Accueil')
 
 @section('body')
-    @card()
+<div class="flex flex-col items-center mt-20">
     <span>
         @!icons.shop()
     </span>
     <h2>Pas encore de commerce</h2>
-    <p>Vous n'avez pas encore de commerce
+    <p>Vous n'avez pas encore de commerce,
         @if(auth.user.status > 0)
-        <a href="{{route('DashboardController.showAddShop')}}">ajoutez en un</a>
+        <a href="{{route('DashboardController.showAddShop')}}" class="text-primary hover:text-primary-light">ajoutez en un</a>
         @else
-        confirmez votre compte pour en ajouter un
+        confirmez votre compte via le lien reçu par email pour en ajouter un
         @endif
     </p>
-    @end
+</div>
 @end
