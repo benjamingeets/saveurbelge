@@ -21,9 +21,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', "SearchesController.showSearchForm")
-Route.get("/commerce/:slug", ({ request }) => {
-  return request.params().slug
-})
+Route.get("/commerce/:slug", "SearchesController.showShop")
 
 Route.get("/account-validation/:id", "AuthController.validateUser")
 Route.get("/reinitialisation-mot-de-passe/:id", "AuthController.showResetPassword")
