@@ -5,6 +5,9 @@ module.exports = {
     './resources/js/**/*.js',
   ],
   theme: {
+    fontFamily:{
+      'main':['Comfortaa']
+    },
     extend: {
       colors:{
         'primary':{
