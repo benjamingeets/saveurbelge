@@ -1,12 +1,40 @@
-<div class="fixed z-50 flex gap-3 p-2 bg-white rounded-md top-5 left-5">
-    <figure>
-        <img class="w-10" src="/saveurbelge.svg" alt="Logo saveur belge"/>
-    </figure>
-    <div class="border rounded-md">
-        <input class="h-full px-2" type="text">
-        <span id="search">
-            GO LA 
-        </span>
+<div class="fixed z-50 bg-white rounded-md top-5 left-5" x-data="{ settings: false }">
+    <div class="flex gap-3 p-2">
+        <figure>
+            <img class="w-10" src="/saveurbelge.svg" alt="Logo saveur belge"/>
+        </figure>
+        <form class="flex border rounded-md">
+            <input class="h-full px-2" type="text" placeholder="Code postal..">
+            <button class="px-2 py-1 m-1 transition rounded-md hover:shadow-lg">
+                @!icons.search()
+            </button>
+        </form>
+        <button @click="settings = !settings">
+            @!icons.settings()
+        </button>
     </div>
-    settings
+    <div class="px-7 pb-7" x-show="settings">
+        <h2>Secteurs</h2>
+        <ul>
+        @each(sector in sectors)
+            <li class="ml-2">
+                <label for="{{sector.name}}">
+                    <input type="checkbox" name="{{sector.name}}" id="{{sector.name}}" checkedwa>
+                    {{sector.name}}
+                </label>
+            </li>
+        @end
+        </ul>
+        <h2>Catégories</h2>
+        <ul>
+            @each(category in categories)
+                <li class="ml-2">
+                    <label for="{{category.name}}">
+                        <input type="checkbox" name="{{category.name}}" id="{{category.name}}" checked>
+                        {{category.name}}
+                    </label>
+                </li>
+            @end
+            </ul>
+    </div>
 </div>
