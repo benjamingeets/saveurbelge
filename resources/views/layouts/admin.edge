@@ -9,7 +9,7 @@
   @entryPointScripts('app')
 </head>
 <body class="">
-  @!navbar()
+  @!navbar({hideBack:true})
   <div class="flex">
     <aside class="fixed flex flex-col justify-center px-4 w-60">
       <nav class="flex flex-col">
@@ -22,7 +22,7 @@
       </nav>
   </aside>
 
-    <main class="flex justify-center items-center w-full py-20">
+    <main class="flex items-center justify-center w-full py-20">
       @!section('body')
     </main>
   </div>
