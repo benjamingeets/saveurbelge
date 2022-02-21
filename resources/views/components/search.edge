@@ -1,9 +1,9 @@
 <div class="fixed z-50 bg-white rounded-md top-5 left-5" x-data="{ settings: false }">
-    <div class="flex gap-3 p-2">
+    <div class="flex items-center gap-3 p-2">
         <figure>
             <img class="w-10" src="/saveurbelge.svg" alt="Logo saveur belge"/>
         </figure>
-        <form class="flex border rounded-md">
+        <form class="flex items-center h-full border rounded-md">
             <input class="h-full px-2" type="text" placeholder="Code postal..">
             <button class="px-2 py-1 m-1 transition rounded-md hover:shadow-lg">
                 @!icons.search()
@@ -13,13 +13,17 @@
             @!icons.settings()
         </button>
     </div>
-    <div class="px-7 pb-7" x-show="settings">
+    <div class="px-7 pb-7" x-show="settings" x-transition x-data="{displaysectors:{
+        @each(sector in sectors)~
+            '{{sector.id}}':true,
+        @end~
+    }}">
         <h2>Secteurs</h2>
         <ul>
         @each(sector in sectors)
             <li class="ml-2">
                 <label for="{{sector.name}}">
-                    <input type="checkbox" name="{{sector.name}}" id="{{sector.name}}" checkedwa>
+                    <input type="checkbox" name="{{sector.name}}" x-model="displaysectors['{{sector.id}}']" id="{{sector.name}}" checked>
                     {{sector.name}}
                 </label>
             </li>
@@ -28,9 +32,9 @@
         <h2>Catégories</h2>
         <ul>
             @each(category in categories)
-                <li class="ml-2">
+                <li x-show="displaysectors['{{category.sector}}']" class="ml-2">
                     <label for="{{category.name}}">
-                        <input type="checkbox" name="{{category.name}}" id="{{category.name}}" checked>
+                        <input type="checkbox" name="{{category.name}}" id="{{category.name}}" checked >
                         {{category.name}}
                     </label>
                 </li>
