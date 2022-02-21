@@ -9,7 +9,11 @@ export default class SearchesController {
         const sectors = await Sector.all()
         return view.render('homepage',{sectors,categories})
     }
-    public async getShops({}){
+    public async getShops({request}){
+        if(request.qs().categories){
+            const categories = await JSON.parse(request.qs().categories)
+            console.log(categories)
+        }
         const shops = await Shop.query().join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.name','slug','logo','latitude','longitude','sectors.name as sector','categories')
         return shops
     }
