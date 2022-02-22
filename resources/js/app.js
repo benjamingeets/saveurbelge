@@ -8,21 +8,29 @@ window.Alpine = Alpine
 Alpine.start()
 
 
-const makeTooltip = ({logo,name}) =>{
+const makeTooltip = ({logo,name,city}) =>{
     return `
-    <div class="flex p-5">
-        ${logo ? `<img class="h-20" loading="lazy" src="/uploads/${logo}"/>` : ''}
-        <div class="text-2xl">${name}</div>
+    <div class="flex gap-5">
+        ${logo ? 
+            `<figure class="h-10 w-10 rounded-full overflow-hidden border-2">
+            <img class="h-full w-full object-cover" loading="lazy" src="/uploads/${logo}"/>
+            </figure>
+            ` : ''
+        }
+        <div class="text-sm">
+            <h3>${name}</h3>
+            <span class="text-primary-dark">${city}</span>
+        </div>
     </div>`
 }
 
 const myIcon = L.icon({
     iconUrl: 'https://cms.galandtristan.be/galandtristan.webp',
-    iconSize: [38, 95],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
+    iconSize: [25, 25],
+    iconAnchor: [0, -35],
+    popupAnchor: [0, 0],
+    shadowSize: [0, 0],
+    shadowAnchor: [0, 0]
 });
 
 up.link.config.followSelectors.push('a[href]')
@@ -39,8 +47,8 @@ up.compiler('#map', () => {
     fetch("http://localhost:3333/shops").then((r) => {
         r.json().then((l) => {
             l.forEach(s => {
-                let m = L.marker([s.latitude, s.longitude], { riseOnHover: true }).addTo(map);
-                m.bindTooltip(makeTooltip({logo:s.logo,name:s.name}),{ direction: 'center', interactive: true, opacity: 1 });
+                let m = L.marker([s.latitude, s.longitude], { riseOnHover: true,icon:myIcon }).addTo(map);
+                m.bindTooltip(makeTooltip({logo:s.logo,name:s.name,city:s.address_city}),{ direction: 'center', interactive: true, opacity: 1 });
                 m.on('click', () => {
                     up.visit('/commerce/' + s.slug)
                 })
