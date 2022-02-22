@@ -1,8 +1,8 @@
 @set('active','flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md')
 @set('notactive','flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200  hover:text-gray-700')
 <button class="fixed z-30 block p-2 rounded-md bg-primary md:hidden top-5 right-5" x-on:click="open = !open" x-text="open ? 'Fermer' : 'Menu'"></button>
-<div class="fixed z-20 flex-col w-screen h-screen px-4 py-8 bg-white border-r md:w-64 md:static md:flex" x-bind:class="open ? '' : 'hidden'">
-    <h2 class="text-3xl font-semibold text-gray-800">SaveurBelge</h2>
+<div class="fixed z-20 flex-col w-screen h-screen px-4 py-8 bg-white border-r md:w-96 md:static md:flex" x-bind:class="open ? '' : 'hidden'">
+    <a href="{{route('SearchesController.showSearchForm')}}" class="text-3xl font-semibold text-center text-gray-800">SaveurBelge</a>
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav>
             @if(auth.user.status > 0 )
@@ -32,8 +32,8 @@
         </nav>
 
         <div class="flex flex-col items-center px-4 -mx-2">
-            <a href="{{route('SearchesController.showSearchForm')}}">Retour au site</a>
             <h4 class="mx-2 font-medium text-gray-800">{{auth.user.firstName}} {{auth.user.lastName}}</h4>
+            <p>&copy; Loak.studio 2022</p>
         </div>
     </div>
 </div>

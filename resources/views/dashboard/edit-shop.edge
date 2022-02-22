@@ -2,9 +2,9 @@
 @set('title', 'Users')
 
 @section('body')
-<form id="edit-shop" class="grid grid-cols-12 gap-4 px-4 mx-auto mt-4" action="{{route('DashboardController.editShop',{id:selectedShop.id})}}" method="post">
+<form id="edit-shop" class="grid max-w-2xl grid-cols-12 gap-4 px-4 mx-auto mt-4" action="{{route('DashboardController.editShop',{id:selectedShop.id})}}" method="post">
     {{ csrfField() }}
-    <div class="grid grid-cols-12 col-span-12 gap-4 lg:col-span-4">
+    <div class="grid grid-cols-12 col-span-12 gap-4">
         <h3 class="col-span-12 text-2xl">Informations</h3>
         
         <label class="flex items-center col-span-12 gap-4" for="logo">
@@ -24,13 +24,13 @@
         @!input({text:'Ville',name:'addressCity',class:"col-span-7",value:selectedShop.addressCity})
         @!textarea({class:'col-span-12',text:'Description',name:'description',value:selectedShop.description})
     </div>
-    <div class="grid content-start grid-cols-12 col-span-12 gap-4 md:col-span-4">
+    <div class="grid content-start grid-cols-12 col-span-12 gap-4">
         <h3 class="col-span-12 text-2xl">Liens</h3>
         @!input({text:'Instagram',name:'instagramUsername',class:"col-span-12",value:selectedShop.instagramUsername})
         @!input({text:'Facebook',name:'facebookUsername',class:"col-span-12",value:selectedShop.facebookUsername})
         @!input({text:'Site web',name:'websiteUrl',class:"col-span-12",value:selectedShop.websiteUrl})
     </div>
-    <div class="grid content-start grid-cols-12 col-span-12 gap-4 md:col-span-4">
+    <div class="grid content-start grid-cols-12 col-span-12 gap-4">
         <h3 class="col-span-12 text-2xl">Catégories</h3>
         @each(category in categories)
             <label for="{{category.id}}" class="col-span-12">
