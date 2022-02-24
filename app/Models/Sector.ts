@@ -8,6 +8,9 @@ export default class Sector extends BaseModel {
   @column()
   public name:string
 
+  @column()
+  public icon:string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

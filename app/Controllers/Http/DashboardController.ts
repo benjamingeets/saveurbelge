@@ -69,17 +69,23 @@ export default class DashboardController {
         const categories = await Category.query().select('*').where('sector',sectors[0].id)
         return view.render('dashboard/create-shop', {sectors,categories ,hideAside:true })
     }
-    public async createShop({request,auth,response}){
+    public async createShop({request,auth,response,session}){
         const logo = request.file('logo')
         const payload = await request.validate(CreateShopValidator)
         payload.ownerId = auth.user.id
-        const shop = await Shop.create(payload)
-        if (logo) {
-            await logo.moveToDisk('./')
-            shop.logo = logo.fileName
-            await shop.save()
+        try{
+            const shop = await Shop.create(payload)
+            if (logo) {
+                await logo.moveToDisk('./')
+                shop.logo = logo.fileName
+                await shop.save()
+            }
+            return response.redirect().toRoute('DashboardController.showDashboard')
+        }catch(e){
+            session.flash('address', `L'adresse entrée n'a pas été reconnue`)
+            console.log(e)
+            response.redirect().toRoute('DashboardController.showAddShop')
         }
-        return response.redirect().toRoute('DashboardController.showDashboard')
     }
     public async showAccount({ view, auth }) {
         const user = await User.findOrFail(auth.user.id)

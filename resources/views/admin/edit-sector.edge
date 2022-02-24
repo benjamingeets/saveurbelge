@@ -5,6 +5,7 @@
     <form action="{{route('AdminsController.editSector',{id:sector.id})}}" method="post">
         {{ csrfField() }}
         <input type="text" name="name" value="{{sector.name}}" id="">
+        <input type="text" name="icon" value="{{sector.icon}}" id="">
         <input type="submit" value="Save">
     </form>
     <a href="{{route('AdminsController.showSectorsAndCategories')}}">Annuler</a>

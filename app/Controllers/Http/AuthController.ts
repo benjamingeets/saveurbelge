@@ -36,7 +36,7 @@ export default class AuthController {
         )
         new VerifyEmail(user, `${`http://localhost:3333`}${url}`).sendLater()
 
-        return response.redirect().toPath("/")
+        return response.redirect().toRoute('DashboardController.showDashboard')
     }
     public async validateUser({ auth, params, request, response, session }) {
         if (!request.hasValidSignature()) {
@@ -50,7 +50,7 @@ export default class AuthController {
         await user.save()
         await auth.login(user)
 
-        return response.redirect('/')
+        return response.redirect().toRoute('DashboardController.showDashboard')
     }
 
     public async showForgotPassword({ view }) {

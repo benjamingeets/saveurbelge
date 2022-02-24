@@ -18,6 +18,11 @@
             @!input({class:"col-span-9",text:"Rue",name:"addressStreet"})
             @!input({class:"col-span-4",text:"Code postal",name:"addressPostcode"})
             @!input({class:"col-span-8",text:"Ville",name:"addressCity"})
+            @if(flashMessages.has('address'))
+            <div class="col-span-12">
+                <p>{{flashMessages.get('address')}}</p>
+            </div>
+            @endif
             @!input({class:"col-span-12",text:"Numéro de téléphone",name:"phone"})
             @!textarea({class:"col-span-12",text:"Description",name:"description"})
     </div>

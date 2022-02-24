@@ -128,8 +128,11 @@ export default class AdminsController {
     public async editSector({ params, request, response }) {
         const id = params.id
         const { name } = request.only(["name"])
+
+        const { icon } = request.only(["icon"])
         const sector = await Sector.findOrFail(id)
         sector.name = name
+        sector.icon = icon
         await sector.save()
         response.redirect().toRoute('AdminsController.showSectorsAndCategories')
     }

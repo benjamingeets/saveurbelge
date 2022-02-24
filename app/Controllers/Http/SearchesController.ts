@@ -1,4 +1,5 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from "@ioc:Adonis/Lucid/Database"
 import Category from "App/Models/Category"
 import Sector from "App/Models/Sector"
 import Shop from "App/Models/Shop"
@@ -14,7 +15,7 @@ export default class SearchesController {
             const categories = await JSON.parse(request.qs().categories)
             console.log(categories)
         }
-        const shops = await Shop.query().join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.name','slug','logo','latitude','longitude','addressCity','sectors.name as sector','categories')
+        const shops = await Database.from('shops').join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.name','slug','logo','latitude','longitude','address_city','categories','sectors.*','sectors.name')
         return shops
     }
     public async showShop({view,params}){
