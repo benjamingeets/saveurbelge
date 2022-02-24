@@ -8,6 +8,7 @@
         <h3 class="col-span-12 text-2xl">Informations</h3>
         
         <label class="flex items-center col-span-12 gap-4" for="logo">
+            @if(selectedShop.logo)
             <figure class="relative w-20 h-20 overflow-hidden rounded-full cursor-pointer group">
                 <div class="absolute flex items-center justify-center w-full h-full text-black bg-gray-300 bg-opacity-0 opacity-0 hover:bg-opacity-50 group-hover:opacity-100">
                     Modifier
@@ -15,6 +16,12 @@
                 <img class="object-cover object-center w-full h-full" src="/uploads/{{selectedShop.logo}}"/>
             </figure>
             <input hidden type="file" name="logo" id="logo" accept="image/png, image/jpeg, image/jpg, image/webp">
+            @else
+            <label for="logo">
+                <span>Logo</span>
+                <input type="file" name="logo" id="logo" accept="image/png, image/jpeg, image/jpg, image/webp">
+            </label>
+            @endif
         </label>
         @!input({text:'Nom',class:"col-span-12",value:selectedShop.name,name:'name'})
         @!input({text:'Numéro de téléphone',class:"col-span-12",value:selectedShop.phone,name:'phone'})

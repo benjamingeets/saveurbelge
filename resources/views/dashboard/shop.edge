@@ -5,9 +5,11 @@
 <div class="max-w-2xl mx-auto mt-10 md:px-6 md:py-12 md:mt-0">
     <div class="flex items-center gap-4">
 
+        @if(selectedShop.logo)
         <figure class="w-16 h-16 overflow-hidden rounded-full">
             <img class="object-cover w-full h-full aspect-square" src="/uploads/{{selectedShop.logo}}"/>
         </figure>
+        @endif
         <h2 class="text-lg md:text-2xl">{{selectedShop.name}}</h2>
     </div>
     <div class="grid grid-cols-1 md:gap-8">
@@ -55,7 +57,7 @@
 </div>
 
 <div class="flex justify-center gap-4">
-@!button({label:'Modifier',href:route('DashboardController.showShopEdit',{id:selectedShop.id})})
 @!button({label:'Supprimer',href:route('DashboardController.showDeleteShop',{id:selectedShop.id})})
+@!button({label:'Modifier',href:route('DashboardController.showShopEdit',{id:selectedShop.id})})
 </div>
 @end
