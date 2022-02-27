@@ -1,0 +1,16 @@
+@layout('layouts/main')
+@set('title','Ajouter mon établissement')
+@section('body')
+<form action="{{route('ShopsController.createShop')}}" method="POST" class="max-w-3xl mx-auto">
+    @!input({text:"Nom de votre établissement *",name:"name"})
+    @!input({text:"Rue *",name:"street"})
+    @!input({text:"Ville *",name:"city"})
+    @!input({text:"Logo",name:"logo",accept:'image/png, image/jpeg, image/jpg, image/webp',type:"file"})
+    @!textarea({text:'Description',name:"description"})
+    @!input({text:"Numéro de téléphone",name:"phone"})
+    @!input({text:"Site internet",name:"website"})
+    @!input({text:"Nom d'utilisateur Facebook",name:"facebook"})
+    @!input({text:"Nom d'utilisateur Instagram",name:"instagram"})
+    <button class="px-4 py-2 bg-green-400 rounded-md">Ajouter mon établissement</button>
+</form>
+@end

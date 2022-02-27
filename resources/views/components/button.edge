@@ -1,8 +1,0 @@
-@set('classes', `${classes ? classes : ''}` + " " + ' inline-block px-4 py-2 font-medium cursor-pointer tracking-wide text-white transition-colors duration-200 transform rounded-md bg-primary-dark hover:bg-primary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80')
-@if(type == "input")
-<input type="submit" value="{{label}}" class="{{classes}}"/>
-@else
-<a href="{{href}}" class="{{classes}}">
-    {{label}}
-</a>
-@endif

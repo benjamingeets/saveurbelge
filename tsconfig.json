@@ -32,10 +32,7 @@
       "@adonisjs/view",
       "@adonisjs/shield",
       "@adonisjs/lucid",
-      "@adonisjs/auth",
-      "@adonisjs/mail",
-      "@adonisjs/lucid-slugify",
-      "@adonisjs/bouncer"
+      "@adonisjs/lucid-slugify"
     ]
   }
 }

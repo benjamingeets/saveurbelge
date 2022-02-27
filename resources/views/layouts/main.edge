@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}} | Dashboard</title>
-  <link rel="stylesheet" href="https://unpkg.com/unpoly@2.5.0/unpoly.min.css">
-  @entryPointStyles('app')
-  @entryPointScripts('app')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @entryPointStyles('app')
+    @entryPointScripts('app')
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+    @if(title)
+        <title> {{title}} | SaveurBelge</title>
+    @else
+        <title>SaveurBelge 👨🏻‍🌾 Des produits de chez nous 🥕</title>
+    @endif
 </head>
-
-<body class="flex bg-white font-main"  x-data="{ open: false }">
-@!sidebar({shops})
-<div class="flex flex-col items-start w-full gap-4">
-  <section class="w-full h-full p-4">
-  @!section('body')
-  </section>
-</div>
+<body>
+    @!section('body')
 </body>
 </html>

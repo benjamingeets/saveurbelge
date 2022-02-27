@@ -1,5 +1,4 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
-  "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/fonts/Comfortaa-Medium.ttf": "http://localhost:8080/assets/fonts/Comfortaa-Medium.e26e46e9.ttf"
+  "assets/app.js": "http://localhost:8080/assets/app.js"
 }
