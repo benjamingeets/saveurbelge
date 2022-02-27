@@ -2,9 +2,9 @@
 @set('title', 'Secteurs et catégories')
 
 @section('body')
-<div class="max-w-64ch w-full">
+<div class="w-full max-w-64ch">
     @each(sector in sectors)
-    <div class="bg-gray-200 my-2 px-4 py-3 rounded-md">
+    <div class="px-4 py-3 my-2 bg-gray-200 rounded-md">
         <h2 class="text-2xl"><a href="{{route('AdminsController.showEditSector',{id:sector.id})}}">{{sector.name}}
             </a> 
         <!-- <form action="{{route('AdminsController.deleteSector',{id:sector.id})}}" method="post">
@@ -29,7 +29,7 @@
     @endeach
     <form action="{{route('AdminsController.createSector')}}" method="post">
         {{ csrfField() }}
-        <input type="text" name="sector" id="">
+        @!input({text:'Nom',class:"col-span-12",name:'sector'})
         <input type="submit" value="Créer un secteur">
     </form>
 </div>

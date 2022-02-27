@@ -10,9 +10,9 @@ Alpine.start()
 
 const makeTooltip = ({logo,name,city}) =>{
     return `
-    <div class="flex gap-5">
+    <div class="flex gap-5 p-2 items-center">
         ${logo ? 
-            `<figure class="h-10 w-10 rounded-full overflow-hidden border-2">
+            `<figure class="h-16 w-16 rounded-full overflow-hidden">
             <img class="h-full w-full object-cover" loading="lazy" src="/uploads/${logo}"/>
             </figure>
             ` : ''
@@ -44,15 +44,16 @@ up.form.config.submitSelectors.push(['form'])
 up.compiler('#map', () => {
     let lat = 50.850340
     let lon = 4.351710
-    
+    const popup = document.querySelector('#city-popup')
+    const names = document.querySelector('#popup-name')
+    const picture = document.querySelector('#popup-image')
     const map = L.map('map', { zoomControl: false }).setView([lat, lon], 9);
-    map.attributionControl.setPrefix('')
+    map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
 
     fetch("http://localhost:3333/shops").then((r) => {
         r.json().then((l) => {
             l.forEach(s => {
-                console.log(s)
                 let m = L.marker([s.latitude, s.longitude], { riseOnHover: true,icon:L.icon({
                     iconUrl: s.icon ? s.icon : '/commerce.svg',
                     iconSize: [35, 35],
@@ -60,7 +61,17 @@ up.compiler('#map', () => {
                 }) }).addTo(map);
                 m.bindTooltip(makeTooltip({logo:s.logo,name:s.name,city:s.address_city}),{ direction: 'center', interactive: true, opacity: 1 });
                 m.on('click', () => {
-                    up.visit('/commerce/' + s.slug)
+                    if(window.innerWidth>768){
+                        up.visit('/commerce/' + s.slug)
+                    }else{
+                        popup.classList.remove('hidden')
+                        popup.classList.add('flex')
+                        names.firstElementChild.textContent = s.name
+                        names.lastElementChild.textContent = s.address_city
+                        picture.src = `/uploads/${s.logo}`
+                        popup.href = `/commerce/${s.slug}`
+                    }
+                       
                 })
             })
         })

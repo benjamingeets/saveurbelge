@@ -8,12 +8,13 @@
     <div >
         <a class="flex items-center" href="{{route('AuthController.showLoginForm')}}">
             @!icons.account()
-            Se connecter</a>
+            
+        @if(auth.isLoggedIn)
+            Mon compte
+        @else
+        Se connecter
+        @endif
+        </a>
     </div>
 
-@unless(hideBack)
-<a href="{{route('SearchesController.showSearchForm')}}" class="absolute flex items-center p-2 rounded-md -bottom-10 hover:bg-white">
-    @!icons.back()
-    Retour à la carte</a>
-@end
 </nav>

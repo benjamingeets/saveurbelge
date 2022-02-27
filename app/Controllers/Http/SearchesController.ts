@@ -15,7 +15,7 @@ export default class SearchesController {
             const categories = await JSON.parse(request.qs().categories)
             console.log(categories)
         }
-        const shops = await Database.from('shops').join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.name','slug','logo','latitude','longitude','address_city','categories','sectors.*','sectors.name')
+        const shops = await Database.from('shops').join('sectors', 'shops.sector', '=', 'sectors.id').select('shops.name','slug','logo','latitude','longitude','address_city','categories',"sectors.icon as icon")
         return shops
     }
     public async showShop({view,params}){

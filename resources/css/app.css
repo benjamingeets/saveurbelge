@@ -10,3 +10,6 @@
 }
 
 [x-cloak] { display: none !important; }
+.leaflet-tooltip{
+  @apply hidden md:block;
+}

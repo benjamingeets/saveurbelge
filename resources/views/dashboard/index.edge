@@ -6,8 +6,7 @@
     <span>
         @!icons.shop()
     </span>
-    <h2>Pas encore de commerce</h2>
-    <p>Vous n'avez pas encore de commerce,
+    <p class="max-w-[64ch] text-center">Vous n'avez pas encore de commerce,
         @if(auth.user.status > 0)
         <a href="{{route('DashboardController.showAddShop')}}" class="text-primary hover:text-primary-light">ajoutez en un</a>
         @else

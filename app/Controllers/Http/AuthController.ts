@@ -68,7 +68,7 @@ export default class AuthController {
         user.password = password
         await user.save()
         await auth.login(user)
-        response.redirect().toPath("/")
+        response.redirect().toRoute("DashboardController.showDashboard")
     }
 
     public async showResetPassword({view,request,session,response,params}){
@@ -88,7 +88,7 @@ export default class AuthController {
         return view.render('auth/resetpassword',{url:url})
     }
 
-    public async forgotPassword({ request }) {
+    public async forgotPassword({ request,response }) {
         const { email } = request.only(["email"])
         const user = await User.findByOrFail('email', email)
         const url = Route.makeSignedUrl(
@@ -100,6 +100,6 @@ export default class AuthController {
         )
         new ForgotPassword(user, `${`http://localhost:3333`}${url}`).sendLater()
 
-        return "Votre demande a bien été reçue."
+        return response.redirect().toRoute('AuthController.showLoginForm')
     }
 }

@@ -6,14 +6,14 @@
     <form class="flex flex-col" action="{{route('AdminsController.editUser',{id:user.id})}}" method="post">
         {{ csrfField() }}
         {{user.id}}
-        <input type="text" name="email" value="{{user.email}}" id="">
-        <input type="text" name="firstName" value="{{user.firstName}}" id="">
-        <input type="text" name="lastName" value="{{user.lastName}}" id="">
-        <input type="password" name="password" value="" id="">
-        <select name="status" id="">
+        @!input({text:'Email',class:"col-span-12",value:user.email,name:'email'})
+        @!input({text:'Prénom',class:"col-span-12",value:user.firstName,name:'firstName'})
+        @!input({text:'Nom',class:"col-span-12",value:user.lastName,name:'lastName'})
+        @!input({text:'mot de passe',class:"col-span-12",name:'password'})
+        <select class="border" name="status" id="">
             <option value="0">Non validé</option>
             <option value="1"
-                @if(user.status == 1)
+                @if(user.status >= 1)
                     selected
                 @endif
             >Validé</option>

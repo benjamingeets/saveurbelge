@@ -4,7 +4,7 @@
 @section('body')
     <form action="{{route('AdminsController.editCategory',{id:category.id})}}" method="post">
         {{ csrfField() }}
-        <input type="text" name="name" value="{{category.name}}" id="">
+        @!input({text:'Nom',class:"col-span-12",value:category.name,name:'name'})
         <input type="submit" value="Save">
     </form>
     <a href="{{route('AdminsController.showSectorsAndCategories')}}">Annuler</a>
