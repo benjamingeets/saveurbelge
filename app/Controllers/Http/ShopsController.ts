@@ -16,14 +16,15 @@ export default class ShopsController {
     }
     public async createShop({request}){
         const payload = await request.validate(CreateShopValidator)
-        console.log(payload)
         if(payload.logo){
-            payload.logo.moveToDisk('./')
+            await payload.logo.moveToDisk('./')
+            payload.logo = payload.logo.fileName
         }
         Shop.create(payload)
         return "ok"
     }
-    public async showShop({params}){
-        return params.slug
+    public async showShop({view,params}){
+        const shop = await Shop.findByOrFail('slug',params.slug)
+        return view.render('shop',{shop})
     }
 }
