@@ -6,17 +6,25 @@ up.link.config.followSelectors.push('a[href]')
 up.form.config.submitSelectors.push(['form'])
 
 up.compiler('#map', () => {
+    const sidepanel = document.querySelector('#sidepanel')
     let lat = 50.850340
     let lon = 4.351710
     const map = L.map('map', { zoomControl: false }).setView([lat, lon], 9);
     map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+    sidepanel.querySelector('button').addEventListener('click',()=>{
+        sidepanel.classList.add('hidden')
+    })
     fetch("/shops").then(r=>r.json().then(shops=>{
         shops.forEach(s=>{
             let m = L.marker([s.latitude, s.longitude]).addTo(map);
             m.bindTooltip(s.name);
             m.on('click', () => {
-                up.visit('/commerce/' + s.slug)
+                sidepanel.classList.remove('hidden')
+                sidepanel.querySelector('h1').textContent = s.name
+                sidepanel.querySelector('p').textContent = s.title
+                sidepanel.querySelector('a').href = `/commerce/${s.slug}`
+                sidepanel.querySelector('img').src = `/uploads/${s.logo}`
             })
         })
     }))
