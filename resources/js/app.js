@@ -6,6 +6,14 @@ up.link.config.followSelectors.push('a[href]')
 up.form.config.submitSelectors.push(['form'])
 
 up.compiler('#map', () => {
+    const restaurantIcon = L.icon({
+        iconUrl: '/pin.svg',
+        iconSize: [35, 35],
+        iconAnchor: [30, 10],
+        popupAnchor: [0, 0],
+        shadowSize: [0, 0],
+        shadowAnchor: [0, 0]
+    });
     const sidepanel = document.querySelector('#sidepanel')
     let lat = 50.850340
     let lon = 4.351710
@@ -17,7 +25,7 @@ up.compiler('#map', () => {
     })
     fetch("/shops").then(r=>r.json().then(shops=>{
         shops.forEach(s=>{
-            let m = L.marker([s.latitude, s.longitude]).addTo(map);
+            let m = L.marker([s.latitude, s.longitude],{icon:restaurantIcon}).addTo(map);
             m.bindTooltip(s.name);
             m.on('click', () => {
                 sidepanel.classList.remove('hidden')
