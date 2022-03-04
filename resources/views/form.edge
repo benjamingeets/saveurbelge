@@ -18,9 +18,12 @@
     @!textarea({class:"col-span-12",text:'Description *',name:"description"})
     @!input({class:"col-span-12",text:"Numéro de téléphone",name:"phone"})
     @!input({class:"col-span-12",text:"Site internet",name:"website",placeholder:'https://monsite.be'})
-    @!input({class:"col-span-6",text:"Nom d'utilisateur Facebook",name:"facebook",placeholder:"@MonCommerce"})
-    @!input({class:"col-span-6",text:"Nom d'utilisateur Instagram",name:"instagram",placeholder:"@MonCommerce"})
-    @!input({class:"col-span-12",text:"Votre adresse email",name:"email",placeholder:"sample@gmail.com"})
+    @!input({class:"col-span-6",text:"Nom d'utilisateur Facebook",name:"facebook",placeholder:"MonCommerce"})
+    @!input({class:"col-span-6",text:"Nom d'utilisateur Instagram",name:"instagram",placeholder:"MonCommerce"})
+    @!input({class:"col-span-12",text:"Votre adresse email *",name:"email",placeholder:"sample@gmail.com"})
+    @!checkbox({class:"col-span-12",text:"Mon établissement vend des produits bios",name:"isBio"})
+    @!checkbox({class:"col-span-12",text:"Mon établissement vend ce que je produis",name:"isProductor"})
+    @!checkbox({class:"col-span-12",text:"Mon établissement accepte une monnaie locale",name:"acceptLocalCurrency"})
     <div class="flex flex-col items-center justify-center col-span-12">
         <button class="px-4 py-2 text-white transition rounded-md bg-primary hover:bg-primary-light">Ajouter mon établissement</button>
         <a href="{{route('ShopsController.showMap')}}">Annuler</a>
