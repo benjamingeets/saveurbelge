@@ -7,6 +7,7 @@ export default class CreateShopValidator {
 
   public schema = schema.create({
     name:schema.string({trim:true}),
+    email:schema.string({trim:true},[rules.email()]),
     city:schema.string({trim:true}),
     street:schema.string({trim:true}),
     phone:schema.string.nullableAndOptional({trim:true}),
@@ -26,6 +27,8 @@ export default class CreateShopValidator {
 
 
   public messages = {
-    'required':'Ce champs est requis'
+    'required':'Ce champs est requis',
+    'url':'Veuillez entrer une adresse internet',
+    'email':'Veuillez entrer une adresse email'
   }
 }

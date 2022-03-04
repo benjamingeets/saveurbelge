@@ -38,6 +38,10 @@
           <figure class="flex-shrink-0 w-20 h-20 overflow-hidden border rounded-full md:w-40 md:h-40">
             <img class="object-cover w-full h-full" src="/uploads/{{shop.logo}}" alt="Logo de {{shop.name}}"/>
           </figure>
+          @else
+          <div class="flex items-center justify-center flex-shrink-0 w-20 h-20 overflow-hidden text-4xl text-black bg-gray-300 border rounded-full md:w-40 md:h-40">
+            {{shop.name[0].toUpperCase()}}
+          </div>
           @endif
           <div>
             <h1 class="text-2xl">{{shop.name}}</h1>
