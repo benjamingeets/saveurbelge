@@ -28,7 +28,7 @@ up.compiler('#map', () => {
                 sidepanel.querySelector('h1').textContent = s.name
                 sidepanel.querySelector('p').textContent = s.title
                 sidepanel.querySelector('a').href = `/commerce/${s.slug}`
-                sidepanel.querySelector('img').src = `/uploads/${s.logo}`
+                sidepanel.querySelector('img').src = s.logo ? `/uploads/${s.logo}` : '/saveurbelge.svg'
             })
         })
     }))
