@@ -8,7 +8,8 @@ up.form.config.submitSelectors.push(['form'])
 up.compiler('#map', () => {
     const restaurantIcon = L.icon({
         iconUrl: '/pin.svg',
-        iconSize: [35, 35]
+        iconSize: [35, 35],
+        tooltipAnchor:[18,0]
     });
     const sidepanel = document.querySelector('#sidepanel')
     let lat = 50.850340
@@ -28,6 +29,7 @@ up.compiler('#map', () => {
                 sidepanel.querySelector('h1').textContent = s.name
                 sidepanel.querySelector('p').textContent = s.title
                 sidepanel.querySelector('a').href = `/commerce/${s.slug}`
+                sidepanel.querySelector('span').textContent=s.city
                 sidepanel.querySelector('img').src = s.logo ? `/uploads/${s.logo}` : '/saveurbelge.svg'
             })
         })
