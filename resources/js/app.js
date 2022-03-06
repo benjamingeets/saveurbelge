@@ -7,9 +7,10 @@ up.form.config.submitSelectors.push(['form'])
 
 up.compiler('#map', () => {
     const restaurantIcon = L.icon({
-        iconUrl: '/pin.svg',
-        iconSize: [35, 35],
-        tooltipAnchor:[18,0]
+        iconUrl: '/pin.png',
+        iconSize: [16, 38],
+        tooltipAnchor:[18,0],
+        iconAnchor: [0, 38],
     });
     const sidepanel = document.querySelector('#sidepanel')
     let lat = 50.850340
