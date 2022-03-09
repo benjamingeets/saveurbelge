@@ -13,20 +13,26 @@ up.compiler('#map', () => {
         iconAnchor: [0, 38],
     });
     const sidepanel = document.querySelector('#sidepanel')
+    const searchbar = document.querySelector('#search')
+    searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
     let lat = 50.850340
     let lon = 4.351710
     const map = L.map('map', { zoomControl: false }).setView([lat, lon], 9);
     map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
     sidepanel.querySelector('button').addEventListener('click',()=>{
-        sidepanel.classList.add('hidden')
+        sidepanel.classList.add('lg:-translate-x-full','lg:-left-10')
+        searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
     })
     fetch("/shops").then(r=>r.json().then(shops=>{
         shops.forEach(s=>{
             let m = L.marker([s.latitude, s.longitude],{icon:restaurantIcon}).addTo(map);
             m.bindTooltip(s.name);
-            m.on('click', () => {
-                sidepanel.classList.remove('hidden')
+            m.on('click', () => {``
+            searchbar.style.transform = `translateY(0px)`
+            console.log(sidepanel.clientHeight)
+                map.flyTo(new L.LatLng(s.latitude - 0.003, s.longitude), 15)
+                sidepanel.classList.remove('lg:-translate-x-full','lg:-left-10')
                 sidepanel.querySelector('h1').textContent = s.name
                 sidepanel.querySelector('p').textContent = s.title
                 sidepanel.querySelector('a').href = `/commerce/${s.slug}`
