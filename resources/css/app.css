@@ -12,3 +12,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+
+@media (min-width:1023px) {
+  #search{
+    transform: translateY(0px) !important;
+  }
+}
