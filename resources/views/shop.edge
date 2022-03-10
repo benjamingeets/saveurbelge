@@ -25,14 +25,8 @@
     <meta property="twitter:image" content="https://saveurbelge.be/share.webp">
     <meta property="og:image" content="https://saveurbelge.be/share.webp">
 </head>
-<body class="px-4 bg-gray-50">  
-    <div class="relative flex items-center justify-center gap-4 my-10">
-        <img src="/saveurbelge.svg" class="w-20"/>
-        <a href="{{route('ShopsController.showMap')}}" class="before:inset-0 before:absolute">
-            <h1 class="text-2xl">SaveurBelge</h1> 
-            <p>⬅️ Retour au site</p>
-        </a>    
-    </div>
+<body class="bg-gray-50">  
+@!navbar()
 <div class="flex flex-col flex-wrap justify-between w-full max-w-6xl p-4 mx-auto bg-white rounded-md md:p-12 mt-9 md:flex-row">
       <div class="md:w-8/12">
         <div  class="flex items-center gap-4 md:gap-12">

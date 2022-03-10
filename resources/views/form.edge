@@ -1,14 +1,8 @@
 @layout('layouts/main')
 @set('title','Ajouter mon établissement')
 @section('body')
-<div class="flex items-center justify-center gap-4 my-10">
-    <img src="/saveurbelge.svg" class="w-20"/>
-    <div>
-        <h1 class="text-2xl">SaveurBelge</h1>
-        <h2>Ajouter mon établissement</h2>
-    </div>
-</div>
-<form action="{{route('ShopsController.createShop')}}" method="POST" class="grid max-w-xl grid-cols-12 gap-4 px-4 mx-auto mb-20 md:px-0">
+@!navbar()
+<form action="{{route('ShopsController.createShop')}}" method="POST" class="grid max-w-xl grid-cols-12 gap-4 p-4 px-4 mx-auto mb-20 bg-white rounded-md">
     {{ csrfField() }}
     @!input({class:"col-span-12",text:"Nom de votre établissement *",name:"name"})
     @!input({class:"col-span-12",text:"Intitulé *",placeholder:"commerce, restaurant, producteur de fruits,...",name:"title"})
@@ -26,7 +20,6 @@
     @!checkbox({class:"col-span-12",text:"Mon établissement accepte une monnaie locale",name:"acceptLocalCurrency"})
     <div class="flex flex-col items-center justify-center col-span-12">
         <button class="px-4 py-2 text-white transition rounded-md bg-primary hover:bg-primary-light">Ajouter mon établissement</button>
-        <a href="{{route('ShopsController.showMap')}}">Annuler</a>
     </div>
 </form>
 @end
