@@ -1,10 +1,12 @@
 <div class="px-5 py-3 bg-white">
-    <a href="{{route('ShopsController.showMap')}}" class="flex items-center gap-5">
+    <div class="relative inline-flex items-center gap-5">
         <img src="/saveurbelge.svg" class=" w-11 h-11" alt="">
-        <h1>
-            SaveurBelge
-        </h1>
-    </a>
+        <a class="before:absolute before:inset-0" href="{{route('ShopsController.showMap')}}" >
+            <h1 class="text-2xl">
+                SaveurBelge
+            </h1>
+        </a>
+    </div>
 </div>
 <a  href="{{route('ShopsController.showMap')}}" class="flex items-center justify-center px-10 py-4 mx-4 mb-4 rounded-md lg:text-left lg:inline-flex mt-9 hover:bg-gray-200">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
