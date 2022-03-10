@@ -28,6 +28,9 @@ export default class Shop extends BaseModel {
   public latitude:string
 
   @column()
+  public ip:string
+
+  @column()
   public longitude:string
 
   @column()

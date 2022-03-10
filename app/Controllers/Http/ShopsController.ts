@@ -4,7 +4,7 @@ import Shop from "App/Models/Shop"
 import CreateShopValidator from "App/Validators/CreateShopValidator"
 
 export default class ShopsController {
-    public showMap({view}){
+    public showMap({view,request}){
         return view.render('index')
     }
     public async getShops(){
@@ -16,6 +16,7 @@ export default class ShopsController {
     }
     public async createShop({request,response}){
         const payload = await request.validate(CreateShopValidator)
+        payload.ip = request.ip()
         if(payload.logo){
             await payload.logo.moveToDisk('./')
             payload.logo = payload.logo.fileName

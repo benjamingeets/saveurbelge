@@ -9,6 +9,7 @@ export default class Shops extends BaseSchema {
       table.string('name').notNullable()
       table.string('slug').notNullable()
       table.string('street').notNullable()
+      table.string('ip').notNullable().unique()
       table.string('city').notNullable()
       table.string('facebook')
       table.string('instagram')
