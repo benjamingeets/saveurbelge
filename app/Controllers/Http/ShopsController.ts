@@ -4,7 +4,7 @@ import Shop from "App/Models/Shop"
 import CreateShopValidator from "App/Validators/CreateShopValidator"
 
 export default class ShopsController {
-    public showMap({view,request}){
+    public showMap({view}){
         return view.render('index')
     }
     public async getShops(){
