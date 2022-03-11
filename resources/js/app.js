@@ -21,7 +21,7 @@ up.compiler('#map', () => {
     map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
     sidepanel.querySelector('button').addEventListener('click',()=>{
-        sidepanel.classList.add('lg:-translate-x-full','lg:-left-10')
+        sidepanel.classList.add('lg:-translate-x-full','lg:-left-10','lg:h-0')
         searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
     })
     fetch("/shops").then(r=>r.json().then(shops=>{
@@ -32,7 +32,7 @@ up.compiler('#map', () => {
             searchbar.style.transform = `translateY(0px)`
             console.log(sidepanel.clientHeight)
                 map.flyTo(new L.LatLng(s.latitude - 0.003, s.longitude), 15)
-                sidepanel.classList.remove('lg:-translate-x-full','lg:-left-10')
+                sidepanel.classList.remove('lg:-translate-x-full','lg:-left-10','lg:h-0')
                 sidepanel.querySelector('h1').textContent = s.name
                 sidepanel.querySelector('p').textContent = s.title
                 sidepanel.querySelector('a').href = `/commerce/${s.slug}`
