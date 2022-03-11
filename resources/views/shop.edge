@@ -25,8 +25,9 @@
     <meta property="twitter:image" content="https://saveurbelge.be/share.webp">
     <meta property="og:image" content="https://saveurbelge.be/share.webp">
 </head>
-<body class="bg-gray-50">  
-@!navbar()
+<body class="flex flex-col justify-between min-h-screen bg-gray-100">  
+<div>
+  @!navbar()
 <div class="flex flex-col flex-wrap justify-between w-full max-w-6xl p-4 mx-auto bg-white rounded-md md:p-12 mt-9 md:flex-row">
       <div class="md:w-8/12">
         <div  class="flex items-center gap-4 md:gap-12">
@@ -50,17 +51,17 @@
         <div class="my-4">
           <ul class="flex justify-center w-full gap-5">
             @if(shop.isBio)
-            <li>
+            <li class="cursor-help" title="Ce commerce vend des produits bio">
               @!icons.bio()
             </li>
             @endif
             @if(shop.isProductor)
-            <li>
+            <li class="cursor-help" title="Ce commerce vend ce qu'il produit">
               @!icons.productor()
             </li>
             @endif
             @if(shop.acceptLocalCurrency)
-            <li>
+            <li class="cursor-help" title="Ce commerce accepte une monnaie locale">
               @!icons.currency()
             </li>
             @endif
@@ -98,5 +99,7 @@
 
      
 <p class="mx-auto mt-10 mb-12 text-center md:mt-24">Quelque chose ne va pas avec ce commerce ? <a href="mailto:contact@saveurbelge.be" class="transition text-primary hover:text-primary-light">Contactez-nous</a></p>
+</div>
+@!footer()
 </body>
 </html>
