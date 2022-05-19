@@ -1,8 +1,0 @@
-@set('oldValue', flashMessages.get($props.name) || $props.value || '')
-@set('type',$props.type || 'checkbox')
-<div {{$props.serialize({ class: classes })}}>
-    <input type="{{type}}" name="{{$props.name}}" id="{{$props.name}}"  value="1">
-    <label for="{{$props.name}}" >
-        {{$props.text}} 
-    </label>
-</div>
