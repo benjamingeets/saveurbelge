@@ -14,6 +14,7 @@ class ShopProvider extends ServiceProvider
     public function register()
     {
         Shop::saving(function($shop){
+            error_log('Some message here.');
             var_dump("ooui");
         });
     }

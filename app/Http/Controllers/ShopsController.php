@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ShopRequest;
+use App\Models\Shop;
 
 class ShopsController extends Controller
 {
@@ -13,7 +15,7 @@ class ShopsController extends Controller
      */
     public function index()
     {
-        //
+        return view('homepage',['shops'=>Shop::all()]);
     }
 
     /**
@@ -27,15 +29,12 @@ class ShopsController extends Controller
         return view('form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function store(ShopRequest $request)
     {
         //
+        
+        return $request;
     }
 
     /**
@@ -44,9 +43,11 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $shop = Shop::where('slug',$slug)->get();
+        return $shop;
+        
     }
 
     /**
