@@ -29,6 +29,9 @@ return new class extends Migration
             $table->string('description')->nullable(true);
             $table->string('phone')->nullable(true);
             $table->string('email')->nullable(false);
+            $table->boolean('is_bio')->default(false);
+            $table->boolean('is_productor')->default(false);
+            $table->boolean('accept_local_currency')->default(false);
             $table->timestamps();
         });
     }
