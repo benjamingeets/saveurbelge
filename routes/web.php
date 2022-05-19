@@ -20,6 +20,5 @@ Route::resource('/', IndexController::class,[
     ]
 ]);
 Route::get('/commerce/:slug',[ShopsController::class,'show']);
-Route::get('/shops/',[ShopsController::class,'index']);
 Route::get('/ajouter-mon-commerce/',[ShopsController::class,'create'])->name('shop.create');
 Route::post('/ajouter-mon-commerce/',[ShopsController::class,'store'])->name('shop.store');

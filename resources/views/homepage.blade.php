@@ -13,4 +13,7 @@
             href="{{ route('shop.create') }}">
             Ajouter mon établissement</a>
     </div>
+    <script>
+        var shops = {!! json_encode($shops->toArray()) !!}
+    </script>
 </x-layouts.main>
