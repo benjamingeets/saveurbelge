@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\ShopsController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', IndexController::class,[
+    'names'=>[
+        'index'=>'index'
+    ]
+]);
+Route::get('/commerce/:slug',[ShopsController::class,'show']);
+Route::get('/shops/',[ShopsController::class,'index']);
+Route::get('/ajouter-mon-commerce/',[ShopsController::class,'create'])->name('shop.create');
+Route::post('/ajouter-mon-commerce/',[ShopsController::class,'store'])->name('shop.store');
