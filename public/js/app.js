@@ -2236,26 +2236,20 @@ up.compiler('#map', function () {
     sidepanel.classList.add('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0');
     searchbar.style.transform = "translateY(".concat(sidepanel.clientHeight, "px)");
   });
-  fetch("/shops").then(function (r) {
-    return r.json().then(function (shops) {
-      shops.forEach(function (s) {
-        var m = L.marker([s.latitude, s.longitude], {
-          icon: restaurantIcon
-        }).addTo(map);
-        m.bindTooltip(s.name);
-        m.on('click', function () {
-          "";
-          searchbar.style.transform = "translateY(0px)";
-          console.log(sidepanel.clientHeight);
-          map.flyTo(new L.LatLng(s.latitude - 0.003, s.longitude), 15);
-          sidepanel.classList.remove('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0');
-          sidepanel.querySelector('h1').textContent = s.name;
-          sidepanel.querySelector('p').textContent = s.title;
-          sidepanel.querySelector('a').href = "/commerce/".concat(s.slug);
-          sidepanel.querySelector('span').textContent = s.city;
-          sidepanel.querySelector('img').src = s.logo ? "/uploads/".concat(s.logo) : '/saveurbelge.svg';
-        });
-      });
+  shops.forEach(function (s) {
+    var m = L.marker([s.latitude, s.longitude], {
+      icon: restaurantIcon
+    }).addTo(map);
+    m.bindTooltip(s.name);
+    m.on('click', function () {
+      searchbar.style.transform = "translateY(0px)";
+      map.flyTo(new L.LatLng(s.latitude - 0.003, s.longitude), 15);
+      sidepanel.classList.remove('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0');
+      sidepanel.querySelector('h1').textContent = s.name;
+      sidepanel.querySelector('p').textContent = s.title;
+      sidepanel.querySelector('a').href = "/commerce/".concat(s.slug);
+      sidepanel.querySelector('span').textContent = s.city;
+      sidepanel.querySelector('img').src = s.logo ? "/uploads/".concat(s.logo) : '/saveurbelge.svg';
     });
   });
   var search = document.querySelector('form');
