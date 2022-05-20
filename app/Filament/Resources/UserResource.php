@@ -17,7 +17,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
@@ -25,6 +25,7 @@ class UserResource extends Resource
             ->schema([
                 
                 TextInput::make('name'),
+                TextInput::make('password')->password(),
                 TextInput::make('email'),
 
                 Checkbox::make('is_admin'),

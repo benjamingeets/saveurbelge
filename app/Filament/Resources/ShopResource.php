@@ -21,7 +21,7 @@ class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
     protected static ?string $recordTitleAttribute = 'name';
     public static function form(Form $form): Form
     {
