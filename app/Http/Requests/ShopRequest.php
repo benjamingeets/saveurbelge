@@ -24,7 +24,7 @@ class ShopRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
+            'name'=>'required|unique:shops|max:255',
             'street'=>'required',
             'city'=>'required',
             'facebook',
@@ -34,7 +34,7 @@ class ShopRequest extends FormRequest
             'logo',
             'description',
             'phone',
-            'email'=>'required',
+            'email'=>'required|unique:shops',
             'is_bio',
             'is_productor',
             'accept_local_currency'

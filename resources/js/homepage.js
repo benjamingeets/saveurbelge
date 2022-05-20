@@ -13,20 +13,26 @@ up.compiler('#map', () => {
         tooltipAnchor: [18, 0],
         iconAnchor: [0, 38],
     });
+    
     const sidepanel = document.querySelector('#sidepanel')
     const searchbar = document.querySelector('#search')
     searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
+
     let lat = 50.850340
     let lon = 4.351710
+
     const map = L.map('map', {
         zoomControl: false
     }).setView([lat, lon], 9);
+
     map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
+
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
     sidepanel.querySelector('button').addEventListener('click', () => {
         sidepanel.classList.add('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0')
         searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
     })
+
     shops.forEach(s => {
         let m = L.marker([s.latitude, s.longitude], {
             icon: restaurantIcon
