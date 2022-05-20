@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
+use Illuminate\Support\Facades\Storage;
 
 class ShopsController extends Controller
 {
@@ -33,8 +34,16 @@ class ShopsController extends Controller
     public function store(ShopRequest $request)
     {
         //
-        
-        return $request;
+        // $shop = new Shop;
+        // $shop->name = $request->name;
+        // $shop->slug = $request->name;
+        // $shop->street=$request->street;
+        // $shop->city = $request->city;
+        // $shop->$latitude ='1';
+        // $shop->longitude='1';
+        // $shop->title = $request->title;
+        $shop = Shop::create($request->all());
+        return $shop;
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ShopResource\Pages;
 use App\Filament\Resources\ShopResource\RelationManagers;
 use App\Models\Shop;
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,7 +14,9 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Checkbox;
-
+use Filament\Forms\Components\FileUpload;
+use Livewire\TemporaryUploadedFile;
+use Illuminate\Support\Str;
 class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
@@ -25,7 +28,7 @@ class ShopResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
-                TextInput::make('slug'),
+                TextInput::make('slug')->disabled(),
                 TextInput::make('street'),
                 TextInput::make('city'),
                 TextInput::make('facebook'),
@@ -39,7 +42,9 @@ class ShopResource extends Resource
                 TextInput::make('email'),
                 Checkbox::make('is_bio'),
                 Checkbox::make('is_productor'),
-                Checkbox::make('accept_local_currency')
+                Checkbox::make('accept_local_currency'),
+                FileUpload::make('logo')->disk('public')->directory('logos')
+                
                 //
             ]);
     }
@@ -50,6 +55,7 @@ class ShopResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('city'),
                 Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([

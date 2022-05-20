@@ -40,7 +40,7 @@ up.compiler('#map', () => {
             sidepanel.querySelector('p').textContent = s.title
             sidepanel.querySelector('a').href = `/commerce/${s.slug}`
             sidepanel.querySelector('span').textContent = s.city
-            sidepanel.querySelector('img').src = s.logo ? `/uploads/${s.logo}` : '/saveurbelge.svg'
+            sidepanel.querySelector('img').src = s.logo ? `/storage/${s.logo}` : '/saveurbelge.svg'
         })
     })
 

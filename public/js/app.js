@@ -2249,7 +2249,7 @@ up.compiler('#map', function () {
       sidepanel.querySelector('p').textContent = s.title;
       sidepanel.querySelector('a').href = "/commerce/".concat(s.slug);
       sidepanel.querySelector('span').textContent = s.city;
-      sidepanel.querySelector('img').src = s.logo ? "/uploads/".concat(s.logo) : '/saveurbelge.svg';
+      sidepanel.querySelector('img').src = s.logo ? "/storage/".concat(s.logo) : '/saveurbelge.svg';
     });
   });
   var search = document.querySelector('form');
