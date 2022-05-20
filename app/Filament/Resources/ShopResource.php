@@ -14,9 +14,11 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Str;
+
 class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
@@ -29,23 +31,32 @@ class ShopResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 TextInput::make('slug')->disabled(),
-                TextInput::make('street'),
-                TextInput::make('city'),
-                TextInput::make('facebook'),
-                TextInput::make('instagram'),
-                TextInput::make('website'),
-                TextInput::make('latitude'),
-                TextInput::make('longitude'),
+                Fieldset::make('adresse')->schema([
+                    TextInput::make('street'),
+                    TextInput::make('city'),
+                ]),
+                Fieldset::make('liens')->schema([
+                    TextInput::make('facebook'),
+                    TextInput::make('instagram'),
+                    TextInput::make('website'),
+                ]),
+                Fieldset::make('position')->schema([
+                    TextInput::make('latitude'),
+                    TextInput::make('longitude')
+                ]),
+                Fieldset::make('contact')->schema([
+                    TextInput::make('phone'),
+                    TextInput::make('email'),
+                ]),
+                Fieldset::make('options')->schema([
+                    Checkbox::make('is_bio'),
+                    Checkbox::make('is_productor'),
+                    Checkbox::make('accept_local_currency'),
+                ]),
+
                 TextInput::make('title'),
                 TextArea::make('description'),
-                TextInput::make('phone'),
-                TextInput::make('email'),
-                Checkbox::make('is_bio'),
-                Checkbox::make('is_productor'),
-                Checkbox::make('accept_local_currency'),
                 FileUpload::make('logo')->disk('public')->directory('logos')
-                
-                //
             ]);
     }
 
@@ -62,14 +73,14 @@ class ShopResource extends Resource
                 //
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
