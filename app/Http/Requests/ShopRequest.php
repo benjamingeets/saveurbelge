@@ -31,7 +31,7 @@ class ShopRequest extends FormRequest
             'instagram',
             'website',
             'title'=>'required',
-            'logo',
+            'logo'=>'size:2000',
             'description',
             'phone',
             'email'=>'required|unique:shops',
