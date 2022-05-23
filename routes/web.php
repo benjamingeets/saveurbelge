@@ -15,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ShopsController::class,'index'])->name('shop.index');
 Route::get('/commerce/{slug}',[ShopsController::class,'show']);
+Route::get('/commerce/{slug}/modifier',[ShopsController::class,'edit'])->name('shop.edit');
+
+Route::post('/commerce/{slug}/modifier',[ShopsController::class,'sendEditMail'])->name('shop.sendmail');
 Route::get('/ajouter-mon-commerce/',[ShopsController::class,'create'])->name('shop.create');
 Route::post('/ajouter-mon-commerce/',[ShopsController::class,'store'])->name('shop.store');

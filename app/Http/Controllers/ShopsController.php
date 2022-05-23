@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ShopRequest;
+use App\Mail\ShopEdit;
 use App\Models\Shop;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class ShopsController extends Controller
 {
@@ -45,19 +48,34 @@ class ShopsController extends Controller
     public function show($slug)
     {
         $shop = Shop::where('slug',$slug)->get();
-        return $shop;
+        return view('shop',['shop'=>$shop[0]]);
         
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$slug)
     {
-        //
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
+        $shop = Shop::where('slug',$slug)->get()[0];
+        return view('form',['shop'=>$shop]);
+    }
+
+    public function sendEditMail(Request $request, $slug)
+    {
+        
+        $shop = Shop::where('slug',$slug)->get()[0];
+        if($shop->email != $request->email){
+            abort(401);
+        }
+        $url = URL::temporarySignedRoute('shop.edit', now()->addMinutes(60), ['slug' => $slug]);
+       Mail::to('benjamin@geets.dev')->send(new ShopEdit($shop,$url));
+        return $request;
     }
 
     /**

@@ -1,6 +1,7 @@
 <x-layouts.main title="Ajouter mon établissement">
 
     <x-navbar/>
+    {{$shop->name}}
     <form enctype="multipart/form-data" action="{{route('shop.store')}}" method="POST" class="grid max-w-xl grid-cols-12 gap-4 p-4 px-4 mx-auto mb-20 bg-white rounded-md">
         @csrf
         <x-input.text :required="true" classes="col-span-12" label="Nom de votre établissement" name="name"/>
