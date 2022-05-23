@@ -1,4 +1,4 @@
-@props(['name','label','classes','placeholder'])
+@props(['name','label','classes'=>'','placeholder'])
 
 <label  class="block mb-2 text-gray-700 {{$classes}}" for="{{$name}}">
     {{$label}} 

@@ -2160,11 +2160,28 @@ module.exports = {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var unpoly__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! unpoly */ "./node_modules/unpoly/unpoly.js");
+/* harmony import */ var unpoly__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(unpoly__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pages_shop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/shop */ "./resources/js/pages/shop.js");
+/* harmony import */ var _pages_homepage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/homepage */ "./resources/js/pages/homepage.js");
 
-__webpack_require__(/*! ./homepage */ "./resources/js/homepage.js");
+
+
+
+up.link.config.followSelectors.push('a[href]');
+up.form.config.submitSelectors.push(['form']);
+up.compiler('#home', function () {
+  (0,_pages_homepage__WEBPACK_IMPORTED_MODULE_3__["default"])();
+});
+up.compiler('#shop', function () {
+  (0,_pages_shop__WEBPACK_IMPORTED_MODULE_2__["default"])();
+});
 
 /***/ }),
 
@@ -2199,29 +2216,29 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/homepage.js":
-/*!**********************************!*\
-  !*** ./resources/js/homepage.js ***!
-  \**********************************/
+/***/ "./resources/js/pages/homepage.js":
+/*!****************************************!*\
+  !*** ./resources/js/pages/homepage.js ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var unpoly__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! unpoly */ "./node_modules/unpoly/unpoly.js");
-/* harmony import */ var unpoly__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(unpoly__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_0__);
 
+var restaurantIcon = L.icon({
+  iconUrl: '/pin.png',
+  iconSize: [16, 38],
+  tooltipAnchor: [18, 0],
+  iconAnchor: [0, 38]
+});
 
-up.link.config.followSelectors.push('a[href]');
-up.form.config.submitSelectors.push(['form']);
-up.compiler('#map', function () {
-  var restaurantIcon = L.icon({
-    iconUrl: '/pin.png',
-    iconSize: [16, 38],
-    tooltipAnchor: [18, 0],
-    iconAnchor: [0, 38]
-  });
+var homepage = function homepage() {
+  var shops = document.querySelectorAll('ul li');
   var sidepanel = document.querySelector('#sidepanel');
   var searchbar = document.querySelector('#search');
   searchbar.style.transform = "translateY(".concat(sidepanel.clientHeight, "px)");
@@ -2237,19 +2254,19 @@ up.compiler('#map', function () {
     searchbar.style.transform = "translateY(".concat(sidepanel.clientHeight, "px)");
   });
   shops.forEach(function (s) {
-    var m = L.marker([s.latitude, s.longitude], {
+    var m = L.marker([s.dataset.latitude, s.dataset.longitude], {
       icon: restaurantIcon
     }).addTo(map);
-    m.bindTooltip(s.name);
+    m.bindTooltip(s.dataset.name);
     m.on('click', function () {
       searchbar.style.transform = "translateY(0px)";
-      map.flyTo(new L.LatLng(s.latitude - 0.003, s.longitude), 15);
+      map.flyTo(new L.LatLng(s.dataset.latitude - 0.003, s.dataset.longitude), 15);
       sidepanel.classList.remove('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0');
-      sidepanel.querySelector('h1').textContent = s.name;
-      sidepanel.querySelector('p').textContent = s.title;
-      sidepanel.querySelector('a').href = "/commerce/".concat(s.slug);
-      sidepanel.querySelector('span').textContent = s.city;
-      sidepanel.querySelector('img').src = s.logo ? "/storage/".concat(s.logo) : '/saveurbelge.svg';
+      sidepanel.querySelector('h1').textContent = s.dataset.name;
+      sidepanel.querySelector('p').textContent = s.dataset.title;
+      sidepanel.querySelector('a').href = "/commerce/".concat(s.dataset.slug);
+      sidepanel.querySelector('span').textContent = s.dataset.city;
+      sidepanel.querySelector('img').src = s.logo ? "/storage/".concat(s.dataset.logo) : '/saveurbelge.svg';
     });
   });
   var search = document.querySelector('form');
@@ -2263,7 +2280,59 @@ up.compiler('#map', function () {
       });
     });
   });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (homepage);
+
+/***/ }),
+
+/***/ "./resources/js/pages/shop.js":
+/*!************************************!*\
+  !*** ./resources/js/pages/shop.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_0__);
+
+var restaurantIcon = L.icon({
+  iconUrl: '/pin.png',
+  iconSize: [16, 38],
+  tooltipAnchor: [18, 0],
+  iconAnchor: [0, 38]
 });
+
+var shop = function shop() {
+  var button = document.querySelector('[data-action="edit"]');
+  var form = document.querySelector('[data-modal]');
+  var close = document.querySelector('[data-close]');
+  button.addEventListener('click', function () {
+    form.classList.toggle('hidden');
+    form.classList.toggle('flex');
+  });
+  close.addEventListener('click', function (event) {
+    event.preventDefault();
+    form.classList.toggle('hidden');
+    form.classList.toggle('flex');
+  });
+  var shop = document.querySelector('#shop');
+  var map = L.map('shop-map', {
+    zoomControl: false,
+    scrollWheelZoom: false
+  }).setView([shop.dataset.latitude, shop.dataset.longitude], 13);
+  map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>');
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+  var m = L.marker([shop.dataset.latitude, shop.dataset.longitude], {
+    icon: restaurantIcon
+  }).addTo(map);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (shop);
 
 /***/ }),
 

@@ -19,7 +19,11 @@ class ShopsController extends Controller
      */
     public function index()
     {
-        return view('homepage',['shops'=>Shop::all()]);
+        return view('homepage', ['shops' => Shop::all()->makeHidden(['email', 'created_at', 'updated_at'])]);
+    }
+    public function list()
+    {
+        return view('shops-list', ['shops' => Shop::all()->makeHidden(['email', 'created_at', 'updated_at'])]);
     }
 
     /**
@@ -32,11 +36,11 @@ class ShopsController extends Controller
         return view('form');
     }
 
-   
+
     public function store(ShopRequest $request)
     {
         $shop = Shop::create($request->all());
-        return $shop;
+        return view('shop-created');
     }
 
     /**
@@ -47,9 +51,8 @@ class ShopsController extends Controller
      */
     public function show($slug)
     {
-        $shop = Shop::where('slug',$slug)->get();
-        return view('shop',['shop'=>$shop[0]]);
-        
+        $shop = Shop::where('slug', $slug)->get();
+        return view('shop', ['shop' => $shop[0]]);
     }
 
     /**
@@ -57,24 +60,24 @@ class ShopsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$slug)
+    public function edit(Request $request, $slug)
     {
-        if (! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             abort(401);
         }
-        $shop = Shop::where('slug',$slug)->get()[0];
-        return view('form',['shop'=>$shop]);
+        $shop = Shop::where('slug', $slug)->first();
+        return view('form', ['shop' => $shop]);
     }
 
     public function sendEditMail(Request $request, $slug)
     {
-        
-        $shop = Shop::where('slug',$slug)->get()[0];
-        if($shop->email != $request->email){
-            abort(401);
+
+        $shop = Shop::where('slug', $slug)->first();
+        if ($shop->email == $request->email) {
+
+            $url = URL::temporarySignedRoute('shop.edit', now()->addMinutes(60), ['slug' => $slug]);
+            Mail::to('benjamin@geets.dev')->send(new ShopEdit($shop, $url));
         }
-        $url = URL::temporarySignedRoute('shop.edit', now()->addMinutes(60), ['slug' => $slug]);
-       Mail::to('benjamin@geets.dev')->send(new ShopEdit($shop,$url));
         return $request;
     }
 

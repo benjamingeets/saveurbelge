@@ -1,4 +1,4 @@
-@props(['classes','name','label'])
+@props(['classes'=>'','name','label'])
 
 <div class="{{$classes}}">
     <input type="checkbox" name="{{$name}}" id="{{$name}}"  value="1">

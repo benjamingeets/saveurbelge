@@ -1,4 +1,4 @@
-@props(['name','label','classes',])
+@props(['name','label','classes'=>'',])
 
 <label class="{{$classes}}" for="{{$name}}">
     {{$label}} 

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('latitude')->nullable(false);
             $table->string('longitude')->nullable(false);
             $table->string('title')->nullable(false);
-            $table->string('logo')->nullable(true);
+            $table->string('logo')->nullable(true)->default('logos/default.png');
             $table->string('description')->nullable(true);
             $table->string('phone')->nullable(true);
             $table->string('email')->nullable(false)->unique();

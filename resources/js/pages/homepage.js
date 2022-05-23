@@ -1,19 +1,17 @@
-import unpoly from 'unpoly'
+
 import leaflet, {
     icon
 } from 'leaflet'
+const restaurantIcon = L.icon({
+    iconUrl: '/pin.png',
+    iconSize: [16, 38],
+    tooltipAnchor: [18, 0],
+    iconAnchor: [0, 38],
+});
+const homepage = () =>{
 
-up.link.config.followSelectors.push('a[href]')
-up.form.config.submitSelectors.push(['form'])
+    const shops = document.querySelectorAll('ul li')
 
-up.compiler('#map', () => {
-    const restaurantIcon = L.icon({
-        iconUrl: '/pin.png',
-        iconSize: [16, 38],
-        tooltipAnchor: [18, 0],
-        iconAnchor: [0, 38],
-    });
-    
     const sidepanel = document.querySelector('#sidepanel')
     const searchbar = document.querySelector('#search')
     searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
@@ -34,19 +32,19 @@ up.compiler('#map', () => {
     })
 
     shops.forEach(s => {
-        let m = L.marker([s.latitude, s.longitude], {
+        let m = L.marker([s.dataset.latitude, s.dataset.longitude], {
             icon: restaurantIcon
         }).addTo(map);
-        m.bindTooltip(s.name);
+        m.bindTooltip(s.dataset.name);
         m.on('click', () => {
             searchbar.style.transform = `translateY(0px)`
-            map.flyTo(new L.LatLng(s.latitude - 0.003, s.longitude), 15)
+            map.flyTo(new L.LatLng(s.dataset.latitude - 0.003, s.dataset.longitude), 15)
             sidepanel.classList.remove('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0')
-            sidepanel.querySelector('h1').textContent = s.name
-            sidepanel.querySelector('p').textContent = s.title
-            sidepanel.querySelector('a').href = `/commerce/${s.slug}`
-            sidepanel.querySelector('span').textContent = s.city
-            sidepanel.querySelector('img').src = s.logo ? `/storage/${s.logo}` : '/saveurbelge.svg'
+            sidepanel.querySelector('h1').textContent = s.dataset.name
+            sidepanel.querySelector('p').textContent = s.dataset.title
+            sidepanel.querySelector('a').href = `/commerce/${s.dataset.slug}`
+            sidepanel.querySelector('span').textContent = s.dataset.city
+            sidepanel.querySelector('img').src = s.logo ? `/storage/${s.dataset.logo}` : '/saveurbelge.svg'
         })
     })
 
@@ -61,4 +59,6 @@ up.compiler('#map', () => {
             })
         })
     })
-})
+}
+
+export default homepage;

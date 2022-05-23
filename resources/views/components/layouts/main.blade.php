@@ -1,3 +1,4 @@
+@props(['title','hideFooter'=>false,'sand'=>false])
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,10 +31,15 @@
         <meta property="twitter:image" content="https://saveurbelge.be/share.webp">
         <meta property="og:image" content="https://saveurbelge.be/share.webp">
 </head>
-<body class="flex flex-col justify-between min-h-screen bg-gray-100">
-    <div>
+<body class="flex flex-col min-h-screen @if($sand) lg:bg-sand @endif">
+    <x-navbar/>
+    <div class="relative flex flex-col flex-1">
         {{$slot}}
     </div>
+
+    @unless ($hideFooter)
+    <x-footer/>
+    @endunless
     <script src="{{asset('js/app.js')}}">
 
     </script>
