@@ -1069,6 +1069,10 @@ input[type=number] {
     margin-top: 0.5rem;
   }
 
+  .lg\:mt-10 {
+    margin-top: 2.5rem;
+  }
+
   .lg\:h-0 {
     height: 0px;
   }

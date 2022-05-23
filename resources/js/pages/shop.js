@@ -9,17 +9,38 @@ const restaurantIcon = L.icon({
 });
 const shop = () =>{
     const button = document.querySelector('[data-action="edit"]')
-    const form = document.querySelector('[data-modal]')
+    const formContainer = document.querySelector('[data-modal]')
+    const form = formContainer.querySelector('form')
     const close = document.querySelector('[data-close]')
     button.addEventListener('click',()=>{
-        form.classList.toggle('hidden')
-        form.classList.toggle('flex')
+        formContainer.classList.toggle('hidden')
+        formContainer.classList.toggle('flex')
     })
     close.addEventListener('click',(event)=>{
         event.preventDefault()
-        form.classList.toggle('hidden')
-        form.classList.toggle('flex')
+        formContainer.classList.toggle('hidden')
+        formContainer.classList.toggle('flex')
     })
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let formData = new FormData(form);
+        fetch(form.action, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        })
+            .then((e) => {
+                form.querySelector('span').textContent = "Email envoyé"
+                form.querySelector('p').textContent = "Si l'adresse e-mail entrée correspond à celle de cet établissement, vous allez recevoir un mail d'édition."
+                form.querySelector('[data-send]').remove()
+                form.querySelector('label').remove()
+            })
+            .catch((error) => alert(error));
+    
+    
+    })
+    
     const shop = document.querySelector('#shop')
     const map = L.map('shop-map', {
         zoomControl: false,

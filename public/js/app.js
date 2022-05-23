@@ -2309,16 +2309,35 @@ var restaurantIcon = L.icon({
 
 var shop = function shop() {
   var button = document.querySelector('[data-action="edit"]');
-  var form = document.querySelector('[data-modal]');
+  var formContainer = document.querySelector('[data-modal]');
+  var form = formContainer.querySelector('form');
   var close = document.querySelector('[data-close]');
   button.addEventListener('click', function () {
-    form.classList.toggle('hidden');
-    form.classList.toggle('flex');
+    formContainer.classList.toggle('hidden');
+    formContainer.classList.toggle('flex');
   });
   close.addEventListener('click', function (event) {
     event.preventDefault();
-    form.classList.toggle('hidden');
-    form.classList.toggle('flex');
+    formContainer.classList.toggle('hidden');
+    formContainer.classList.toggle('flex');
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var formData = new FormData(form);
+    fetch(form.action, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams(formData).toString()
+    }).then(function (e) {
+      form.querySelector('span').textContent = "Email envoyé";
+      form.querySelector('p').textContent = "Si l'adresse e-mail entrée correspond à celle de cet établissement, vous allez recevoir un mail d'édition.";
+      form.querySelector('[data-send]').remove();
+      form.querySelector('label').remove();
+    })["catch"](function (error) {
+      return alert(error);
+    });
   });
   var shop = document.querySelector('#shop');
   var map = L.map('shop-map', {

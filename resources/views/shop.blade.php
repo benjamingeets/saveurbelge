@@ -81,7 +81,7 @@ $title = $shop->name;
             <span class="text-2xl text-center">Editer {{$shop->name}}</span>
             <p>Entrez l'adresse email liée à cet établissement pour obtenir un lien d'édition</p>
             <x-input.text type="email" name="email" label="Email"/>
-            <button class="self-center px-4 py-2 text-white transition rounded-md bg-primary hover:bg-primary-light">Envoyer</button>
+            <button data-send class="self-center px-4 py-2 text-white transition rounded-md bg-primary hover:bg-primary-light">Envoyer</button>
         </form>
     </div>
 </x-layouts.main>
