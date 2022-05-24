@@ -2,7 +2,8 @@
     'title',
     'hideFooter'=>false,
     'sand'=>false,
-    'description'
+    'description',
+    'overflow_hidden'=>false
     ])
 @php
     if(empty($title)){
@@ -47,7 +48,7 @@
         <meta property="twitter:image" content="https://saveurbelge.be/share.webp">
         <meta property="og:image" content="https://saveurbelge.be/share.webp">
 </head>
-<body class="flex flex-col min-h-screen @if($sand) lg:bg-sand @endif">
+<body class="flex flex-col min-h-screen @if($overflow_hidden) overflow-hidden @endif @if($sand) lg:bg-sand @endif">
     <x-navbar/>
     <div class="relative flex flex-col flex-1">
         {{$slot}}
