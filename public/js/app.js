@@ -2241,6 +2241,8 @@ var homepage = function homepage() {
   var shops = document.querySelectorAll('ul li');
   var sidepanel = document.querySelector('#sidepanel');
   var searchbar = document.querySelector('#search');
+  var search = document.querySelector('form');
+  var input = document.querySelector('input');
   searchbar.style.transform = "translateY(".concat(sidepanel.clientHeight, "px)");
   var lat = 50.850340;
   var lon = 4.351710;
@@ -2262,18 +2264,15 @@ var homepage = function homepage() {
       searchbar.style.transform = "translateY(0px)";
       map.flyTo(new L.LatLng(s.dataset.latitude - 0.003, s.dataset.longitude), 15);
       sidepanel.classList.remove('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0');
-      sidepanel.querySelector('h1').textContent = s.dataset.name;
+      sidepanel.querySelector('h1 a').textContent = s.dataset.name;
       sidepanel.querySelector('p').textContent = s.dataset.title;
       sidepanel.querySelector('a').href = "/commerce/".concat(s.dataset.slug);
-      sidepanel.querySelector('span').textContent = s.dataset.city;
-      sidepanel.querySelector('img').src = s.logo ? "/storage/".concat(s.dataset.logo) : '/saveurbelge.svg';
+      sidepanel.querySelector('img').src = "/storage/".concat(s.dataset.logo);
     });
   });
-  var search = document.querySelector('form');
-  var input = document.querySelector('input');
   search.addEventListener('submit', function (e) {
     e.preventDefault();
-    fetch('https://api-postcode.vercel.app/get-city/' + input.value).then(function (r) {
+    fetch('https://belgium.deno.dev/' + input.value).then(function (r) {
       r.json().then(function (o) {
         var target = o[0];
         map.flyTo(new L.LatLng(target.lat, target.lon), 14);
@@ -2344,7 +2343,7 @@ var shop = function shop() {
     zoomControl: false,
     scrollWheelZoom: false
   }).setView([shop.dataset.latitude, shop.dataset.longitude], 13);
-  map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>');
+  map.attributionControl.setPrefix('');
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
   var m = L.marker([shop.dataset.latitude, shop.dataset.longitude], {
     icon: restaurantIcon

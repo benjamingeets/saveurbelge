@@ -4,11 +4,11 @@
             <img class="object-cover w-full h-full col-span-1" src="/saveurbelge.svg" alt="">
         </figure>
         <div class="flex flex-col justify-center col-span-3 text-center">
-            <h1 class="text-2xl font-bold">name</h1>
-            <p class="">title</p>
-            <span class="capitalize text-primary">city</span>
+            <h1>
+                <a  class="inline-block max-w-[10ch] text-2xl font-bold text-primary hover:underline" href=""></a>
+            </h1>
+            <p class="mt-4"></p>
         </div>
-        <a href="#" class="px-4 py-2 text-white transition border rounded-md hover:bg-primary-light bg-primary">Découvrir</a>
     </div>
 
     <button id="close" class="absolute top-2 right-2">

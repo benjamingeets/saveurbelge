@@ -1,12 +1,12 @@
 @php
 $title = $shop->name;
 @endphp
-<x-layouts.main :sand="true">
+<x-layouts.main :title="$shop->name" :sand="true" :description="substr($shop->description,0,140)">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
     <figure class="w-screen h-64">
-        <img class="object-cover w-full h-full" src="https://via.placeholder.com/300x200" alt="">
+        <img class="object-cover w-full h-full" src="/storage/{{$shop->banner}}" alt="">
     </figure>
     <article id="shop" data-latitude="{{$shop->latitude}}" data-longitude="{{$shop->longitude}}"
         class="relative grid w-full max-w-5xl gap-16 p-4 mx-auto mb-20 bg-white rounded-md lg:p-12 lg:-mt-16 lg:grid-cols-7 ">
@@ -20,19 +20,38 @@ $title = $shop->name;
             </figure>
             <h2 class="mt-8 mb-4 text-xl ">Coordonnées</h2>
             <address class="not-italic ">
-                <ul>
+                <ul  class="space-y-3 ">
                     <li class="mb-8 ">
-                        {{ $shop->street }} {{ $shop->city }}
+                        <a class="transition hover:underline hover:text-primary" href="https://www.google.be/maps?hl=fr&q={{$shop->street}} {{$shop->city}}">
+                        
+                            {{ $shop->street }} {{ $shop->city }}
+                        </a>
                     </li>
                     @if (!empty($shop->phone))
-                        <li>
-                            {{ $shop->phone }}
+                        <li class="flex items-center gap-2 text-primary hover:underline">
+                           <x-icon.phone/>  <a href="tel:{{ $shop->phone }}">{{ $shop->phone }}</a>
                         </li>
                     @endif
                     @if (!empty($shop->website))
-                        <li>
-                            <a target="_blank" href="{{ $shop->website }}">{{ $shop->website }}</a>
+                        <li class="flex items-center gap-2 text-primary hover:underline">
+                            <x-icon.website/>  <a target="_blank" href="{{ $shop->website }}">{{ $shop->website }}</a>
                         </li>
+                    @endif
+                </ul>
+                <ul class="flex mt-3 text-primary">
+                    @if(!empty($shop->facebook))
+                    <li>
+                        <a href="https://facebook.com/{{$shop->facebook}}">
+                            <x-icon.facebook/>
+                        </a>
+                    </li>
+                    @endif
+                    @if(!empty($shop->instagram))
+                    <li>
+                        <a href="https://facebook.com/{{$shop->instagram}}">
+                            <x-icon.instagram/>
+                        </a>
+                    </li>
                     @endif
                 </ul>
             </address>

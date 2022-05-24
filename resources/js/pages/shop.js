@@ -47,7 +47,7 @@ const shop = () =>{
         scrollWheelZoom:false,
     }).setView([shop.dataset.latitude, shop.dataset.longitude], 13);
 
-    map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
+    map.attributionControl.setPrefix('')
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
     let m = L.marker([shop.dataset.latitude, shop.dataset.longitude], {
         icon: restaurantIcon

@@ -8,5 +8,7 @@
         type="file" 
         accept="image/png, image/jpeg, image/jpg, image/webp"
         id="{{$name}}" 
-        name="{{$name}}">
+        name="{{$name}}"
+        value="{{old($name)}}"
+        >
 </label>

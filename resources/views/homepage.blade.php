@@ -8,7 +8,7 @@
     </div>
     <ul class="sr-only">
         @foreach ($shops as $shop)
-            <li data-name="{{$shop->name}}" data-latitude="{{$shop->latitude}}" data-longitude="{{$shop->longitude}}" data-title="{{$shop->title}}" data-slug="{{$shop->slug}}" data-city="{{$shop->city}}">
+            <li data-name="{{$shop->name}}" data-logo="{{$shop->logo}}" data-latitude="{{$shop->latitude}}" data-longitude="{{$shop->longitude}}" data-title="{{$shop->title}}" data-slug="{{$shop->slug}}" data-city="{{$shop->city}}">
                 {{$shop->name}}
             </li>
         @endforeach

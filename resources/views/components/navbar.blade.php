@@ -2,7 +2,7 @@
     <figure class="relative inline-flex items-center gap-5">
         <img src="/saveurbelge.svg" class=" w-11 h-11" alt="">
         <a class="before:absolute before:inset-0" href="{{ route('shop.index') }}">
-            <h1 class="text-2xl">
+            <h1 class="text-2xl font-title">
                 SaveurBelge
             </h1>
         </a>

@@ -16,22 +16,26 @@ class Shop extends Model
         parent::boot();
 
         self::saving(function ($model) {
-            $model->slug =Str::slug($model->name);
-            if($model->isDirty(['street','city'])){
-                $response = Http::get("https://nominatim.openstreetmap.org/search",[
+            $model->slug = Str::slug($model->name);
+            if ($model->isDirty(['street', 'city'])) {
+                $response = Http::get("https://nominatim.openstreetmap.org/search", [
                     'street' => $model->street,
-                    'city'=>$model->city,
-                    'country'=>'belgium',
-                    'format'=>'json'
-                ])[0];
-
-                $model->latitude =$response['lat'];
-                $model->longitude = $response['lon'];
+                    'city' => $model->city,
+                    'country' => 'belgium',
+                    'format' => 'json'
+                ]);
+                
+                    $model->latitude = $response[0]['lat'];
+                    $model->longitude = $response[0]['lon'];
+                
             }
-            if($model->isDirty('logo') && gettype($model->logo)=='object'){
-               $model->logo = $model->logo->store('logos','public');
+            if ($model->isDirty('logo') && gettype($model->logo) == 'object') {
+                $model->logo = $model->logo->store('logos', 'public');
+            }
+
+            if ($model->isDirty('banner') && gettype($model->banner) == 'object') {
+                $model->banner = $model->banner->store('banners', 'public');
             }
         });
-
     }
 }

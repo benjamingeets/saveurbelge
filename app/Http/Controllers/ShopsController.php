@@ -39,8 +39,15 @@ class ShopsController extends Controller
 
     public function store(ShopRequest $request)
     {
-        $shop = Shop::create($request->all());
-        return view('shop-created');
+        try {
+            $shop = Shop::create($request->all());
+            return view('shop-created');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['address' => "L'adresse entrée n'a pas été reconnue."])->withInput();
+        }
+        // if(!$shop->save()){
+        //     
+        // }
     }
 
     /**
@@ -51,8 +58,11 @@ class ShopsController extends Controller
      */
     public function show($slug)
     {
-        $shop = Shop::where('slug', $slug)->get();
-        return view('shop', ['shop' => $shop[0]]);
+        $shop = Shop::where('slug', $slug)->first();
+        if(empty($shop->name)){
+            abort(404);
+        }
+        return view('shop', ['shop' => $shop]);
     }
 
     /**
@@ -88,9 +98,13 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $slug)
+    {   
+        $shop = Shop::where('slug', $slug)->first();
+        $shop->update($request->all());
+        $shop->save();
+
+        return redirect()->route('shop.show', ['slug' => $slug]);
     }
 
     /**

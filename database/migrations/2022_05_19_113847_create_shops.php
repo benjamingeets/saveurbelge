@@ -25,10 +25,12 @@ return new class extends Migration
             $table->string('latitude')->nullable(false);
             $table->string('longitude')->nullable(false);
             $table->string('title')->nullable(false);
-            $table->string('logo')->nullable(true)->default('logos/default.png');
+            $table->string('logo')->nullable(true)->default('logos/default.jpg');
+            $table->string('banner')->nullable(true)->default('banners/default.jpg');
             $table->string('description')->nullable(true);
             $table->string('phone')->nullable(true);
-            $table->string('email')->nullable(false)->unique();
+            $table->string('email')->nullable(false);
+            $table->boolean('accepted')->default(false);
             $table->boolean('is_bio')->default(false);
             $table->boolean('is_productor')->default(false);
             $table->boolean('accept_local_currency')->default(false);

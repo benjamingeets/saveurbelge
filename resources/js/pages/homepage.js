@@ -1,4 +1,3 @@
-
 import leaflet, {
     icon
 } from 'leaflet'
@@ -8,12 +7,14 @@ const restaurantIcon = L.icon({
     tooltipAnchor: [18, 0],
     iconAnchor: [0, 38],
 });
-const homepage = () =>{
+const homepage = () => {
 
     const shops = document.querySelectorAll('ul li')
-
     const sidepanel = document.querySelector('#sidepanel')
     const searchbar = document.querySelector('#search')
+    const search = document.querySelector('form')
+    const input = document.querySelector('input')
+
     searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
 
     let lat = 50.850340
@@ -26,6 +27,7 @@ const homepage = () =>{
     map.attributionControl.setPrefix('Saveur Belge / <a href="https://loak.studio" target="_blank">LoakStudio</a>')
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+    
     sidepanel.querySelector('button').addEventListener('click', () => {
         sidepanel.classList.add('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0')
         searchbar.style.transform = `translateY(${sidepanel.clientHeight}px)`
@@ -40,19 +42,16 @@ const homepage = () =>{
             searchbar.style.transform = `translateY(0px)`
             map.flyTo(new L.LatLng(s.dataset.latitude - 0.003, s.dataset.longitude), 15)
             sidepanel.classList.remove('lg:-translate-x-full', 'lg:-left-10', 'lg:h-0')
-            sidepanel.querySelector('h1').textContent = s.dataset.name
+            sidepanel.querySelector('h1 a').textContent = s.dataset.name
             sidepanel.querySelector('p').textContent = s.dataset.title
             sidepanel.querySelector('a').href = `/commerce/${s.dataset.slug}`
-            sidepanel.querySelector('span').textContent = s.dataset.city
-            sidepanel.querySelector('img').src = s.logo ? `/storage/${s.dataset.logo}` : '/saveurbelge.svg'
+            sidepanel.querySelector('img').src = `/storage/${s.dataset.logo}`
         })
     })
 
-    const search = document.querySelector('form')
-    const input = document.querySelector('input')
     search.addEventListener('submit', (e) => {
         e.preventDefault()
-        fetch('https://api-postcode.vercel.app/get-city/' + input.value).then(r => {
+        fetch('https://belgium.deno.dev/' + input.value).then(r => {
             r.json().then(o => {
                 const target = o[0]
                 map.flyTo(new L.LatLng(target.lat, target.lon), 14)
