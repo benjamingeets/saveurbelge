@@ -28,8 +28,6 @@ class UserResource extends Resource
                 TextInput::make('name'),
                 TextInput::make('password')->password(),
                 TextInput::make('email'),
-
-                Checkbox::make('is_admin'),
             ]);
     }
 
