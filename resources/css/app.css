@@ -1,7 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Chrome, Safari, Edge, Opera */
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/Montserrat/static/Montserrat-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/Montserrat/static/Montserrat-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("/assets/fonts/Comfortaa/static/Comfortaa-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("/assets/fonts/Comfortaa/static/Comfortaa-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+*{
+  @apply font-main;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

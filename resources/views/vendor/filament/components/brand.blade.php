@@ -1,0 +1,1 @@
+<img src="/saveurbelge.svg" alt="Logo" class="h-10">
