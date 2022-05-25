@@ -30,6 +30,6 @@ class ShopEdit extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.shopedit',['shop'=>$this->shop,'url'=>$this->url]);
+        return $this->subject("Mise à jour de votre commerce")->view('mails.shopedit',['shop'=>$this->shop,'url'=>$this->url]);
     }
 }
