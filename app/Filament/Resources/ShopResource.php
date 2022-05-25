@@ -29,11 +29,11 @@ class ShopResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name'),
+                TextInput::make('name')->required(),
                 TextInput::make('slug')->disabled(),
                 Fieldset::make('adresse')->schema([
-                    TextInput::make('street'),
-                    TextInput::make('city'),
+                    TextInput::make('street')->required(),
+                    TextInput::make('city')->required(),
                 ]),
                 Fieldset::make('liens')->schema([
                     TextInput::make('facebook'),
@@ -46,7 +46,7 @@ class ShopResource extends Resource
                 ]),
                 Fieldset::make('contact')->schema([
                     TextInput::make('phone'),
-                    TextInput::make('email'),
+                    TextInput::make('email')->required(),
                 ]),
                 Fieldset::make('options')->schema([
                     Checkbox::make('is_bio'),
@@ -54,7 +54,7 @@ class ShopResource extends Resource
                     Checkbox::make('accept_local_currency'),
                 ]),
 
-                TextInput::make('title'),
+                TextInput::make('title')->required(),
                 TextArea::make('description'),
                 FileUpload::make('logo')->disk('public')->directory('logos')
             ]);
