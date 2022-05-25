@@ -7,7 +7,7 @@
             <h1>
                 <a  class="inline-block max-w-[10ch] text-2xl font-bold text-primary hover:underline" href=""></a>
             </h1>
-            <p class="mt-4"></p>
+            <p class="mt-4 max-w-[20ch]"></p>
         </div>
     </div>
 
