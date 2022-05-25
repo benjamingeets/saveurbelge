@@ -55,7 +55,7 @@ $title = $shop->name;
                     @endif
                 </ul>
             </address>
-            <button data-action="edit" class="bottom-0 lg:absolute text-primary">Modifier l'établissement</button>
+            <button data-action="edit" class="mt-4 text-primary">Modifier l'établissement</button>
         </div>
         <div class="lg:col-span-5">
             <h1 class="mb-4 text-4xl">
