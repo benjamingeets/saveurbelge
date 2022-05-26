@@ -48,7 +48,7 @@
         <meta property="twitter:image" content="https://saveurbelge.be/share.webp">
         <meta property="og:image" content="https://saveurbelge.be/share.webp">
 </head>
-<body class="flex flex-col  @if($overflow_hidden) h-screen overflow-hidden @else min-h-screen @endif @if($sand) lg:bg-sand @endif">
+<body class="flex flex-col overflow-y-hidden  @if($overflow_hidden) h-screen overflow-hidden @else min-h-screen @endif @if($sand) lg:bg-sand @endif">
     <x-navbar/>
     <div class="relative flex flex-col flex-1">
         {{$slot}}
