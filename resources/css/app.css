@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
 
 @font-face {
   font-family: "Montserrat";
