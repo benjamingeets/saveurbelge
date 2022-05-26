@@ -55,7 +55,7 @@ class ShopResource extends Resource
                 ]),
 
                 TextInput::make('title')->required(),
-                TextArea::make('description'),
+                TextArea::make('description')->maxLength(255),
                 FileUpload::make('logo')->disk('public')->directory('logos')->default('logo-default.jpg'),
                 FileUpload::make('banner')->disk('public')->directory('logos')->default('banner-default.jpg')
             ]);
