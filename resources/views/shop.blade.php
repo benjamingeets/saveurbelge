@@ -34,7 +34,7 @@ $title = $shop->name;
                     @endif
                     @if (!empty($shop->website))
                         <li class="flex items-center gap-2 text-primary hover:underline">
-                            <x-icon.website/>  <a target="_blank" href="{{ $shop->website }}">{{ $shop->website }}</a>
+                            <x-icon.website/>  <a target="_blank" href="{{ Str::startsWith($shop->website, 'https://') ?  $shop->website:'https://'.$shop->website }}">{{ $shop->website }}</a>
                         </li>
                     @endif
                 </ul>
