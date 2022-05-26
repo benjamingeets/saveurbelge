@@ -104,7 +104,7 @@ class ShopsController extends Controller
         $shop->update($request->all());
         $shop->save();
 
-        return redirect()->route('shop.show', ['slug' => $slug]);
+        return redirect()->route('shop.show', ['slug' => $shop->slug]);
     }
 
     /**
