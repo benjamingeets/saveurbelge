@@ -33,7 +33,7 @@ class ShopRequest extends FormRequest
             'title'=>'required',
             'logo'=>'size:2000',
             'banner'=>'size:2000',
-            'description',
+            'description'=>'max:255',
             'phone',
             'email'=>'required|unique:shops',
             'is_bio',

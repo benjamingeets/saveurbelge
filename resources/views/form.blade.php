@@ -42,7 +42,7 @@ if(Route::currentRouteName() == 'shop.edit'){
         </figure>
     @endif
     <x-input.file :required="true" label="Bannière (Max 2mb)" name="banner" />
-        <x-input.textarea :value="!empty($shop->description) ? $shop->description : ''" label="Description" name="description" />
+        <x-input.textarea :value="!empty($shop->description) ? $shop->description : ''" label="Description (max 255 caractères)" name="description" />
         <x-input.text :value="!empty($shop->phone) ? $shop->phone : ''" label="Numéro de téléphone" name="phone" />
         <x-input.text :value="!empty($shop->website) ? $shop->website : ''" label="Site internet" name="website" placeholder="https://monsite.be" />
         <x-input.text :value="!empty($shop->email) ? $shop->email : ''" :required="true" classes="col-span-6" label="Votre adresse email"
