@@ -82,7 +82,7 @@ $title = $shop->name;
                 @endif
             </ul>
             @if (!empty($shop->description))
-            <blockquote class="p-5 mt-6 border-l-2 border-primary bg-sand">{{ $shop->description }}</blockquote>
+            <blockquote class="p-5 mt-6 space-y-2 border-l-2 border-primary bg-sand">{{ Illuminate\Mail\Markdown::parse($shop->description)}}</blockquote>
                 
             @endif
             <div class="z-10 w-full mt-6 overflow-hidden rounded-md h-52" id="shop-map">
