@@ -86,7 +86,7 @@ class ShopsController extends Controller
         if ($shop->email == $request->email) {
 
             $url = URL::temporarySignedRoute('shop.edit', now()->addMinutes(60), ['slug' => $slug]);
-            Mail::to('benjamin@geets.dev')->send(new ShopEdit($shop, $url));
+            Mail::to($request->email)->send(new ShopEdit($shop, $url));
         }
         return $request;
     }
