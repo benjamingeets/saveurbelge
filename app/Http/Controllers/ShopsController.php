@@ -43,6 +43,7 @@ class ShopsController extends Controller
             $shop = Shop::create($request->all());
             return view('shop-created');
         } catch (\Throwable $th) {
+            error_log($th);
             return redirect()->back()->withErrors(['address' => "L'adresse entrée n'a pas été reconnue."])->withInput();
         }
         // if(!$shop->save()){
