@@ -24,18 +24,18 @@ class ShopRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:shops|max:255'.$this->id,
-            'street'=>'required',
-            'city'=>'required',
+            'name' => 'required|unique:shops|max:255' . $this->id,
+            'street' => 'required',
+            'city' => 'required',
             'facebook',
             'instagram',
             'website',
-            'title'=>'required',
-            'logo'=>'size:2000',
-            'banner'=>'size:2000',
-            'description'=>'max:255',
+            'title' => 'required',
+            'logo' => 'max:2000',
+            'banner' => 'max:2000',
+            'description' => 'max:255',
             'phone',
-            'email'=>'required|unique:shops',
+            'email' => 'required|unique:shops',
             'is_bio',
             'is_productor',
             'accept_local_currency'

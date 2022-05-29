@@ -33,6 +33,7 @@ class ShopsController extends Controller
      */
     public function create()
     {
+
         return view('form');
     }
 
@@ -40,15 +41,16 @@ class ShopsController extends Controller
     public function store(ShopRequest $request)
     {
         try {
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $out->writeln("Store");
             $shop = Shop::create($request->all());
             return view('shop-created');
         } catch (\Throwable $th) {
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $out->writeln("ERROR");
             error_log($th);
             return redirect()->back()->withErrors(['address' => "L'adresse entrée n'a pas été reconnue."])->withInput();
         }
-        // if(!$shop->save()){
-        //     
-        // }
     }
 
     /**
@@ -60,7 +62,7 @@ class ShopsController extends Controller
     public function show($slug)
     {
         $shop = Shop::where('slug', $slug)->first();
-        if(empty($shop->name)){
+        if (empty($shop->name)) {
             abort(404);
         }
         return view('shop', ['shop' => $shop]);
@@ -100,7 +102,7 @@ class ShopsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
-    {   
+    {
         $shop = Shop::where('slug', $slug)->first();
         $shop->update($request->all());
         $shop->save();
