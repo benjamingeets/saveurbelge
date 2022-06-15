@@ -30,7 +30,6 @@ if (empty($description)) {
     <meta property="og:title" content="{{ $title }}">
     @if (!empty($title))
         <title> {{ $title }} | SaveurBelge</title>
-        git@github.com:benjamingeets/saveurbelge.git
     @else
         <title>SaveurBelge 👨🏻‍🌾 Des produits de chez nous 🥕</title>
     @endif
